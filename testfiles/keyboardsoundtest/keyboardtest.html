@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<script>
+		var audioC = new Audio("CLong.wav");
+		var audioCSharp = new Audio("CSharp.wav");
+		var audioD = new Audio("D.wav");
+		var audioDSharp = new Audio("DSharp.wav");
+		var audioE = new Audio("E.wav");
+		var audioF = new Audio("F.wav");
+		var delay = 500;
+		var fadeDelay = 100; 
+		var setVolume = 1; 
+		function resetColour() {
+			setColour(0);
+			setTimeout(fadeOut(), fadeDelay);
+		}
+		function fadeOut() {
+			if (audioC.volume > 0) {
+				audioC.volume -= 0.05;
+				setTimeout(fadeOut(), fadeDelay); 
+			} else {
+				audioC.pause(); 
+			}	
+		}
+		function setColour(x) {
+			
+			var imgURL = "keyboard.png";
+			switch (x) {
+				case 1: 
+					imgURL = "keyboardC.png";
+					audioC.play();
+					audioC.currentTime = 0;
+					audioC.volume = setVolume; 
+					break; 
+				case 2: 
+					imgURL = "keyboardCSharp.png";
+					audioCSharp.play();
+					break; 
+				case 3: 
+					imgURL = "keyboardD.png";
+					audioD.play(); 
+					break; 
+				case 4: 
+					imgURL = "keyboardDSharp.png";
+					audioDSharp.play(); 
+					break; 
+				case 5: 
+					imgURL = "keyboardE.png";
+					audioE.play(); 
+					break; 
+				case 6: 
+					imgURL = "keyboardF.png";
+					audioF.play(); 
+					break; 
+				case 7: 
+					imgURL = "keyboardFSharp.png";
+					break; 
+				case 8: 
+					imgURL = "keyboardG.png";
+					break; 
+				case 9: 
+					imgURL = "keyboardGSharp.png";
+					break; 
+				case 10: 
+					imgURL = "keyboardA.png";
+					break; 
+				case 11: 
+					imgURL = "keyboardASharp.png";
+					break; 
+				case 12: 
+					imgURL = "keyboardB.png";
+					break; 
+				default:
+					imgURL = "keyboard.png";
+			} 
+			document.getElementById("keyboard").src = imgURL; 
+		}
+	</script> 
+</head> 
+<body>
+	<img src="keyboard.png" id="keyboard" usemap="#keymap"> 
+	
+	<map name="#keymap">
+		<area shape="poly" coords="0,198,0,516,116,516,116,383,90,380,90,198" onmousedown="setColour(1)" onmouseup="setTimeout(resetColour, delay)">
+		<area shape="rect" coords="90,198,144,380" onmousedown="setColour(2)" onmouseup="setTimeout(resetColour, delay)">
+		<area shape="poly" coords="120,511,121,383,146,383,146,198,200,199,202,384,226,384,222,512" onmousedown="setColour(3)" onmouseup="setTimeout(resetColour, delay)">
+		<area shape="rect" coords="201,198,258,380" onmousedown="setColour(4)" onmouseup="setTimeout(resetColour, delay)">
+		<area shape="poly" coords="237,511,234,383,258,385,259,197,341,198,339,511" onmousedown="setColour(5)" onmouseup="setTimeout(resetColour, delay)">
+		<area shape="poly" coords="346,196,346,510,454,514,456,382,429,381,428,198" onmousedown="setColour(6)" onmouseup="setTimeout(resetColour, delay)">
+		<area shape="rect" coords="430,198,486,380" onmousedown="setColour(7)" onmouseup="setTimeout(resetColour, delay)">
+		<area shape="poly" coords="462,512,458,382,484,383,487,197,543,197,544,383,566,383,566,514" onmousedown="setColour(8)" onmouseup="setTimeout(resetColour, delay)">
+		<area shape="rect" coords="542,198,599,380" onmousedown="setColour(9)" onmouseup="setTimeout(resetColour, delay)">
+		<area shape="poly" coords="575,384,599,384,601,198,655,200,656,383,679,385,678,515,575,514" onmousedown="setColour(10)" onmouseup="setTimeout(resetColour, delay)">
+		<area shape="rect" coords="656,198,713,380" onmousedown="setColour(11)" onmouseup="setTimeout(resetColour, delay)">
+		<area shape="poly" coords="713,198,795,200,794,511,690,514,689,381,709,382" onmousedown="setColour(12)" onmouseup="setTimeout(resetColour, delay)">
+	</map>
+</body> 
+</html> 
