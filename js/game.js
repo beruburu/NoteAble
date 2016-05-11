@@ -1,12 +1,12 @@
-//actual height and width of image
+//actual height and width of keyboard image
 var maxHeight = 670;
 var maxWidth = 1027;
 
+//default location of musical staff
+var staffTop = 110; 
+
 //delay before resetting a pressed key
 var delay = 600;
-
-//the key of the last mouseup event
-var keyEnd = 0;
 
 //default coordinates of image map
 var coords = [[3, 252, 109, 252, 109, 494, 143, 494, 143, 662, 3, 662]
@@ -31,6 +31,9 @@ var keysPressed = [];
 //whether pressed keys have been unpressed or not; 1= still pressed
 var keyValues = [];
 
+//the maximum length of the user sequence
+var keysMax = 9;
+
 
 loadPage();
 
@@ -43,8 +46,6 @@ function loadPage() {
 
 //fires on key mouseup
 function endNoteTimer(x) {
-    keysPressed.push(x);
-    keyValues.push(1);
     setTimeout(endNote, delay);
 }
 
@@ -67,6 +68,16 @@ function playNote(x) {
     document.getElementById("key" + keys[x]).style.display = "inline";
     var audio = new Audio("sounds/" + keys[x] + ".wav");
     audio.play();
+
+    keysPressed.push(x);
+    keyValues.push(1);
+
+    if (keysPressed.length > keysMax) {
+        keysPressed.shift();
+        keyValues.shift();
+    }
+
+    displayUserNotes();
 }
 
 //fires when the window is resized
@@ -85,4 +96,20 @@ function resizeMap() {
         }
         document.getElementById("map" + keys[x]).coords = coords_Resized[x].toString(); 
     }
+    document.getElementById("staff").style.top = Math.round(staffTop * sizeRatio) + "px";
+
+}
+
+//displays musical staff of user's note arrays
+function displayUserNotes() {
+    var staff = document.getElementById("staff");
+
+    var newShape = document.createElement("IMG");
+    newShape.src = "./images/shapes/" + keys[keysPressed[keysPressed.length -1]] + ".png";
+    newShape.className = "shapes";
+
+    if (staff.childNodes.length >= keysMax) {
+        staff.removeChild(staff.firstChild);
+    }
+    staff.appendChild(newShape);
 }

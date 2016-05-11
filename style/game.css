@@ -8,19 +8,35 @@ html, body {
     height: 100%;
     width: 100%;
 }
-#keyboard, #keyC, #keyCSharp, #keyD, #keyDSharp, #keyE, #keyF, #keyFSharp, #keyG, #keyGSharp, #keyA, #keyASharp, #keyB, #transparent {
+#keyboard, #transparent, .keys {
     max-height: 98%;
     max-width: 100%;
     position:  absolute; 
     left:  0;
     top:  0;
+    
+    /*prevent user selection of image*/
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
 }
 
 
-#keyC, #keyCSharp, #keyD, #keyDSharp, #keyE, #keyF, #keyFSharp, #keyG, #keyGSharp, #keyA, #keyASharp, #keyB {
+.keys {
     display:  none;
 }
 
-#screenElements {
-    display:  none;
+#staff {
+    position:  absolute;
+    left:  0;
+    top:  100px;
+    height:  15%;
+    padding-left: 5%;
+    
+}
+
+.shapes {
+    height: 100%;
 }
