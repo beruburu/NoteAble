@@ -2,8 +2,9 @@
 var maxHeight = 670;
 var maxWidth = 1027;
 
-//default location of musical staff
-var staffTop = 110; 
+//default location and size of musical staff
+var staffTop = 81;
+var staffHeight = 143;
 
 //delay before resetting a pressed key
 var delay = 600;
@@ -82,7 +83,7 @@ function playNote(x) {
 
 //fires when the window is resized
 function resizeWindow() {
-    setTimeout(resizeMap, 10); //10 second delay to allow for image to resize
+    setTimeout(resizeMap, 10); //delay to allow for image to resize
 }
 
 //resizes the image map
@@ -97,6 +98,9 @@ function resizeMap() {
         document.getElementById("map" + keys[x]).coords = coords_Resized[x].toString(); 
     }
     document.getElementById("staff").style.top = Math.round(staffTop * sizeRatio) + "px";
+    document.getElementById("staff").style.height = Math.round(staffHeight * sizeRatio) + "px";
+    document.getElementById("staff").style.width = Math.round(img.clientWidth * 0.94) + "px";
+
 
 }
 
