@@ -1,0 +1,10 @@
+#gameover {
+	height: 350px;
+	width: 450px;
+	background-color: #ffffff;
+	background-image: url("images/gameoverBG.png");
+	background-size: cover;
+	position: relative;
+	z-index: 999;
+	border-radius: 10px;
+}
