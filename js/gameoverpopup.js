@@ -1,5 +1,5 @@
 $(document).ready(function() {
 	$("button").click(function() {
-		$("div").animate({bottom: '250px'});
+		$("div").animate({bottom: '550px'});
 	});
 });
