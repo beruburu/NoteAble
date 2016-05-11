@@ -1,17 +1,5 @@
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<script src="js/game.js"></script>
-	<script src= "generator.js"></script>
-	<script>
-		/*var audioC = new Audio("sounds/C.wav");
-		var audioCSharp = new Audio("sounds/CSharp.wav");
-		var audioD = new Audio("sounds/D.wav");
-		var audioDSharp = new Audio("sounds/DSharp.wav");
-		var audioE = new Audio("sounds/E.wav");
-		var audioF = new Audio("sounds/F.wav");*/
 
-		/*var keys = [];
+		var keys = [];
 		keys[0] = new Audio();
 		keys[0].src = "sounds/C.wav";
 		keys[1] = new Audio();
@@ -77,7 +65,7 @@
 				position = Math.floor((Math.random() * 11) + 0);
 				keys[position].addEventListener("ended", createTrack); 
 				track.push(keys[position]);	
-				//keysPressed[i].push(keys[position]);			
+				//keysPressed.push(keys[position]);			
 				keys[position].play();	
 			}
 		}
@@ -87,7 +75,7 @@
 			i = 0;
 		}
 
-		function isCorrect() {
+		/*function isCorrect() {
 			var confirm = 0;
 			for(i = 0; i < track.length; i++) {
 				if(keysPressed[i] == track[i]) {
@@ -105,13 +93,4 @@
 			document.getElementById("correct").innerHTML = "That is correct.";
 		} else {
 			document.getElementById("correct").innerHTML = "That is not correct.";
-		} 
-	</script>
-</head>
-
-<body>
-	<p>Track generator</p>
-	<button name ="button" onclick="playTrack()" type="button">Create random track (double click)</button>
-	<p id="correct"></p>
-</body>
-</html>
+		} */
