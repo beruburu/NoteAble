@@ -29,6 +29,7 @@
 		var length = trackLength(1);
 		var i = 0;
 		var track = [];
+		//var keysPressed = [];
 		var correct = false;
 
 		function trackLength(level) {
@@ -65,7 +66,7 @@
 				position = Math.floor((Math.random() * 11) + 0);
 				keys[position].addEventListener("ended", createTrack); 
 				track.push(keys[position]);	
-				//keysPressed.push(keys[position]);			
+				keysPressed.push(keys[position]);			
 				keys[position].play();	
 			}
 		}
@@ -75,7 +76,7 @@
 			i = 0;
 		}
 
-		/*function isCorrect() {
+		function isCorrect() {
 			var confirm = 0;
 			for(i = 0; i < track.length; i++) {
 				if(keysPressed[i] == track[i]) {
@@ -89,8 +90,11 @@
 			}
 		}
 
-		if (isCorrect) {
-			document.getElementById("correct").innerHTML = "That is correct.";
-		} else {
-			document.getElementById("correct").innerHTML = "That is not correct.";
-		} */
+		function confirmCorrect() {
+			playTrack();
+			if (isCorrect) {
+				document.getElementById("correct").innerHTML = "That is correct.";
+			} else {
+				document.getElementById("correct").innerHTML = "That is not correct.";
+			}
+		}
