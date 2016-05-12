@@ -39,3 +39,26 @@ html, body {
 .shapes {
     height: 70%;
 }
+
+#topbar {
+	position:relative;
+	z-index:1;
+	margin-right:100px;
+	margin-top:3px;
+}
+
+ul {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+	float: right;
+}
+
+li a {
+	display: block;
+}
+
