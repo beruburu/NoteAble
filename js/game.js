@@ -273,6 +273,31 @@ function removeLife() {
 	}
 }
 
+    var timer1 = document.getElementById('timer');
+    var seconds = 0;
+    var minutes = 1;
+    var t;
+
+function incrementTimer() {
+    seconds--;
+    if (seconds < 0) {
+        seconds = 59;
+        minutes--;
+        if (minutes < 0) {
+            minutes = 59;
+        }
+    }
+
+    timer1.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "0") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    runTimer();
+}
+
+function runTimer() {
+    if (seconds>0 || minutes>0) {
+        t = setTimeout(incrementTimer, 1000); 
+    } 
+}
+runTimer();
 
 
 

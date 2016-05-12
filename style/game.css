@@ -23,6 +23,10 @@ html, body {
    user-select: none;
 }
 
+@font-face {
+    font-family: Quicksand;
+    src: url("../style/Quicksand-Bold.otf");
+}
 
 .keys {
     display:  none;
@@ -50,7 +54,10 @@ html, body {
 #timer {
     float:left;
     margin-left:80px;
-    margin-top:20px;
+    margin-top:10px;
+    font-family: Quicksand;
+    font-size:40px;
+    color:white;
 }
 
 ul {
