@@ -14,7 +14,7 @@
 
 @font-face {
     font-family: Quicksand;
-	src: url("style/Quicksand-Bold.otf");
+	src: url("../style/Quicksand-Bold.otf");
 }
         
 #heading {
@@ -31,24 +31,40 @@
 	font-weight: bold;
 	text-align: center;
 	color: #ff4a00;
-	margin-top: 75px;
-	margin-bottom: 100px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 #scoreheading {
 	font-size: 35px;
 	background-color: #f0e9b9;
-	
+	width: 120px;
+	height: 50px;
+	margin: auto;
+	margin-top: 40px;
 }
 
 #score {
 	font-size: 46px;
 	background-color: #f0e9b9;
+	width: 140px;
+	height: 50px;
+	margin: auto;
+	margin-top: 15px;
 }
 
 #bestscore {
 	font-size: 20px;
 	background-color: #f0e9b9;
+	width: 210px;
+	height: 25px;
+	margin: auto;
+	margin-top: 35px;
+}
+
+#gameoverbuttons {
+	margin-top: 25px;
+	padding: 0;
 }
 
 #retrybutton {
@@ -62,6 +78,8 @@
 	font-weight: bold;
     color: #FF6138;
     position: absolute;
+	margin-left: 83px;
+	margin-top: 10px;
 }
 
 #mainmenu {
@@ -74,4 +92,5 @@
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
+	margin-left: 1px;
 }
