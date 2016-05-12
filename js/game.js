@@ -10,7 +10,7 @@ var staffHeight = 143;
 var livesHeight = 50; 
 
 //default font size for the highscore
-var scoreFontSize = 22;
+var scoreFontSize = 30;
 
 //delay before resetting a pressed key
 var delay = 600;
@@ -39,6 +39,9 @@ var keys = ["C", "CSharp", "D", "DSharp", "E", "F", "FSharp", "G", "GSharp", "A"
 var keysPressed = [];
 //whether pressed keys have been unpressed or not; 1= still pressed
 var keyValues = [];
+
+//array of notes to activate the easter egg
+var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
 
 //the maximum length of the user sequence
 var keysMax = 9;
@@ -112,7 +115,18 @@ function endNote() {
     
     //check for a match once the user has entered enough keys
     if (keysPressed.length == track.length) {
-        confirmCorrect();
+        //do not confirm if the user has started the easter egg sequence
+        var eeMatch = true;
+        x = 0;
+        while (x < keysPressed.length && eeMatch) {
+            if (keysPressed[x] !== easterEggSeq[x]) {                
+                eeMatch = false; 
+            }
+            x++;
+        }
+        if (!eeMatch) {
+            confirmCorrect(); 
+        }
     }
 }
 
@@ -242,7 +256,7 @@ function confirmCorrect() {
 	if (isCorrect()) {
 	    win();
 	} else {
-	    lossCount++;
+	    lose();
 	}
 }
 
