@@ -260,7 +260,7 @@ function confirmCorrect() {
 	}
 }
 
-//computer user win
+//compute user win
 function win() {
 	winCount++;
 	document.getElementById("wins").innerHTML = "Wins: " + winCount;
@@ -309,47 +309,42 @@ function removeLife() {
 	}
 }
 
+    var timer1 = document.getElementById('timer');
+    var seconds = 0;
+    var minutes = 1;
+    var t;
+
+function incrementTimer() {
+    seconds--;
+    if (seconds < 0) {
+        seconds = 59;
+        minutes--;
+        if (minutes < 0) {
+            minutes = 59;
+        }
+    }
+
+    timer1.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "0") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    runTimer();
+}
+
+function runTimer() {
+    if (seconds>0 || minutes>0) {
+        t = setTimeout(incrementTimer, 1000); 
+    } 
+}
+runTimer();
+
+
 
 
 
 //easter egg
-var myTimer = null;
-var imageNumber = 0;
-
-function move() {
-	var sheep = document.getElementById('sheep');
-	
-	sheep.style.left = parseInt(sheep.style.left) + 1 + "px";
-	imageNumber = (imageNumber + 1) % 5;
-	sheep.src = "images/easteregg/rainbow_sheep" + imageNumber + ".png";
-}
-
-function moveAccordinToKeyPressed(e) {
-	if (e.event) {
-		theKeyPressed = e.keyCode;
-	}else if (e.which) {
-		theKeyPressed = e.which;
-	}
-	if (theKeyPressed == 39) {
-		if(myTimer == null){
-				myTimer = setInterval('move();', 50);
-			}else{
-				clearInterval(myTimer);
-				myTimer = null;
-			}
-	}
-}
-
-window.onload=function() {
-	var sheep = document.getElementById('sheep');
-	window.onkeydown=moveAccordingToKeyPressed;
-	
-	sheep.onclick=function() {
-		if(myTimer == null) {
-			myTimer = setInterval('move();', 50);
-		}else{
-			clearInterval(myTimer);
-			myTimer = null;
-		}
-	}
-}
+$(document).ready(function(e) {
+        var width = "+=" + $(document).width();
+        $("#sheep").animate({
+        left: width
+      }, 5000, function() {
+        $("#sheep").css("display", "none");
+      });
+    });
