@@ -91,3 +91,11 @@ ul {
     font-weight:  bold;
     font-size: 30px;
 }
+
+#sheep {
+    position:absolute; 
+    z-index:1; 
+    left:8px;
+    top: 15%;
+    display: none;
+}

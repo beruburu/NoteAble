@@ -57,6 +57,9 @@ var winCount = 0;
 //the number of times the user has lost
 var lossCount = 0; 
 
+//true if the keyboard is disabled
+var disabled = false;
+
 //enter sound values into array
 var keySounds = [];
 keySounds[0] = new Audio();
@@ -86,7 +89,8 @@ keySounds[11].src = "sounds/B.wav";
 
 loadPage();
 
-playTrack(); 
+playTrack();
+
 
 //sets up the page
 function loadPage() {
@@ -119,7 +123,7 @@ function endNote() {
         var eeMatch = true;
         x = 0;
         while (x < keysPressed.length && eeMatch) {
-            if (keysPressed[x] !== easterEggSeq[x]) {                
+            if (easterEggSeq.length < x || keysPressed[x] !== easterEggSeq[x]) {                
                 eeMatch = false; 
             }
             x++;
@@ -127,23 +131,37 @@ function endNote() {
         if (!eeMatch) {
             confirmCorrect(); 
         }
+    } else if (keysPressed.length == easterEggSeq.length) {
+        var eeMatch = true;
+        x = 0;
+        while (x < keysPressed.length && eeMatch) {
+            if (easterEggSeq.length < x || keysPressed[x] !== easterEggSeq[x]) {                
+                eeMatch = false; 
+            }
+            x++;
+        }
+
+        if (eeMatch) { easterEgg();  }
     }
 }
 
 //fires when the key is pressed
 function playNote(x) {
-    document.getElementById("key" + keys[x]).style.display = "inline";
-    keySounds[x].play();
+    if (!disabled) {
+        document.getElementById("key" + keys[x]).style.display = "inline";
+        keySounds[x].play();
 
-    keysPressed.push(x);
-    keyValues.push(1);
+        keysPressed.push(x);
+        keyValues.push(1);
 
-    if (keysPressed.length > keysMax) {
-        keysPressed.shift();
-        keyValues.shift();
+        if (keysPressed.length > keysMax) {
+            keysPressed.shift();
+            keyValues.shift();
+        }
+
+        displayUserNotes();
+        
     }
-
-    displayUserNotes();
 }
 
 //fires when the window is resized
@@ -229,7 +247,7 @@ function createTrack() {
 
 //starts recursive createTrack function
 function playTrack() {
-    
+    disabled = true; 
 	createTrack();
     i = 0;
 }
@@ -296,6 +314,8 @@ function clearStaff() {
     while (staff.hasChildNodes()) {
         staff.removeChild(staff.childNodes[0]);
     }
+
+    disabled = false; 
 }
 
 //remove lives when incorrect sequence entered by player
@@ -335,16 +355,16 @@ function runTimer() {
 }
 runTimer();
 
-
-
-
-
 //easter egg
-$(document).ready(function(e) {
+function easterEgg() {
+        $("#sheep").css("display", "inline");
+
         var width = "+=" + $(document).width();
         $("#sheep").animate({
-        left: width
-      }, 5000, function() {
-        $("#sheep").css("display", "none");
-      });
-    });
+            left: width
+        }, 5000, function () {
+            $("#sheep").css("display", "none");
+            $("#sheep").css("left", "8px");
+            nextTrack();
+        });
+ };
