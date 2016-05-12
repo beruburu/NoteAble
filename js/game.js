@@ -8,6 +8,8 @@ var staffHeight = 143;
 
 //delay before resetting a pressed key
 var delay = 600;
+//delay before hiding the computer's staff
+var staffDelay = 1000;
 
 //default coordinates of image map
 var coords = [[3, 252, 109, 252, 109, 494, 143, 494, 143, 662, 3, 662]
@@ -35,8 +37,47 @@ var keyValues = [];
 //the maximum length of the user sequence
 var keysMax = 9;
 
+var trackLength = 3; //temporarily set to 3
+var i = 0;
+var track = [];
+var correct = false;
+
+//the number of times the user has won
+var winCount = 0;
+
+//the number of times the user has lost
+var lossCount = 0; 
+
+//enter sound values into array
+var keySounds = [];
+keySounds[0] = new Audio();
+keySounds[0].src = "sounds/C.wav";
+keySounds[1] = new Audio();
+keySounds[1].src = "sounds/CSharp.wav";
+keySounds[2] = new Audio();
+keySounds[2].src = "sounds/D.wav";
+keySounds[3] = new Audio();
+keySounds[3].src = "sounds/DSharp.wav";
+keySounds[4] = new Audio();
+keySounds[4].src = "sounds/E.wav";
+keySounds[5] = new Audio();
+keySounds[5].src = "sounds/F.wav";
+keySounds[6] = new Audio();
+keySounds[6].src = "sounds/FSharp.wav";
+keySounds[7] = new Audio();
+keySounds[7].src = "sounds/G.wav";
+keySounds[8] = new Audio();
+keySounds[8].src = "sounds/GSharp.wav";
+keySounds[9] = new Audio();
+keySounds[9].src = "sounds/A.wav";
+keySounds[10] = new Audio();
+keySounds[10].src = "sounds/ASharp.wav";
+keySounds[11] = new Audio();
+keySounds[11].src = "sounds/B.wav";
 
 loadPage();
+
+playTrack(); 
 
 //sets up the page
 function loadPage() {
@@ -62,13 +103,17 @@ function endNote() {
         x++;
     }
     document.getElementById("key" + keys[firstPressed]).style.display = "none";
+    
+    //check for a match once the user has entered enough keys
+    if (keysPressed.length == track.length) {
+        confirmCorrect();
+    }
 }
 
 //fires when the key is pressed
 function playNote(x) {
     document.getElementById("key" + keys[x]).style.display = "inline";
-    var audio = new Audio("sounds/" + keys[x] + ".wav");
-    audio.play();
+    keySounds[x].play();
 
     keysPressed.push(x);
     keyValues.push(1);
@@ -97,11 +142,10 @@ function resizeMap() {
         }
         document.getElementById("map" + keys[x]).coords = coords_Resized[x].toString(); 
     }
+
     document.getElementById("staff").style.top = Math.round(staffTop * sizeRatio) + "px";
     document.getElementById("staff").style.height = Math.round(staffHeight * sizeRatio) + "px";
-    document.getElementById("staff").style.width = Math.round(img.clientWidth * 0.94) + "px";
-
-
+    document.getElementById("staff").style.width = Math.round(img.clientWidth * 0.9) + "px";
 }
 
 //displays musical staff of user's note arrays
@@ -117,3 +161,104 @@ function displayUserNotes() {
     }
     staff.appendChild(newShape);
 }
+
+//displays computer note sequence on staff
+function displayCompNotes() {
+    var staff = document.getElementById("staff");
+
+    var selKey = keys[track[track.length - 1]];
+    var newShape = document.createElement("IMG");
+    newShape.src = "./images/shapes/" + selKey + ".png";
+    newShape.className = "shapes";
+
+    document.getElementById("key" + selKey).style.display = "inline";
+    staff.appendChild(newShape);
+}
+
+//create the track one note at a time
+function createTrack() {
+	var position;
+	i++;
+
+    //remove colours from previous key
+    if (track.length > 0) {
+        var lastKey = keys[track[track.length - 1]];
+        document.getElementById("key" + lastKey).style.display = "none";
+    }
+
+	if (i < trackLength) {
+		position = Math.floor((Math.random() * 11) + 0);
+        
+        keySounds[position].addEventListener("ended", createTrack); 
+		track.push(position);		
+		keySounds[position].play();
+		displayCompNotes();
+    } else {
+        for (x = 0; x < keySounds.length; x++) {
+            keySounds[x].removeEventListener("ended", createTrack);
+        } 
+        setTimeout(clearStaff, staffDelay);
+	}
+
+
+}
+
+//starts recursive createTrack function
+function playTrack() {
+    
+	createTrack();
+    i = 0;
+}
+
+//compares user input with computer's track
+function isCorrect() {
+	var confirm = 0;
+	for(i = 0; i < track.length; i++) {
+		if(keysPressed[i] == track[i]) {
+			confirm++;
+		}
+	}
+
+
+    if(confirm == track.length) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+//checks if the input was correct
+function confirmCorrect() {
+	if (isCorrect()) {
+	    winCount++;
+	} else {
+	    lossCount++;
+	}
+	
+    setTimeout(nextTrack, 500);
+}
+
+//prepares for the next track
+function nextTrack() {
+    clearUserInput();
+    track = [];
+    i = 0;
+    setTimeout(playTrack, 500);
+}
+
+//clears user input
+function clearUserInput() {
+    clearStaff();
+    keysPressed = [];
+    keyValues = [];
+}
+
+//clears items from the staff
+function clearStaff() {
+    var staff = document.getElementById("staff");
+
+    while (staff.hasChildNodes()) {
+        staff.removeChild(staff.childNodes[0]);
+    }
+}
+
