@@ -91,6 +91,7 @@ loadPage();
 
 playTrack();
 
+// gameOver();
 
 //sets up the page
 function loadPage() {
@@ -289,7 +290,13 @@ function win() {
 function lose() {
 	lossCount++;
 	document.getElementById("life" + lossCount).style.display = "none";
-    setTimeout(nextTrack, 500);
+
+    if (lossCount < 3) {
+        setTimeout(nextTrack, 500);
+    } else {
+        gameOver();
+    }
+
 }
 
 //prepares for the next track
@@ -368,3 +375,8 @@ function easterEgg() {
             nextTrack();
         });
  };
+
+ 
+ function gameOver() {
+        $("#gameover").animate({bottom: '550px'});  
+ }
