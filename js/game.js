@@ -6,6 +6,9 @@ var maxWidth = 1027;
 var staffTop = 81;
 var staffHeight = 143;
 
+//default height of the lives list
+var livesHeight = 50; 
+
 //delay before resetting a pressed key
 var delay = 600;
 //delay before hiding the computer's staff
@@ -75,6 +78,9 @@ keySounds[10].src = "sounds/ASharp.wav";
 keySounds[11] = new Audio();
 keySounds[11].src = "sounds/B.wav";
 
+//whether or not key presses are disabled
+var disabled = false; 
+
 loadPage();
 
 playTrack(); 
@@ -112,18 +118,20 @@ function endNote() {
 
 //fires when the key is pressed
 function playNote(x) {
-    document.getElementById("key" + keys[x]).style.display = "inline";
-    keySounds[x].play();
+    if (!disabled) {
+        document.getElementById("key" + keys[x]).style.display = "inline";
+        keySounds[x].play();
 
-    keysPressed.push(x);
-    keyValues.push(1);
+        keysPressed.push(x);
+        keyValues.push(1);
 
-    if (keysPressed.length > keysMax) {
-        keysPressed.shift();
-        keyValues.shift();
+        if (keysPressed.length > keysMax) {
+            keysPressed.shift();
+            keyValues.shift();
+        }
+
+        displayUserNotes();        
     }
-
-    displayUserNotes();
 }
 
 //fires when the window is resized
@@ -146,6 +154,8 @@ function resizeMap() {
     document.getElementById("staff").style.top = Math.round(staffTop * sizeRatio) + "px";
     document.getElementById("staff").style.height = Math.round(staffHeight * sizeRatio) + "px";
     document.getElementById("staff").style.width = Math.round(img.clientWidth * 0.9) + "px";
+    document.getElementById("lives").style.width = Math.round(img.clientWidth * 0.9) + "px";
+    document.getElementById("lives").style.height = Math.round(livesHeight * sizeRatio) + "px";
 }
 
 //displays musical staff of user's note arrays
@@ -205,7 +215,7 @@ function createTrack() {
 
 //starts recursive createTrack function
 function playTrack() {
-    
+    disabled = true;
 	createTrack();
     i = 0;
 }
@@ -231,11 +241,17 @@ function isCorrect() {
 function confirmCorrect() {
 	if (isCorrect()) {
 	    winCount++;
+        setTimeout(nextTrack, 500);
 	} else {
-	    lossCount++;
+	    lose(); 
 	}
+}
+
+function lose() {
+	lossCount++;
+	document.getElementById("life" + lossCount).style.display = "none";
+    
     setTimeout(nextTrack, 500);
-	removeLife();
 }
 
 //prepares for the next track
@@ -260,19 +276,9 @@ function clearStaff() {
     while (staff.hasChildNodes()) {
         staff.removeChild(staff.childNodes[0]);
     }
-}
 
-//remove lives when incorrect sequence entered by player
-function removeLife() {
-	var ulElem = document.getElementById("lives");
-	var i = 0;
-	
-	if (!isCorrect()) {
-		ulElem.removeChild(ulElem.childNodes[i]);
-		i++;
-	}
+    disabled = false; 
 }
-
 
 
 

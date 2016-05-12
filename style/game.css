@@ -56,9 +56,13 @@ ul {
 
 li {
 	float: right;
+    height:  100%;
+    margin: 0;
+    padding:  0;
 }
 
-li a {
-	display: block;
+.lifeimg {
+    height:  100%;    
 }
+
 
