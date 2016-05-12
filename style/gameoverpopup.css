@@ -14,26 +14,52 @@
 
 @font-face {
     font-family: Quicksand;
+	src: url("style/Quicksand-Bold.otf");
 }
         
 #heading {
     font-family: Quicksand;
     font-size: 42px;
+	font-weight: bold;
     color: white; 
     padding-left: 161px;
     padding-top: 21px;
+}
+
+#scorecontent {
+	font-family: Quicksand;
+	font-weight: bold;
+	text-align: center;
+	color: #ff4a00;
+	margin-top: 75px;
+	margin-bottom: 100px;
+}
+
+#scoreheading {
+	font-size: 35px;
+	background-color: #f0e9b9;
+	
+}
+
+#score {
+	font-size: 46px;
+	background-color: #f0e9b9;
+}
+
+#bestscore {
+	font-size: 20px;
+	background-color: #f0e9b9;
 }
 
 #retrybutton {
     background-color: #FFFFFF;
     border-radius: 6px;
     outline: none;
-    margin-top: 250px;
-    margin-left: 85px;
     width: 170px;
     height: 60px;
     font-family: Quicksand;
     font-size: 29px;
+	font-weight: bold;
     color: #FF6138;
     position: absolute;
 }
@@ -44,8 +70,6 @@
     outline: none;
     width:  110px;
     height: 80px;
-    margin-top:  240px;  
-    margin-left: 1px;
     background-image: url("../images/home.png");
     background-size: 50%;
     background-repeat: no-repeat;

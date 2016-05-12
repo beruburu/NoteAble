@@ -81,9 +81,6 @@ keySounds[10].src = "sounds/ASharp.wav";
 keySounds[11] = new Audio();
 keySounds[11].src = "sounds/B.wav";
 
-//whether or not key presses are disabled
-var disabled = false; 
-
 loadPage();
 
 playTrack(); 
@@ -121,20 +118,18 @@ function endNote() {
 
 //fires when the key is pressed
 function playNote(x) {
-    if (!disabled) {
-        document.getElementById("key" + keys[x]).style.display = "inline";
-        keySounds[x].play();
+    document.getElementById("key" + keys[x]).style.display = "inline";
+    keySounds[x].play();
 
-        keysPressed.push(x);
-        keyValues.push(1);
+    keysPressed.push(x);
+    keyValues.push(1);
 
-        if (keysPressed.length > keysMax) {
-            keysPressed.shift();
-            keyValues.shift();
-        }
-
-        displayUserNotes();        
+    if (keysPressed.length > keysMax) {
+        keysPressed.shift();
+        keyValues.shift();
     }
+
+    displayUserNotes();
 }
 
 //fires when the window is resized
@@ -220,7 +215,7 @@ function createTrack() {
 
 //starts recursive createTrack function
 function playTrack() {
-    disabled = true;
+    
 	createTrack();
     i = 0;
 }
@@ -247,7 +242,7 @@ function confirmCorrect() {
 	if (isCorrect()) {
 	    win();
 	} else {
-	    lose(); 
+	    lossCount++;
 	}
 }
 
@@ -262,7 +257,6 @@ function win() {
 function lose() {
 	lossCount++;
 	document.getElementById("life" + lossCount).style.display = "none";
-    
     setTimeout(nextTrack, 500);
 }
 
@@ -288,9 +282,19 @@ function clearStaff() {
     while (staff.hasChildNodes()) {
         staff.removeChild(staff.childNodes[0]);
     }
-
-    disabled = false; 
 }
+
+//remove lives when incorrect sequence entered by player
+function removeLife() {
+	var ulElem = document.getElementById("lives");
+	var i = 0;
+	
+	if (!isCorrect()) {
+		ulElem.removeChild(ulElem.childNodes[i]);
+		i++;
+	}
+}
+
 
 
 
