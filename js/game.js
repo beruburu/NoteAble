@@ -234,8 +234,8 @@ function confirmCorrect() {
 	} else {
 	    lossCount++;
 	}
-	
     setTimeout(nextTrack, 500);
+	removeLife();
 }
 
 //prepares for the next track
@@ -262,3 +262,58 @@ function clearStaff() {
     }
 }
 
+//remove lives when incorrect sequence entered by player
+function removeLife() {
+	var ulElem = document.getElementById("lives");
+	var i = 0;
+	
+	if (!isCorrect()) {
+		ulElem.removeChild(ulElem.childNodes[i]);
+		i++;
+	}
+}
+
+
+
+
+//easter egg
+var myTimer = null;
+var imageNumber = 0;
+
+function move() {
+	var sheep = document.getElementById('sheep');
+	
+	sheep.style.left = parseInt(sheep.style.left) + 1 + "px";
+	imageNumber = (imageNumber + 1) % 5;
+	sheep.src = "images/easteregg/rainbow_sheep" + imageNumber + ".png";
+}
+
+function moveAccordinToKeyPressed(e) {
+	if (e.event) {
+		theKeyPressed = e.keyCode;
+	}else if (e.which) {
+		theKeyPressed = e.which;
+	}
+	if (theKeyPressed == 39) {
+		if(myTimer == null){
+				myTimer = setInterval('move();', 50);
+			}else{
+				clearInterval(myTimer);
+				myTimer = null;
+			}
+	}
+}
+
+window.onload=function() {
+	var sheep = document.getElementById('sheep');
+	window.onkeydown=moveAccordingToKeyPressed;
+	
+	sheep.onclick=function() {
+		if(myTimer == null) {
+			myTimer = setInterval('move();', 50);
+		}else{
+			clearInterval(myTimer);
+			myTimer = null;
+		}
+	}
+}
