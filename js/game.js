@@ -9,6 +9,9 @@ var staffHeight = 143;
 //default height of the lives list
 var livesHeight = 50; 
 
+//default font size for the highscore
+var scoreFontSize = 22;
+
 //delay before resetting a pressed key
 var delay = 600;
 //delay before hiding the computer's staff
@@ -156,6 +159,8 @@ function resizeMap() {
     document.getElementById("staff").style.width = Math.round(img.clientWidth * 0.9) + "px";
     document.getElementById("lives").style.width = Math.round(img.clientWidth * 0.9) + "px";
     document.getElementById("lives").style.height = Math.round(livesHeight * sizeRatio) + "px";
+    document.getElementById("wins").style.width = Math.round(img.clientWidth) + "px";
+    document.getElementById("wins").style.fontSize = (scoreFontSize * sizeRatio) + "px";
 }
 
 //displays musical staff of user's note arrays
@@ -240,13 +245,20 @@ function isCorrect() {
 //checks if the input was correct
 function confirmCorrect() {
 	if (isCorrect()) {
-	    winCount++;
-        setTimeout(nextTrack, 500);
+	    win();
 	} else {
 	    lose(); 
 	}
 }
 
+//computer user win
+function win() {
+	winCount++;
+	document.getElementById("wins").innerHTML = "Wins: " + winCount;
+    setTimeout(nextTrack, 500);
+}
+
+//compute user loss
 function lose() {
 	lossCount++;
 	document.getElementById("life" + lossCount).style.display = "none";

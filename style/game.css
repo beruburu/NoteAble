@@ -54,15 +54,25 @@ ul {
     overflow: hidden;
 }
 
-li {
-	float: right;
-    height:  100%;
-    margin: 0;
-    padding:  0;
-}
 
 .lifeimg {
+    padding-top:  1%;
     height:  100%;    
+    float:  right;    
 }
 
 
+@font-face {
+    font-family: Quicksand;
+}
+
+#wins {
+    font-family: Arial;
+    color:  white;
+    position:  absolute;
+    left: 0;
+    top: 3%;
+    text-align:  center;
+    font-weight:  bold;
+    font-size: 25px;
+}
