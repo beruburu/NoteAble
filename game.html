@@ -4,29 +4,29 @@
     <head>
         <link rel="stylesheet" type="text/css" href="style/style.css">
         <link rel="stylesheet" type="text/css" href="style/game.css">
+        <link rel="stylesheet" type="text/css" href="style/gameoverpopup.css">
         <script src="js/game.js" defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <meta charset="utf-8" />
         <title>NoteAble</title>
     </head>
     <body>
-		
+        
         <div id="container">
-		<div id="topbar">
+        <div id="topbar">
             <div id="lives">
                 <img src="images/lives.png" alt="life" class="lifeimg" id="life1">
                 <img src="images/lives.png" alt="life" class="lifeimg" id="life2">
                 <img src="images/lives.png" alt="life" class="lifeimg" id="life3">
+            <ul>
+                <li id = "timer"><time>0:00</time></li>
+            </ul>
             </div>
-		
-		<ul id="lives">
-            <li id = "timer"><time>1:00</time></li> 
-			<li><img src="images/lives.png" alt="life" id="life1"></li>
-			<li><img src="images/lives.png" alt="life" id="life2"></li>
-			<li><img src="images/lives.png" alt="life" id="life3"></li>           
-		</ul>
-			</div>
-			<img src="images/easteregg/rainbow_sheep0.png" id="sheep" alt="sheep" style="position:absolute; z-index:1; left:8px; display:none;">
-            <img src="images/NoteAble_Keyboard.png" id="keyboard" alt="keyboard">
+    
+            </div>
+            </div>
+            <img src="images/easteregg/rainbowsheep.gif" id="sheep" alt="sheep">
+            <img src="images/NoteAble_Keyboard_shapes.png" id="keyboard" alt="keyboard">
             <img src="images/c.png" id="keyC" class="keys" alt="c">
             <img src="images/cSharp.png" id="keyCSharp" class="keys" alt="csharp">
             <img src="images/d.png" id="keyD" class="keys" alt="d">
@@ -61,6 +61,18 @@
         </div>
         <div id="wins">
             Wins: 0
+        </div>
+        <div id="gameover">
+            <div id="heading">Game Over</div>
+            <div id="scorecontent">
+                <div id="scoreheading">Score</div>
+                <div id="score">5947</div>
+                <div id="bestscore">Personal Best: 6813</div>
+            </div>
+            <div id="gameoverbuttons">
+                <button id="mainmenu"></button>
+                <button id="retrybutton" onclick="location.reload();">Retry</button>
+            </div>     
         </div>
     </body>
 </html>

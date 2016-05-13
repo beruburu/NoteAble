@@ -1,4 +1,4 @@
-    var h1 = document.getElementsByTagName('h1')[0];
+ var h1 = document.getElementsByTagName('h1')[0];
     var seconds = 0;
     var minutes = 1;
     var t;
@@ -26,5 +26,3 @@
     }
 
     timer();
-
-   

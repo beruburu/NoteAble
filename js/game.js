@@ -10,7 +10,7 @@ var staffHeight = 143;
 var livesHeight = 50; 
 
 //default font size for the highscore
-var scoreFontSize = 22;
+var scoreFontSize = 30;
 
 //delay before resetting a pressed key
 var delay = 600;
@@ -40,6 +40,9 @@ var keysPressed = [];
 //whether pressed keys have been unpressed or not; 1= still pressed
 var keyValues = [];
 
+//array of notes to activate the easter egg
+var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
+
 //the maximum length of the user sequence
 var keysMax = 9;
 
@@ -53,6 +56,15 @@ var winCount = 0;
 
 //the number of times the user has lost
 var lossCount = 0; 
+
+//true if the keyboard is disabled
+var disabled = false;
+
+var timer1 = document.getElementById('timer');
+var minutes = 1;
+var seconds = 0;
+var t;
+var standardDelay = 1000;
 
 //enter sound values into array
 var keySounds = [];
@@ -83,7 +95,9 @@ keySounds[11].src = "sounds/B.wav";
 
 loadPage();
 
-playTrack(); 
+playTrack();
+
+// gameOver();
 
 //sets up the page
 function loadPage() {
@@ -111,25 +125,52 @@ function endNote() {
     document.getElementById("key" + keys[firstPressed]).style.display = "none";
     
     //check for a match once the user has entered enough keys
-    if (keysPressed.length == track.length) {
-        confirmCorrect();
+    if (keysPressed.length >= track.length) {
+        //do not confirm if the user has started the easter egg sequence
+        var eeMatch = true;
+        x = 0;
+        while (x < keysPressed.length && eeMatch) {
+            if (easterEggSeq.length < x || keysPressed[x] !== easterEggSeq[x]) {                
+                eeMatch = false; 
+            }
+            x++;
+        }
+
+        if (!eeMatch) {
+            confirmCorrect(); 
+        }
+    } else if (keysPressed.length == easterEggSeq.length) {
+        var eeMatch = true;
+        x = 0;
+        while (x < keysPressed.length && eeMatch) {
+            if (easterEggSeq.length < x || keysPressed[x] !== easterEggSeq[x]) {                
+                eeMatch = false; 
+            }
+            x++;
+        }
+
+        if (eeMatch) { easterEgg();  }
     }
 }
 
 //fires when the key is pressed
 function playNote(x) {
-    document.getElementById("key" + keys[x]).style.display = "inline";
-    keySounds[x].play();
+    if (!disabled) {
+        document.getElementById("key" + keys[x]).style.display = "inline";
+        keySounds[x].currentTime = 0;
+        keySounds[x].play();
 
-    keysPressed.push(x);
-    keyValues.push(1);
+        keysPressed.push(x);
+        keyValues.push(1);
 
-    if (keysPressed.length > keysMax) {
-        keysPressed.shift();
-        keyValues.shift();
+        if (keysPressed.length > keysMax) {
+            keysPressed.shift();
+            keyValues.shift();
+        }
+
+        displayUserNotes();
+        
     }
-
-    displayUserNotes();
 }
 
 //fires when the window is resized
@@ -187,8 +228,8 @@ function displayCompNotes() {
 
 //create the track one note at a time
 function createTrack() {
-	var position;
-	i++;
+    var position;
+    i++;
 
     //remove colours from previous key
     if (track.length > 0) {
@@ -196,68 +237,79 @@ function createTrack() {
         document.getElementById("key" + lastKey).style.display = "none";
     }
 
-	if (i < trackLength) {
-		position = Math.floor((Math.random() * 11) + 0);
+    if (i < trackLength) {
+        position = Math.floor((Math.random() * 11) + 0);
         
         keySounds[position].addEventListener("ended", createTrack); 
-		track.push(position);		
-		keySounds[position].play();
-		displayCompNotes();
+        track.push(position);       
+        keySounds[position].play();
+        displayCompNotes();
     } else {
         for (x = 0; x < keySounds.length; x++) {
             keySounds[x].removeEventListener("ended", createTrack);
         } 
         setTimeout(clearStaff, staffDelay);
-	}
+    }
 
 
 }
 
 //starts recursive createTrack function
 function playTrack() {
-    
-	createTrack();
+    disabled = true; 
+    resetTimer;
+    createTrack();
     i = 0;
+    //the setTimeout delay consists of: length of track, delay after final note, and 
+    //a standard delay to transition to runTimer() smoothly
+    setTimeout(runTimer, (trackLength*1000)+staffDelay+standardDelay);
 }
 
 //compares user input with computer's track
 function isCorrect() {
-	var confirm = 0;
-	for(i = 0; i < track.length; i++) {
-		if(keysPressed[i] == track[i]) {
-			confirm++;
-		}
-	}
+    var confirm = 0;
+    for(i = 0; i < track.length; i++) {
+        if(keysPressed[i] == track[i]) {
+            confirm++;
+        }
+    }
 
 
     if(confirm == track.length) {
-		return true;
-	} else {
-		return false;
-	}
+        return true;
+    } else {
+        return false;
+    }
 }
 
 //checks if the input was correct
 function confirmCorrect() {
-	if (isCorrect()) {
-	    win();
-	} else {
-	    lossCount++;
-	}
+    if (isCorrect()) {
+        win();
+    } else {
+        lose();
+    }
 }
 
-//computer user win
+//compute user win
 function win() {
-	winCount++;
-	document.getElementById("wins").innerHTML = "Wins: " + winCount;
+    winCount++;
+    document.getElementById("wins").innerHTML = "Wins: " + winCount;
+    resetTimer;
     setTimeout(nextTrack, 500);
 }
 
 //compute user loss
 function lose() {
-	lossCount++;
-	document.getElementById("life" + lossCount).style.display = "none";
-    setTimeout(nextTrack, 500);
+    lossCount++;
+    document.getElementById("life" + lossCount).style.display = "none";
+
+    if (lossCount < 3) {
+        setTimeout(nextTrack, 500);
+    } else {
+        gameOver();
+    }
+
 }
 
 //prepares for the next track
@@ -282,85 +334,62 @@ function clearStaff() {
     while (staff.hasChildNodes()) {
         staff.removeChild(staff.childNodes[0]);
     }
+
+    disabled = false; 
 }
 
 //remove lives when incorrect sequence entered by player
 function removeLife() {
-	var ulElem = document.getElementById("lives");
-	var i = 0;
-	
-	if (!isCorrect()) {
-		ulElem.removeChild(ulElem.childNodes[i]);
-		i++;
-	}
+    var ulElem = document.getElementById("lives");
+    var i = 0;
+    
+    if (!isCorrect()) {
+        ulElem.removeChild(ulElem.childNodes[i]);
+        i++;
+    }
 }
 
-    var timer1 = document.getElementById('timer');
-    var seconds = 0;
-    var minutes = 1;
-    var t;
+function resetTimer() {
+    seconds = 0;
+}
 
-function incrementTimer() {
+//the seconds still remaining after the user plays the correct notes
+var leftover;
+
+//recursive timer that resets to 0:00 after correct user input, and only starts
+//counting down after the generated track plays
+function runTimer() {
     seconds--;
     if (seconds < 0) {
-        seconds = 59;
-        minutes--;
-        if (minutes < 0) {
-            minutes = 59;
-        }
+        seconds = 8;//set the time length of countdown
+    }
+    if(leftover > 0 && isCorrect()) {
+        seconds = 0;
     }
 
-    timer1.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "0") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-    runTimer();
+    timer1.textContent = "0:" + (seconds > 9 ? seconds : "0" + seconds);
+    leftover = 8 - seconds;
+
+    if (seconds > 0) {
+        setTimeout(runTimer, 1000); 
+    }
 }
-
-function runTimer() {
-    if (seconds>0 || minutes>0) {
-        t = setTimeout(incrementTimer, 1000); 
-    } 
-}
-runTimer();
-
-
 
 //easter egg
-var myTimer = null;
-var imageNumber = 0;
+function easterEgg() {
+        $("#sheep").css("display", "inline");
 
-function move() {
-	var sheep = document.getElementById('sheep');
-	
-	sheep.style.left = parseInt(sheep.style.left) + 1 + "px";
-	imageNumber = (imageNumber + 1) % 5;
-	sheep.src = "images/easteregg/rainbow_sheep" + imageNumber + ".png";
-}
+        var width = "+=" + $(document).width();
+        $("#sheep").animate({
+            left: width
+        }, 5000, function () {
+            $("#sheep").css("display", "none");
+            $("#sheep").css("left", "8px");
+            nextTrack();
+        });
+ };
 
-function moveAccordinToKeyPressed(e) {
-	if (e.event) {
-		theKeyPressed = e.keyCode;
-	}else if (e.which) {
-		theKeyPressed = e.which;
-	}
-	if (theKeyPressed == 39) {
-		if(myTimer == null){
-				myTimer = setInterval('move();', 50);
-			}else{
-				clearInterval(myTimer);
-				myTimer = null;
-			}
-	}
-}
-
-window.onload=function() {
-	var sheep = document.getElementById('sheep');
-	window.onkeydown=moveAccordingToKeyPressed;
-	
-	sheep.onclick=function() {
-		if(myTimer == null) {
-			myTimer = setInterval('move();', 50);
-		}else{
-			clearInterval(myTimer);
-			myTimer = null;
-		}
-	}
-}
+ 
+ function gameOver() {
+        $("#gameover").animate({bottom: '550px'});  
+ }
