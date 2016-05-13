@@ -119,7 +119,7 @@ function endNote() {
     document.getElementById("key" + keys[firstPressed]).style.display = "none";
     
     //check for a match once the user has entered enough keys
-    if (keysPressed.length >= track.length) {
+    if (keysPressed.length == track.length) {
         //do not confirm if the user has started the easter egg sequence
         var eeMatch = true;
         x = 0;
@@ -129,7 +129,6 @@ function endNote() {
             }
             x++;
         }
-
         if (!eeMatch) {
             confirmCorrect(); 
         }
