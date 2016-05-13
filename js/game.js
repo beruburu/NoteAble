@@ -258,7 +258,7 @@ function createTrack() {
 function playTrack() {
     disabled = true; 
     resetTimer;
-    createTrack();
+	createTrack();
     i = 0;
     //the setTimeout delay consists of: length of track, delay after final note, and 
     //a standard delay to transition to runTimer() smoothly
