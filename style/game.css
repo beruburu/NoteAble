@@ -16,6 +16,10 @@ html, body {
     left:  0;
     top:  0;
     
+}
+
+#keyboard, #transparent, .keys, .shapes, #staff, #lives, #gameover, #topbar, #timer {
+    
     /*prevent user selection of image*/
    -moz-user-select: -moz-none;
    -khtml-user-select: none;
