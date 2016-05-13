@@ -60,6 +60,12 @@ var lossCount = 0;
 //true if the keyboard is disabled
 var disabled = false;
 
+var timer1 = document.getElementById('timer');
+var minutes = 1;
+var seconds = 0;
+var t;
+var standardDelay = 1000;
+
 //enter sound values into array
 var keySounds = [];
 keySounds[0] = new Audio();
@@ -221,8 +227,8 @@ function displayCompNotes() {
 
 //create the track one note at a time
 function createTrack() {
-	var position;
-	i++;
+    var position;
+    i++;
 
     //remove colours from previous key
     if (track.length > 0) {
@@ -230,19 +236,19 @@ function createTrack() {
         document.getElementById("key" + lastKey).style.display = "none";
     }
 
-	if (i < trackLength) {
-		position = Math.floor((Math.random() * 11) + 0);
+    if (i < trackLength) {
+        position = Math.floor((Math.random() * 11) + 0);
         
         keySounds[position].addEventListener("ended", createTrack); 
-		track.push(position);		
-		keySounds[position].play();
-		displayCompNotes();
+        track.push(position);       
+        keySounds[position].play();
+        displayCompNotes();
     } else {
         for (x = 0; x < keySounds.length; x++) {
             keySounds[x].removeEventListener("ended", createTrack);
         } 
         setTimeout(clearStaff, staffDelay);
-	}
+    }
 
 
 }
@@ -250,47 +256,52 @@ function createTrack() {
 //starts recursive createTrack function
 function playTrack() {
     disabled = true; 
+    resetTimer;
 	createTrack();
     i = 0;
+    //the setTimeout delay consists of: length of track, delay after final note, and 
+    //a standard delay to transition to runTimer() smoothly
+    setTimeout(runTimer, (trackLength*1000)+staffDelay+standardDelay);
 }
 
 //compares user input with computer's track
 function isCorrect() {
-	var confirm = 0;
-	for(i = 0; i < track.length; i++) {
-		if(keysPressed[i] == track[i]) {
-			confirm++;
-		}
-	}
+    var confirm = 0;
+    for(i = 0; i < track.length; i++) {
+        if(keysPressed[i] == track[i]) {
+            confirm++;
+        }
+    }
 
 
     if(confirm == track.length) {
-		return true;
-	} else {
-		return false;
-	}
+        return true;
+    } else {
+        return false;
+    }
 }
 
 //checks if the input was correct
 function confirmCorrect() {
-	if (isCorrect()) {
-	    win();
-	} else {
-	    lose();
-	}
+    if (isCorrect()) {
+        win();
+    } else {
+        lose();
+    }
 }
 
 //compute user win
 function win() {
-	winCount++;
-	document.getElementById("wins").innerHTML = "Wins: " + winCount;
+    winCount++;
+    document.getElementById("wins").innerHTML = "Wins: " + winCount;
+    resetTimer;
     setTimeout(nextTrack, 500);
 }
 
 //compute user loss
 function lose() {
-	lossCount++;
-	document.getElementById("life" + lossCount).style.display = "none";
+    lossCount++;
+    document.getElementById("life" + lossCount).style.display = "none";
 
     if (lossCount < 3) {
         setTimeout(nextTrack, 500);
@@ -328,40 +339,43 @@ function clearStaff() {
 
 //remove lives when incorrect sequence entered by player
 function removeLife() {
-	var ulElem = document.getElementById("lives");
-	var i = 0;
-	
-	if (!isCorrect()) {
-		ulElem.removeChild(ulElem.childNodes[i]);
-		i++;
-	}
+    var ulElem = document.getElementById("lives");
+    var i = 0;
+    
+    if (!isCorrect()) {
+        ulElem.removeChild(ulElem.childNodes[i]);
+        i++;
+    }
 }
 
-    var timer1 = document.getElementById('timer');
-    var seconds = 0;
-    var minutes = 1;
-    var t;
+function resetTimer() {
+    seconds = 0;
+}
 
-function incrementTimer() {
+//the seconds still remaining after the user plays the correct notes
+var leftover;
+
+//recursive timer that resets to 0:00 after correct user input, and only starts
+//counting down after the generated track plays
+function runTimer() {
     seconds--;
     if (seconds < 0) {
-        seconds = 59;
-        minutes--;
-        if (minutes < 0) {
-            minutes = 59;
-        }
+        seconds = 8;//set the time length of countdown
+    }
+    if(leftover > 0 && isCorrect()) {
+        seconds = 0;
     }
 
-    timer1.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "0") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-    runTimer();
-}
+    timer1.textContent = "0:" + (seconds > 9 ? seconds : "0" + seconds);
+    leftover = 8 - seconds;
 
-function runTimer() {
-    if (seconds>0 || minutes>0) {
-        t = setTimeout(incrementTimer, 1000); 
-    } 
+    if (seconds > 0) {
+        setTimeout(runTimer, 1000); 
+    }
+    if (seconds == 0 && !isCorrect()) {
+        lose();
+    }
 }
-runTimer();
 
 //easter egg
 function easterEgg() {
