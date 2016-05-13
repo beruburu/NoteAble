@@ -373,6 +373,9 @@ function runTimer() {
     if (seconds > 0) {
         setTimeout(runTimer, 1000); 
     }
+    if (seconds == 0 && !isCorrect()) {
+        lose();
+    }
 }
 
 //easter egg
