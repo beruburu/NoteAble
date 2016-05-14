@@ -1,4 +1,6 @@
-//actual height and width of keyboard image
+//***SCREEN RESIZING***
+
+//default height and width of keyboard image
 var maxHeight = 670;
 var maxWidth = 1027;
 
@@ -11,11 +13,6 @@ var livesHeight = 50;
 
 //default font size for the highscore
 var scoreFontSize = 30;
-
-//delay before resetting a pressed key
-var delay = 600;
-//delay before hiding the computer's staff
-var staffDelay = 1000;
 
 //default coordinates of image map
 var coords = [[3, 252, 109, 252, 109, 494, 143, 494, 143, 662, 3, 662]
@@ -32,39 +29,16 @@ var coords = [[3, 252, 109, 252, 109, 494, 143, 494, 143, 662, 3, 662]
 , [882,44,914,494,914,254,1020,254,1020,659,882,659]
 ]; 
 
-//names of all keys
-var keys = ["C", "CSharp", "D", "DSharp", "E", "F", "FSharp", "G", "GSharp", "A", "ASharp", "B"];
 
-//arrays of keys pressed
-var keysPressed = [];
-//whether pressed keys have been unpressed or not; 1= still pressed
-var keyValues = [];
+//***TIMEOUT DELAYS***
 
-//array of notes to activate the easter egg
-var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
+//delay before resetting a pressed key
+var delay = 600;
 
-//the maximum length of the user sequence
-var keysMax = 9;
+//delay before hiding the computer's staff
+var staffDelay = 1000;
 
-var trackLength = 3; //temporarily set to 3
-var i = 0;
-var track = [];
-var correct = false;
-
-//the number of times the user has won
-var winCount = 0;
-
-//the number of times the user has lost
-var lossCount = 0; 
-
-//true if the keyboard is disabled
-var disabled = false;
-
-var timer1 = document.getElementById('timer');
-var minutes = 1;
-var seconds = 0;
-var t;
-var standardDelay = 1000;
+//***KEY VALUES***
 
 //enter sound values into array
 var keySounds = [];
@@ -93,84 +67,61 @@ keySounds[10].src = "sounds/ASharp.wav";
 keySounds[11] = new Audio();
 keySounds[11].src = "sounds/B.wav";
 
+//names of all keys
+var keys = ["C", "CSharp", "D", "DSharp", "E", "F", "FSharp", "G", "GSharp", "A", "ASharp", "B"];
+
+
+//***USER INPUT***
+
+//arrays of keys pressed
+var keysPressed = [];
+
+//whether pressed keys have been unpressed or not; 1= still pressed
+var keyValues = [];
+
+//the maximum length of the user sequence
+var keysMax = 9;
+
+//true if the user's input matches the track
+var correct = false;
+
+//the number of times the user has won
+var winCount = 0;
+
+//the number of times the user has lost
+var lossCount = 0; 
+
+//**COMPUTER GENERATED TRACK**
+
+//the length of the track; temporarily set to 3
+var trackLength = 3; 
+
+//the current position when playing through the track
+var i = 0;
+
+//array of notes for the random track
+var track = [];
+
+//**OTHER VARIABLES**
+
+//array of notes to activate the easter egg
+var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
+
+//true if the keyboard is disabled
+var disabled = false;
+
+
+//**PAGE LOADING SEQUENCE**
 loadPage();
-
 playTrack();
-
-// gameOver();
 
 //sets up the page
 function loadPage() {
-    //Event listeners for dynamic image map 
+    //add event listeners for dynamic image map 
     window.addEventListener('resize', resizeWindow);
     document.getElementById("keyboard").addEventListener('load', resizeMap);
 }
 
-//fires on key mouseup
-function endNoteTimer(x) {
-    setTimeout(endNote, delay);
-}
-
-//hides the coloured key overlay
-function endNote() {
-    var firstPressed = -1; //the first key that has been pressed and not yet unpressed
-    var x = 0;
-    while (x < keysPressed.length && firstPressed == -1) {
-        if (keyValues[x] == 1) {
-           firstPressed = keysPressed[x];
-           keyValues[x] = 0; //reset to 0 for unpressed
-        }
-        x++;
-    }
-    document.getElementById("key" + keys[firstPressed]).style.display = "none";
-    
-    //check for a match once the user has entered enough keys
-    if (keysPressed.length == track.length) {
-        //do not confirm if the user has started the easter egg sequence
-        var eeMatch = true;
-        x = 0;
-        while (x < keysPressed.length && eeMatch) {
-            if (easterEggSeq.length < x || keysPressed[x] !== easterEggSeq[x]) {                
-                eeMatch = false; 
-            }
-            x++;
-        }
-        if (!eeMatch) {
-            confirmCorrect(); 
-        }
-    } else if (keysPressed.length == easterEggSeq.length) {
-        var eeMatch = true;
-        x = 0;
-        while (x < keysPressed.length && eeMatch) {
-            if (easterEggSeq.length < x || keysPressed[x] !== easterEggSeq[x]) {                
-                eeMatch = false; 
-            }
-            x++;
-        }
-
-        if (eeMatch) { easterEgg();  }
-    }
-}
-
-//fires when the key is pressed
-function playNote(x) {
-    if (!disabled) {
-        document.getElementById("key" + keys[x]).style.display = "inline";
-        keySounds[x].currentTime = 0;
-        keySounds[x].play();
-
-        keysPressed.push(x);
-        keyValues.push(1);
-
-        if (keysPressed.length > keysMax) {
-            keysPressed.shift();
-            keyValues.shift();
-        }
-
-        displayUserNotes();
-        
-    }
-}
 
 //fires when the window is resized
 function resizeWindow() {
@@ -197,8 +148,76 @@ function resizeMap() {
     document.getElementById("wins").style.width = Math.round(img.clientWidth) + "px";
     document.getElementById("wins").style.fontSize = (scoreFontSize * sizeRatio) + "px";
 }
+//fires when the key is pressed
+function playNote(x) {
+    if (!disabled) { //check if key has been disabled
+        document.getElementById("key" + keys[x]).style.display = "inline";
+        keySounds[x].currentTime = 0;
+        keySounds[x].play();
 
-//displays musical staff of user's note arrays
+        keysPressed.push(x);
+        keyValues.push(1);
+
+        if (keysPressed.length > keysMax) {
+            keysPressed.shift();
+            keyValues.shift();
+        }
+
+        displayUserNotes();
+        
+    }
+}
+
+//fires on key mouseup
+function endNoteTimer(x) {
+    setTimeout(endNote, delay); //leaves the key coloured for the delay time
+}
+
+//hides the coloured key overlay
+function endNote() {
+    var firstPressed = -1; //the first key that has been pressed and not yet unpressed
+    var x = 0;
+    while (x < keysPressed.length && firstPressed == -1) {
+        if (keyValues[x] == 1) {
+           firstPressed = keysPressed[x];
+           keyValues[x] = 0; //reset to 0 for unpressed
+        }
+        x++;
+    }
+    document.getElementById("key" + keys[firstPressed]).style.display = "none";
+    
+    //check for a match once the user has entered enough keys
+    if (keysPressed.length == track.length) {
+        //if the user has started the easter egg sequence, do not confirm input
+        var eeMatch = true;
+        x = 0;
+        while (x < keysPressed.length && eeMatch) {
+            if (easterEggSeq.length < x || keysPressed[x] !== easterEggSeq[x]) {                
+                eeMatch = false; 
+            }
+            x++;
+        }
+        if (!eeMatch) {
+            confirmCorrect(); 
+        }
+    } else if (keysPressed.length == easterEggSeq.length) {
+        //check if input matches easter egg sequence
+        var eeMatch = true;
+        x = 0;
+        while (x < keysPressed.length && eeMatch) {
+            if (keysPressed[x] !== easterEggSeq[x]) {                
+                eeMatch = false; 
+            }
+            x++;
+        }
+
+        if (eeMatch) { easterEgg();  }
+    }
+}
+
+
+
+//displays user's input on the staff
 function displayUserNotes() {
     var staff = document.getElementById("staff");
 
@@ -225,10 +244,17 @@ function displayCompNotes() {
     staff.appendChild(newShape);
 }
 
-//create the track one note at a time
+//starts creation of computer's track
+function playTrack() {
+    disabled = true; 
+	createTrack();
+    i = 0;
+}
+
+//recursive function to create the random track one note at a time
 function createTrack() {
-    var position;
-    i++;
+	var position;
+	i++;
 
     //remove colours from previous key
     if (track.length > 0) {
@@ -236,72 +262,60 @@ function createTrack() {
         document.getElementById("key" + lastKey).style.display = "none";
     }
 
-    if (i < trackLength) {
-        position = Math.floor((Math.random() * 11) + 0);
+	if (i < trackLength) {
+		position = Math.floor((Math.random() * 11) + 0);
         
         keySounds[position].addEventListener("ended", createTrack); 
-        track.push(position);       
-        keySounds[position].play();
-        displayCompNotes();
+		track.push(position);		
+		keySounds[position].play();
+		displayCompNotes();
     } else {
         for (x = 0; x < keySounds.length; x++) {
             keySounds[x].removeEventListener("ended", createTrack);
         } 
         setTimeout(clearStaff, staffDelay);
-    }
+	}
 
 
-}
-
-//starts recursive createTrack function
-function playTrack() {
-    disabled = true; 
-    resetTimer;
-	createTrack();
-    i = 0;
-    //the setTimeout delay consists of: length of track, delay after final note, and 
-    //a standard delay to transition to runTimer() smoothly
-    setTimeout(runTimer, (trackLength*1000)+staffDelay+standardDelay);
 }
 
 //compares user input with computer's track
 function isCorrect() {
-    var confirm = 0;
-    for(i = 0; i < track.length; i++) {
-        if(keysPressed[i] == track[i]) {
-            confirm++;
-        }
-    }
+	var confirm = 0;
+	for(i = 0; i < track.length; i++) {
+		if(keysPressed[i] == track[i]) {
+			confirm++;
+		}
+	}
 
 
     if(confirm == track.length) {
-        return true;
-    } else {
-        return false;
-    }
+		return true;
+	} else {
+		return false;
+	}
 }
 
 //checks if the input was correct
 function confirmCorrect() {
-    if (isCorrect()) {
-        win();
-    } else {
-        lose();
-    }
+	if (isCorrect()) {
+	    win();
+	} else {
+	    lose();
+	}
 }
 
-//compute user win
+//user wins
 function win() {
-    winCount++;
-    document.getElementById("wins").innerHTML = "Wins: " + winCount;
-    resetTimer;
+	winCount++;
+	document.getElementById("wins").innerHTML = "Wins: " + winCount;
     setTimeout(nextTrack, 500);
 }
 
-//compute user loss
+//user loses
 function lose() {
-    lossCount++;
-    document.getElementById("life" + lossCount).style.display = "none";
+	lossCount++;
+	document.getElementById("life" + lossCount).style.display = "none";
 
     if (lossCount < 3) {
         setTimeout(nextTrack, 500);
@@ -337,47 +351,46 @@ function clearStaff() {
     disabled = false; 
 }
 
-//remove lives when incorrect sequence entered by player
+//remove lives when user has lost
 function removeLife() {
-    var ulElem = document.getElementById("lives");
-    var i = 0;
-    
-    if (!isCorrect()) {
-        ulElem.removeChild(ulElem.childNodes[i]);
-        i++;
-    }
+	var ulElem = document.getElementById("lives");
+	var i = 0;
+	
+	if (!isCorrect()) {
+		ulElem.removeChild(ulElem.childNodes[i]);
+		i++;
+	}
 }
 
-function resetTimer() {
-    seconds = 0;
-}
+//TIMER CODE: INCOMPLETE SO COMMENTED OUT
+/*    var timer1 = document.getElementById('timer');
+    var seconds = 0;
+    var minutes = 1;
+    var t;
 
-//the seconds still remaining after the user plays the correct notes
-var leftover;
-
-//recursive timer that resets to 0:00 after correct user input, and only starts
-//counting down after the generated track plays
-function runTimer() {
+function incrementTimer() {
     seconds--;
     if (seconds < 0) {
-        seconds = 8;//set the time length of countdown
-    }
-    if(leftover > 0 && isCorrect()) {
-        seconds = 0;
+        seconds = 59;
+        minutes--;
+        if (minutes < 0) {
+            minutes = 59;
+        }
     }
 
-    timer1.textContent = "0:" + (seconds > 9 ? seconds : "0" + seconds);
-    leftover = 8 - seconds;
-
-    if (seconds > 0) {
-        setTimeout(runTimer, 1000); 
-    }
-    if (seconds == 0 && !isCorrect()) {
-        lose();
-    }
+    timer1.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "0") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    runTimer();
 }
 
-//easter egg
+function runTimer() {
+    if (seconds>0 || minutes>0) {
+        t = setTimeout(incrementTimer, 1000); 
+    } 
+}
+runTimer();
+*/
+
+//easter egg: sheep runs across screen
 function easterEgg() {
         $("#sheep").css("display", "inline");
 
@@ -391,7 +404,7 @@ function easterEgg() {
         });
  };
 
- 
+ //shows game over screen
  function gameOver() {
         $("#gameover").animate({bottom: '550px'});  
  }
