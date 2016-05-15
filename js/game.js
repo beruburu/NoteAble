@@ -110,6 +110,8 @@ var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
 //true if the keyboard is disabled
 var disabled = false;
 
+//true if confirmCorrect has been fired for this sequence
+var confirming = false; 
 
 //**PAGE LOADING SEQUENCE**
 loadPage();
@@ -150,7 +152,8 @@ function resizeMap() {
 }
 //fires when the key is pressed
 function playNote(x) {
-    if (!disabled) { //check if key has been disabled
+    //check if key has been disabled
+    if (!disabled) { 
         document.getElementById("key" + keys[x]).style.display = "inline";
         keySounds[x].currentTime = 0;
         keySounds[x].play();
@@ -163,6 +166,10 @@ function playNote(x) {
             keyValues.shift();
         }
 
+        if (keysPressed.length == track.length && !easterEggMatch()) {
+            disabled = true; //disable key presses when the full track length is complete
+        }
+
         displayUserNotes();
         
     }
@@ -170,49 +177,41 @@ function playNote(x) {
 
 //fires on key mouseup
 function endNoteTimer(x) {
-    setTimeout(endNote, delay); //leaves the key coloured for the delay time
+    
+    setTimeout(endNote, delay, x); //leaves the key coloured for the delay time        
 }
 
 //hides the coloured key overlay
-function endNote() {
-    var firstPressed = -1; //the first key that has been pressed and not yet unpressed
-    var x = 0;
-    while (x < keysPressed.length && firstPressed == -1) {
-        if (keyValues[x] == 1) {
-           firstPressed = keysPressed[x];
-           keyValues[x] = 0; //reset to 0 for unpressed
-        }
-        x++;
-    }
-    document.getElementById("key" + keys[firstPressed]).style.display = "none";
+function endNote(x) {
+
+    document.getElementById("key" + keys[x]).style.display = "none";
     
     //check for a match once the user has entered enough keys
     if (keysPressed.length == track.length) {
         //if the user has started the easter egg sequence, do not confirm input
-        var eeMatch = true;
-        x = 0;
-        while (x < keysPressed.length && eeMatch) {
-            if (easterEggSeq.length < x || keysPressed[x] !== easterEggSeq[x]) {                
-                eeMatch = false; 
-            }
-            x++;
-        }
-        if (!eeMatch) {
+        //if confirmCorrect has already been fired for this sequence, do not confirm input
+        if (!easterEggMatch() && !confirming) {
             confirmCorrect(); 
         }
     } else if (keysPressed.length == easterEggSeq.length) {
         //check if input matches easter egg sequence
-        var eeMatch = true;
-        x = 0;
-        while (x < keysPressed.length && eeMatch) {
-            if (keysPressed[x] !== easterEggSeq[x]) {                
-                eeMatch = false; 
-            }
-            x++;
+        if (easterEggMatch()) { 
+            easterEgg();  
         }
-
-        if (eeMatch) { easterEgg();  }
     }
+}
+
+function easterEggMatch() {
+    var eeMatch = true;
+    var x = 0;
+    while (x < keysPressed.length && eeMatch) {
+        if (keysPressed[x] !== easterEggSeq[x]) {                
+            eeMatch = false; 
+        }
+        x++;
+    }
+
+    return eeMatch;
 }
 
 
@@ -298,6 +297,7 @@ function isCorrect() {
 
 //checks if the input was correct
 function confirmCorrect() {
+    confirming = true; 
 	if (isCorrect()) {
 	    win();
 	} else {
@@ -338,6 +338,7 @@ function clearUserInput() {
     clearStaff();
     keysPressed = [];
     keyValues = [];
+    confirming = false; 
 }
 
 //clears items from the staff
