@@ -9,7 +9,7 @@ html, body {
     height: 100%;
     width: 100%;
 }
-#keyboard, #transparent, .keys {
+#keyboard, #transparent, .keys, #overlay {
     max-height: 98%;
     max-width: 100%;
     position:  absolute; 
@@ -18,7 +18,7 @@ html, body {
     
 }
 
-#keyboard, #transparent, .keys, .shapes, #staff, #lives, #gameover, #topbar, #timer {
+#keyboard, #transparent, .keys, .shapes, #staff, #lives, #gameover, #topbar, #timer, #wins, #overlay {
     
     /*prevent user selection of image*/
    -moz-user-select: -moz-none;
@@ -102,4 +102,12 @@ ul {
     left:8px;
     top: 15%;
     display: none;
+}
+
+#overlay {
+    z-index:1;
+    background-color: rgba(0,0,0,0.4);
+    height: 98%;
+    width: 100%;
+    display:  none;
 }

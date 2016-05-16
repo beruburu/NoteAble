@@ -70,7 +70,7 @@
            <area shape="poly" id="mapA" coords="735,494,769,494,770,254,841,255,841,491,875,496,875,662,735,662" onmousedown="playNote(9)" onmouseup="endNoteTimer(9)">
            <area shape="rect" id="mapASharp" coords="840,253,912,492" onmousedown="playNote(10)" onmouseup="endNoteTimer(10)">
            <area shape="poly" id="mapB" coords="882,44,914,494,914,254,1020,254,1020,659,882,659" onmousedown="playNote(11)" onmouseup="endNoteTimer(11)">
-          </map> 
+        </map> 
         </div>
 
         <!--The staff that displays the notes-->
@@ -81,6 +81,11 @@
         <div id="wins">
             Wins: 0
         </div>
+        
+        <!--A transparent overlay over the screen during pause or game over-->
+        <div id="overlay">
+        </div>
+        
 
         <!--Game over popup-->
 		<div id="gameover">
@@ -96,5 +101,6 @@
             	<button id="retrybutton" onclick="location.reload();">Retry</button>
 			</div>     
 		</div>
+
     </body>
 </html>

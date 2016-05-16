@@ -108,7 +108,13 @@ var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
 var disabled = false;
 
 //true if confirmCorrect has been fired for this sequence
-var confirming = false; 
+var confirming = false;
+
+//true if the game is paused
+var paused = false;
+
+//true if createTrack should be resumed after unpausing
+var resumeTrack = false; 
 
 //**DIFFICULTY LEVEL**
 
@@ -120,6 +126,8 @@ var winsPerLength = 3;
 
 //the number of wins that have happened at this length
 var winsPerLengthCount = 0; 
+
+
 
 
 //**PAGE LOADING SEQUENCE**
@@ -261,30 +269,35 @@ function playTrack() {
 
 //recursive function to create the random track one note at a time
 function createTrack() {
-	var position;
-	i++;
-
-    //remove colours from previous key
-    if (track.length > 0) {
-        var lastKey = keys[track[track.length - 1]];
-        document.getElementById("key" + lastKey).style.display = "none";
-    }
-
-	if (i < trackLength) {
-		position = Math.floor((Math.random() * 11) + 0);
+    if (!paused) {
         
-        keySounds[position].addEventListener("ended", createTrack); 
-		track.push(position);		
-		keySounds[position].play();
-		displayCompNotes();
+	    var position;
+	    i++;
+
+        //remove colours from previous key
+        if (track.length > 0) {
+            var lastKey = keys[track[track.length - 1]];
+            document.getElementById("key" + lastKey).style.display = "none";
+        }
+
+	    if (i < trackLength) {
+		    position = Math.floor((Math.random() * 11) + 0);
+        
+            keySounds[position].addEventListener("ended", createTrack); 
+		    track.push(position);		
+		    keySounds[position].play();
+		    displayCompNotes();
+        } else {
+            for (x = 0; x < keySounds.length; x++) {
+                keySounds[x].removeEventListener("ended", createTrack);
+            } 
+            setTimeout(clearStaff, staffDelay);
+	    }
+
     } else {
-        for (x = 0; x < keySounds.length; x++) {
-            keySounds[x].removeEventListener("ended", createTrack);
-        } 
-        setTimeout(clearStaff, staffDelay);
-	}
-
-
+        //set track to resume when the game is unpaused
+        resumeTrack = true;
+    }
 }
 
 //compares user input with computer's track
@@ -424,5 +437,20 @@ function easterEgg() {
 
  //shows game over screen
  function gameOver() {
+        pause(); 
         $("#gameover").animate({bottom: '550px'});  
  }
+
+ //pauses and unpauses the game
+ function pause() {
+    paused = !paused;
+    if (paused) {
+        document.getElementById("overlay").style.display = "inline";
+    } else {
+        document.getElementById("overlay").style.display = "none";  
+        if (resumeTrack) { //continue track creation if it has been paused
+            setTimeout(createTrack, 100);
+        }  
+    }
+    resumeTrack = false;    
+ }
