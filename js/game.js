@@ -93,9 +93,6 @@ var lossCount = 0;
 
 //**COMPUTER GENERATED TRACK**
 
-//the length of the track; temporarily set to 3
-var trackLength = 3; 
-
 //the current position when playing through the track
 var i = 0;
 
@@ -112,6 +109,18 @@ var disabled = false;
 
 //true if confirmCorrect has been fired for this sequence
 var confirming = false; 
+
+//**DIFFICULTY LEVEL**
+
+//the length of the track
+var trackLength = 3;
+
+//the number of wins before an increase in length 
+var winsPerLength = 3; 
+
+//the number of wins that have happened at this length
+var winsPerLengthCount = 0; 
+
 
 //**PAGE LOADING SEQUENCE**
 loadPage();
@@ -308,6 +317,14 @@ function confirmCorrect() {
 //user wins
 function win() {
 	winCount++;
+    
+    //increase track length after winsPerLength wins
+	winsPerLengthCount++; 
+    if (winsPerLengthCount == winsPerLength && trackLength < keysMax) {
+        trackLength++;
+        winsPerLengthCount = 0; 
+    }
+
 	document.getElementById("wins").innerHTML = "Wins: " + winCount;
     setTimeout(nextTrack, 500);
 }
