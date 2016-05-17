@@ -108,7 +108,13 @@ var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
 var disabled = false;
 
 //true if confirmCorrect has been fired for this sequence
-var confirming = false; 
+var confirming = false;
+
+//true if the game is paused
+var paused = false;
+
+//true if createTrack should be resumed after unpausing
+var resumeTrack = false; 
 
 //**DIFFICULTY LEVEL**
 
@@ -121,16 +127,45 @@ var winsPerLength = 3;
 //the number of wins that have happened at this length
 var winsPerLengthCount = 0; 
 
+//**STAGE & LEVEL**
+
+//0=Shapes, 1=Letters, 2=Staff
+var stage = 0;
+
+//difficulty -- not yet implemented
+var difficulty = 0;
+
 
 //**PAGE LOADING SEQUENCE**
 loadPage();
-playTrack();
+instructAppear();
+//playTrack();
 
 //sets up the page
 function loadPage() {
     //add event listeners for dynamic image map 
     window.addEventListener('resize', resizeWindow);
     document.getElementById("keyboard").addEventListener('load', resizeMap);
+
+    //read stage and difficulty from query string
+    var url = window.location.href;
+    if (url.includes("s=")) {
+        stage = parseInt(url.charAt(url.indexOf("s=") + 2));
+    }
+    if (url.includes("d=")) {
+        difficulty = parseInt(url.charAt(url.indexOf("d=") + 2));
+    }
+
+    switch (stage) {
+        case 0:
+            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_shapes.png";
+            break;
+        case 1:
+            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
+            break;
+        case 2:
+            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff.png";
+    }
 }
 
 
@@ -229,14 +264,23 @@ function easterEggMatch() {
 function displayUserNotes() {
     var staff = document.getElementById("staff");
 
-    var newShape = document.createElement("IMG");
-    newShape.src = "./images/shapes/" + keys[keysPressed[keysPressed.length -1]] + ".png";
-    newShape.className = "shapes";
+    var newNote = document.createElement("IMG");
 
+    switch (stage) {
+        case 0: //shapes
+            newNote.src = "./images/shapes/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+            newNote.className = "shapes";
+            break;
+        case 1: //shapes
+            newNote.src = "./images/letters/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+            newNote.className = "letters";
+            break;
+        case 2: //staff
+    }
     if (staff.childNodes.length >= keysMax) {
         staff.removeChild(staff.firstChild);
     }
-    staff.appendChild(newShape);
+    staff.appendChild(newNote);
 }
 
 //displays computer note sequence on staff
@@ -244,12 +288,24 @@ function displayCompNotes() {
     var staff = document.getElementById("staff");
 
     var selKey = keys[track[track.length - 1]];
-    var newShape = document.createElement("IMG");
-    newShape.src = "./images/shapes/" + selKey + ".png";
-    newShape.className = "shapes";
+    var newNote = document.createElement("IMG");
+
+    
+    switch (stage) {
+        case 0: //shapes
+            newNote.src = "./images/shapes/" + selKey + ".png";
+            newNote.className = "shapes";
+            break;
+        case 1: //shapes
+            newNote.src = "./images/letters/" + selKey + ".png";
+            newNote.className = "letters";
+            break;
+        case 2: //staff
+    }
+
 
     document.getElementById("key" + selKey).style.display = "inline";
-    staff.appendChild(newShape);
+    staff.appendChild(newNote);
 }
 
 //starts creation of computer's track
@@ -261,30 +317,35 @@ function playTrack() {
 
 //recursive function to create the random track one note at a time
 function createTrack() {
-	var position;
-	i++;
-
-    //remove colours from previous key
-    if (track.length > 0) {
-        var lastKey = keys[track[track.length - 1]];
-        document.getElementById("key" + lastKey).style.display = "none";
-    }
-
-	if (i < trackLength) {
-		position = Math.floor((Math.random() * 11) + 0);
+    if (!paused) {
         
-        keySounds[position].addEventListener("ended", createTrack); 
-		track.push(position);		
-		keySounds[position].play();
-		displayCompNotes();
+	    var position;
+	    i++;
+
+        //remove colours from previous key
+        if (track.length > 0) {
+            var lastKey = keys[track[track.length - 1]];
+            document.getElementById("key" + lastKey).style.display = "none";
+        }
+
+	    if (i < trackLength) {
+		    position = Math.floor((Math.random() * 11) + 0);
+        
+            keySounds[position].addEventListener("ended", createTrack); 
+		    track.push(position);		
+		    keySounds[position].play();
+		    displayCompNotes();
+        } else {
+            for (x = 0; x < keySounds.length; x++) {
+                keySounds[x].removeEventListener("ended", createTrack);
+            } 
+            setTimeout(clearStaff, staffDelay);
+	    }
+
     } else {
-        for (x = 0; x < keySounds.length; x++) {
-            keySounds[x].removeEventListener("ended", createTrack);
-        } 
-        setTimeout(clearStaff, staffDelay);
-	}
-
-
+        //set track to resume when the game is unpaused
+        resumeTrack = true;
+    }
 }
 
 //compares user input with computer's track
@@ -424,5 +485,33 @@ function easterEgg() {
 
  //shows game over screen
  function gameOver() {
+        pause(); 
         $("#gameover").animate({bottom: '550px'});  
+ }
+
+ //pauses and unpauses the game
+ function pause() {
+    paused = !paused;
+    if (paused) {
+        document.getElementById("overlay").style.display = "inline";
+    } else {
+        document.getElementById("overlay").style.display = "none";  
+        if (resumeTrack) { //continue track creation if it has been paused
+            setTimeout(createTrack, 100);
+        }  
+    }
+    resumeTrack = false;    
+ }
+ 
+ //shows instructional popup
+ function instructAppear() {
+	 pause();
+	 $("#instructions").animate({bottom: '950px'}, 1000);
+ }
+ 
+ //dismisses instructional popup
+ function instructDismiss() {
+	 $("#instructions").animate({bottom: '-550px'}, 1000);
+	 pause();
+	 playTrack();
  }
