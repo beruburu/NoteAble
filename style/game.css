@@ -9,13 +9,13 @@ html, body {
     height: 100%;
     width: 100%;
 }
+
 #keyboard, #transparent, .keys, #overlay {
     max-height: 98%;
     max-width: 100%;
     position:  absolute; 
     left:  0;
-    top:  0;
-    
+    top:  0;    
 }
 
 #keyboard, #transparent, .keys, .shapes, #staff, #lives, #gameover, #topbar, #timer, #wins, #overlay {
@@ -45,9 +45,10 @@ html, body {
     
 }
 
-.shapes {
+.shapes, .letters {
     height: 70%;
 }
+
 
 #topbar {
 	position:relative;

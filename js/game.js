@@ -127,7 +127,10 @@ var winsPerLength = 3;
 //the number of wins that have happened at this length
 var winsPerLengthCount = 0; 
 
+//**STAGE & LEVEL**
 
+//0=Shapes, 1=Letters, 2=Staff
+var stage = 0;
 
 
 //**PAGE LOADING SEQUENCE**
@@ -139,6 +142,17 @@ function loadPage() {
     //add event listeners for dynamic image map 
     window.addEventListener('resize', resizeWindow);
     document.getElementById("keyboard").addEventListener('load', resizeMap);
+
+    switch (stage) {
+        case 0:
+            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_shapes.png";
+            break;
+        case 1:
+            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
+            break;
+        case 2:
+            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff.png";
+    }
 }
 
 
@@ -237,14 +251,23 @@ function easterEggMatch() {
 function displayUserNotes() {
     var staff = document.getElementById("staff");
 
-    var newShape = document.createElement("IMG");
-    newShape.src = "./images/shapes/" + keys[keysPressed[keysPressed.length -1]] + ".png";
-    newShape.className = "shapes";
+    var newNote = document.createElement("IMG");
 
+    switch (stage) {
+        case 0: //shapes
+            newNote.src = "./images/shapes/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+            newNote.className = "shapes";
+            break;
+        case 1: //shapes
+            newNote.src = "./images/letters/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+            newNote.className = "letters";
+            break;
+        case 2: //staff
+    }
     if (staff.childNodes.length >= keysMax) {
         staff.removeChild(staff.firstChild);
     }
-    staff.appendChild(newShape);
+    staff.appendChild(newNote);
 }
 
 //displays computer note sequence on staff
@@ -252,12 +275,24 @@ function displayCompNotes() {
     var staff = document.getElementById("staff");
 
     var selKey = keys[track[track.length - 1]];
-    var newShape = document.createElement("IMG");
-    newShape.src = "./images/shapes/" + selKey + ".png";
-    newShape.className = "shapes";
+    var newNote = document.createElement("IMG");
+
+    
+    switch (stage) {
+        case 0: //shapes
+            newNote.src = "./images/shapes/" + selKey + ".png";
+            newNote.className = "shapes";
+            break;
+        case 1: //shapes
+            newNote.src = "./images/letters/" + selKey + ".png";
+            newNote.className = "letters";
+            break;
+        case 2: //staff
+    }
+
 
     document.getElementById("key" + selKey).style.display = "inline";
-    staff.appendChild(newShape);
+    staff.appendChild(newNote);
 }
 
 //starts creation of computer's track
