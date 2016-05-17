@@ -1,0 +1,99 @@
+#highscores {
+	height: 384px;
+	width: 555.12px;
+	background-color: #ff3b42;
+	background-image: url("../images/highScoresBG.png");
+    background-size: 553.6px 220px;
+    background-repeat: no-repeat;
+    background-position: center;
+	position: relative;
+    margin-left: 220px;
+	z-index: 999;
+	border-radius: 12px;
+}
+
+@font-face {
+    font-family: Quicksand;
+	src: url("../style/Quicksand-Bold.otf");
+}
+        
+#heading {
+    font-family: Quicksand;
+    font-size: 42px;
+	font-weight: bold;
+    color: white; 
+    padding-left: 161px;
+    padding-top: 21px;
+}
+
+#highscorescontent {
+	font-family: Quicksand;
+	font-weight: bold;
+	text-align: left;
+	color: #ff3b42;
+	margin-top: 15px;
+	font-size: 30px;
+}
+
+#score1 {
+	background-color: #ffb6b9;
+	width: 250px;
+	height: 30px;
+	margin: auto;
+	margin-top: 40px;
+	padding-left: 15px;
+}
+
+#score2 {
+	background-color: #ffb6b9;
+	width: 250px;
+	height: 30px;
+	margin: auto;
+	margin-top: 5px;
+	padding-left: 15px;
+}
+
+#score3 {
+	background-color: #ffb6b9;
+	width: 250px;
+	height: 30px;
+	margin: auto;
+	margin-top: 5px;
+	padding-left: 15px;
+}
+
+#score4 {
+	background-color: #ffb6b9;
+	width: 250px;
+	height: 30px;
+	margin: auto;
+	margin-top: 5px;
+	padding-left: 15px;
+}
+
+#score5 {
+	background-color: #ffb6b9;
+	width: 250px;
+	height: 30px;
+	margin: auto;
+	margin-top: 5px;
+	padding-left: 15px;
+}
+
+#button {
+	padding-top: 50px;
+	padding-left: 193px;
+	margin-top: -10px;
+}
+
+#confirmbutton {
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    outline: none;
+    width: 170px;
+    height: 60px;
+    font-family: Quicksand;
+    font-size: 29px;
+	font-weight: bold;
+    color: #ff3b42;
+}
