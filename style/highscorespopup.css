@@ -89,11 +89,18 @@
 #confirmbutton {
     background-color: #FFFFFF;
     border-radius: 6px;
-    outline: none;
+    border: none;
+	outline: none;
     width: 170px;
     height: 60px;
     font-family: Quicksand;
     font-size: 29px;
 	font-weight: bold;
+	text-decoration: none;
     color: #ff3b42;
+}
+
+#confirmbutton:active {
+	color: #ffffff;
+	background-color: #ffb6b9;
 }
