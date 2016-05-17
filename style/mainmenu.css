@@ -12,13 +12,13 @@ body {
 #fullscreen {
     width: 73.25%;
     height: 100%;
-    background-color: #CCCCCC;
+    background-color: #6E6E6E;
 }
 
 #menubar {
     height: 12%;
 	width: 100%;
-	background-color: #A1A099;
+	background-color: #92278F;
 	position: relative;
 	z-index: 999;
     border-bottom-right-radius: 20px;
@@ -28,7 +28,7 @@ body {
 #backbutton {
     height: 100%;
     width: 7.75%;
-    background-color: #716B6B;
+    background-color: #ED008C;
     border-bottom-left-radius: 20px;
     outline: none;
     background-image: url("../images/backarrow.png");
@@ -42,7 +42,7 @@ body {
     right: 39%;
     top:  30%;
     font-size: 200%;
-    color: #000;
+    color: #FFFFFF;
 }
 
 #settingsbutton {
@@ -51,7 +51,7 @@ body {
     position: absolute;
     right: 0px;
     top: 0px;
-    background-color: #716B6B;
+    background-color: #ED008C; 
     border-bottom-right-radius: 20px;
     outline: none;
     background-image: url("../images/settingscog.png");
@@ -68,7 +68,6 @@ body {
 #levelcontainer {
     height: 100%;
     width: 60%;
-    //background-color: #ff006e;
     position: relative;
     left: 20%;
 }
@@ -117,8 +116,21 @@ body {
     font-size: 180%;
     background-image: url("../images/advanced.png");
     background-repeat: no-repeat;
-    background-position: 10%;
-    background-size: 10%;
+    background-position: 8%;
+    background-size: 13%;
 }
 
-
+#highscorebutton {
+    height: 10%;
+    width: 10%;
+    background-color: #ED008C;
+    position: absolute;
+    bottom: 2.2%;
+    left: 1%;
+    outline: none;
+    font-family: Quicksand;
+    font-size: 130%;
+    color: #FFFFFF;
+    border-radius: 7px;
+    
+}
