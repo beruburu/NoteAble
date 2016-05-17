@@ -135,6 +135,7 @@ var stage = 0;
 
 //**PAGE LOADING SEQUENCE**
 loadPage();
+instructAppear();
 playTrack();
 
 //sets up the page
@@ -488,4 +489,16 @@ function easterEgg() {
         }  
     }
     resumeTrack = false;    
- }
+ }
+ 
+ //shows instructional popup
+ function instructAppear() {
+	 pause();
+	 $("#instructions").animate({bottom: '950px'}, 1000);
+ }
+ 
+ //dismisses instructional popup
+ function instructDismiss() {
+	 $("#instructions").animate({bottom: '-550px'}, 1000);
+	 pause();
+ }
