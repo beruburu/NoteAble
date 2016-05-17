@@ -132,6 +132,9 @@ var winsPerLengthCount = 0;
 //0=Shapes, 1=Letters, 2=Staff
 var stage = 0;
 
+//difficulty -- not yet implemented
+var difficulty = 0;
+
 
 //**PAGE LOADING SEQUENCE**
 loadPage();
@@ -143,6 +146,15 @@ function loadPage() {
     //add event listeners for dynamic image map 
     window.addEventListener('resize', resizeWindow);
     document.getElementById("keyboard").addEventListener('load', resizeMap);
+
+    //read stage and difficulty from query string
+    var url = window.location.href;
+    if (url.includes("s=")) {
+        stage = parseInt(url.charAt(url.indexOf("s=") + 2));
+    }
+    if (url.includes("d=")) {
+        difficulty = parseInt(url.charAt(url.indexOf("d=") + 2));
+    }
 
     switch (stage) {
         case 0:
