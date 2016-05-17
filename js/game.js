@@ -136,7 +136,7 @@ var stage = 0;
 //**PAGE LOADING SEQUENCE**
 loadPage();
 instructAppear();
-playTrack();
+//playTrack();
 
 //sets up the page
 function loadPage() {
@@ -501,4 +501,5 @@ function easterEgg() {
  function instructDismiss() {
 	 $("#instructions").animate({bottom: '-550px'}, 1000);
 	 pause();
+	 playTrack();
  }
