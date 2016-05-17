@@ -132,6 +132,13 @@ var winsPerLengthCount = 0;
 //0=Shapes, 1=Letters, 2=Staff
 var stage = 0;
 
+var timer = document.getElementById('timer');
+//var minutes = 1;
+var seconds = 0;
+var t;
+var waitDelay = 1000;
+var maxLives = 5;
+
 
 //**PAGE LOADING SEQUENCE**
 loadPage();
@@ -187,11 +194,24 @@ function playNote(x) {
     //check if key has been disabled
     if (!disabled) { 
         document.getElementById("key" + keys[x]).style.display = "inline";
-        keySounds[x].currentTime = 0;
-        keySounds[x].play();
 
         keysPressed.push(x);
         keyValues.push(1);
+
+        if (seconds == 0 && !isCorrect()) {
+            if(keysPressed.length == 0) {
+                lose();
+            } else if (keysPressed.length < track.length) {
+                lose();
+            } else if (keysPressed.length == track.length) {
+                seconds = 0;
+                lose();
+            }
+        }
+
+        keySounds[x].currentTime = 0;
+        keySounds[x].play();
+
 
         if (keysPressed.length > keysMax) {
             keysPressed.shift();
@@ -231,6 +251,17 @@ function endNote(x) {
             easterEgg();  
         }
     }
+        if (seconds == 0 && !isCorrect()) {
+            if(keysPressed.length == 0) {
+                lose();
+            } else if (keysPressed.length < track.length) {
+                lose();
+            } else if (keysPressed.length == track.length) {
+                seconds = 0;
+                lose();
+            }
+        }
+    
 }
 
 function easterEggMatch() {
@@ -298,9 +329,13 @@ function displayCompNotes() {
 
 //starts creation of computer's track
 function playTrack() {
-    disabled = true; 
+    disabled = true;
+    resetTimer;
 	createTrack();
     i = 0;
+    //the setTimeout delay consists of: length of track, delay after final note, and 
+    //a transition delay to transition to runTimer() smoothly
+    setTimeout(runTimer, (trackLength*1000)+staffDelay+waitDelay);
 }
 
 //recursive function to create the random track one note at a time
@@ -317,7 +352,7 @@ function createTrack() {
         }
 
 	    if (i < trackLength) {
-		    position = Math.floor((Math.random() * 11) + 0);
+		    position = Math.floor((Math.random() * 12) + 0);
         
             keySounds[position].addEventListener("ended", createTrack); 
 		    track.push(position);		
@@ -345,12 +380,16 @@ function isCorrect() {
 		}
 	}
 
+   // if(seconds == 0 && keysPressed.length == 0) {
+   //     return false;
+   // }
 
-    if(confirm == track.length) {
-		return true;
-	} else {
-		return false;
-	}
+
+        if(confirm == track.length) {
+    		return true;
+    	} else {
+    		return false;
+    	}
 }
 
 //checks if the input was correct
@@ -383,7 +422,7 @@ function lose() {
 	lossCount++;
 	document.getElementById("life" + lossCount).style.display = "none";
 
-    if (lossCount < 3) {
+    if (lossCount < maxLives) {
         setTimeout(nextTrack, 500);
     } else {
         gameOver();
@@ -429,33 +468,63 @@ function removeLife() {
 	}
 }
 
-//TIMER CODE: INCOMPLETE SO COMMENTED OUT
-/*    var timer1 = document.getElementById('timer');
-    var seconds = 0;
-    var minutes = 1;
-    var t;
+function resetTimer() {
+    seconds = 0;
+}
 
-function incrementTimer() {
+//the seconds that still remain after the user plays the correct notes
+var leftover;
+
+//recursive timer that resets to 0:00 after the user moves on to the next challenge.
+//the timer starts counting down after the generated track is finished playing
+
+//the timer will call the lose() function when one of the following occur:
+//*Note* a complete sequence is when the keysPressed.length == track.length
+
+//1. The timer reaches 0.00 without user input
+//2. User has only entered a partially complete sequence (whether it was going to be correct or not) when the timer has reached 0.00
+//3. User enters a complete sequence before the timer reaches 0.00 but that sequence is incorrect 
+
+//bug: the timer is unreliable when condition #3 occurs. it will reset the timer when incorrect, but it sometimes still continues the countdown.
+function runTimer() {
+    var difference;
+
     seconds--;
     if (seconds < 0) {
-        seconds = 59;
-        minutes--;
-        if (minutes < 0) {
-            minutes = 59;
+        seconds = 8;//set the time length of countdown
+    }
+    if(leftover > 0 && isCorrect()) {
+        seconds = 0;
+    }
+
+    timer.textContent = "0:" + (seconds > 9 ? seconds : "0" + seconds);
+    leftover = 8 - seconds;
+
+    if (seconds > 0) {
+        setTimeout(runTimer, 1000); 
+    }
+
+    if (seconds == 0 && !isCorrect()) {
+        difference = keysPressed.length - track.length;
+        if(keysPressed.length == 0) {
+            lose();
+        } else if (keysPressed.length < track.length) {
+            lose();
+        } else if (keysPressed.length == track.length) {
+            seconds = 0;
+            lose();
         }
     }
 
-    timer1.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "0") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-    runTimer();
+   // if (keysPressed.length == track.length && leftover == 0) {
+    //    if (!isCorrect()) {
+     //       seconds = 0;
+      //  }
+   // }
+    //if ((keysPressed.length == track.length) && !isCorrect() && leftover == 0) {
+     //       seconds = 0;
+     //   }
 }
-
-function runTimer() {
-    if (seconds>0 || minutes>0) {
-        t = setTimeout(incrementTimer, 1000); 
-    } 
-}
-runTimer();
-*/
 
 //easter egg: sheep runs across screen
 function easterEgg() {
