@@ -115,8 +115,10 @@ body {
     outline: none;
     font-family: Quicksand;
     font-size: 180%;
-    background-image: url("../images/intermediate.png");
+    background-image: url("../images/advanced.png");
     background-repeat: no-repeat;
     background-position: 10%;
     background-size: 10%;
 }
+
+
