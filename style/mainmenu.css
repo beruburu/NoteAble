@@ -1,0 +1,122 @@
+body {
+    width: 100%;
+    height: 100%;
+    font-family: Quicksand;
+}
+
+@font-face {
+    font-family: Quicksand;
+	src: url("../style/Quicksand-Bold.otf");
+}
+
+#fullscreen {
+    width: 73.25%;
+    height: 100%;
+    background-color: #CCCCCC;
+}
+
+#menubar {
+    height: 12%;
+	width: 100%;
+	background-color: #A1A099;
+	position: relative;
+	z-index: 999;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#backbutton {
+    height: 100%;
+    width: 7.75%;
+    background-color: #716B6B;
+    border-bottom-left-radius: 20px;
+    outline: none;
+    background-image: url("../images/backarrow.png");
+    background-size: 55%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#title {
+    position: absolute;
+    right: 39%;
+    top:  30%;
+    font-size: 200%;
+    color: #000;
+}
+
+#settingsbutton {
+    height: 100%;
+    width: 7.75%;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: #716B6B;
+    border-bottom-right-radius: 20px;
+    outline: none;
+    background-image: url("../images/settingscog.png");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#maincontainer {
+    height: 100%;
+    width: 100%;
+}
+
+#levelcontainer {
+    height: 100%;
+    width: 60%;
+    //background-color: #ff006e;
+    position: relative;
+    left: 20%;
+}
+
+#novice {
+    height: 15%;
+    width: 100%;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 10%;
+    border-radius: 20px;
+    outline: none;
+    font-family: Quicksand;
+    font-size: 180%;
+    background-image: url("../images/novice.png");
+    background-repeat: no-repeat;
+    background-position: 13%;
+    background-size: 4%;
+}
+
+#intermediate {
+    height: 15%;
+    width: 100%;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 37%;
+    border-radius: 20px; 
+    outline: none;
+    font-family: Quicksand;
+    font-size: 180%;
+    background-image: url("../images/intermediate.png");
+    background-repeat: no-repeat;
+    background-position: 10%;
+    background-size: 10%;
+}
+
+#advanced {
+    height: 15%;
+    width: 100%;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 64%;
+    border-radius: 20px;
+    outline: none;
+    font-family: Quicksand;
+    font-size: 180%;
+    background-image: url("../images/intermediate.png");
+    background-repeat: no-repeat;
+    background-position: 10%;
+    background-size: 10%;
+}
