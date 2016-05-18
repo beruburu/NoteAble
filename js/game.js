@@ -132,17 +132,37 @@ var winsPerLengthCount = 0;
 //0=Shapes, 1=Letters, 2=Staff
 var stage = 0;
 
+//difficulty -- not yet implemented
+var difficulty = 0;
+
+
+//**TIMER**/
+var timer = document.getElementById('timer');
+var seconds = 0;
+var t;
+var waitDelay = 1000;
+var maxLives = 5;
+var timerPaused = false; 
 
 //**PAGE LOADING SEQUENCE**
 loadPage();
 instructAppear();
-playTrack();
+//playTrack();
 
 //sets up the page
 function loadPage() {
     //add event listeners for dynamic image map 
     window.addEventListener('resize', resizeWindow);
     document.getElementById("keyboard").addEventListener('load', resizeMap);
+
+    //read stage and difficulty from query string
+    var url = window.location.href;
+    if (url.includes("s=")) {
+        stage = parseInt(url.charAt(url.indexOf("s=") + 2));
+    }
+    if (url.includes("d=")) {
+        difficulty = parseInt(url.charAt(url.indexOf("d=") + 2));
+    }
 
     switch (stage) {
         case 0:
@@ -231,6 +251,17 @@ function endNote(x) {
             easterEgg();  
         }
     }
+
+    /*if (seconds == 0 && !isCorrect()) {
+            if(keysPressed.length == 0) {
+                lose();
+            } else if (keysPressed.length < track.length) {
+                lose();
+            } else if (keysPressed.length == track.length) {
+                seconds = 0;
+                lose();
+            }
+     }*/
 }
 
 function easterEggMatch() {
@@ -299,16 +330,20 @@ function displayCompNotes() {
 //starts creation of computer's track
 function playTrack() {
     disabled = true; 
-	createTrack();
-    i = 0;
+    resetTimer();
+    createTrack();
+    i = 0;    
+    //the setTimeout delay consists of: length of track, delay after final note, and 
+    //a transition delay to transition to runTimer() smoothly
+    //setTimeout(runTimer, (trackLength*1000)+staffDelay+waitDelay);
 }
 
 //recursive function to create the random track one note at a time
 function createTrack() {
     if (!paused) {
         
-	    var position;
-	    i++;
+        var position;
+        i++;
 
         //remove colours from previous key
         if (track.length > 0) {
@@ -316,19 +351,21 @@ function createTrack() {
             document.getElementById("key" + lastKey).style.display = "none";
         }
 
-	    if (i < trackLength) {
-		    position = Math.floor((Math.random() * 11) + 0);
+        if (i < trackLength) {
+            position = Math.floor((Math.random() * 11) + 0);
         
             keySounds[position].addEventListener("ended", createTrack); 
-		    track.push(position);		
-		    keySounds[position].play();
-		    displayCompNotes();
+            track.push(position);       
+            keySounds[position].play();
+            displayCompNotes();
         } else {
             for (x = 0; x < keySounds.length; x++) {
                 keySounds[x].removeEventListener("ended", createTrack);
             } 
             setTimeout(clearStaff, staffDelay);
-	    }
+            setTimeout(runTimer, staffDelay);
+            timerPaused = false; 
+        }
 
     } else {
         //set track to resume when the game is unpaused
@@ -338,50 +375,52 @@ function createTrack() {
 
 //compares user input with computer's track
 function isCorrect() {
-	var confirm = 0;
-	for(i = 0; i < track.length; i++) {
-		if(keysPressed[i] == track[i]) {
-			confirm++;
-		}
-	}
+    var confirm = 0;
+    for(i = 0; i < track.length; i++) {
+        if(keysPressed[i] == track[i]) {
+            confirm++;
+        }
+    }
 
 
     if(confirm == track.length) {
-		return true;
-	} else {
-		return false;
-	}
+        return true;
+    } else {
+        return false;
+    }
 }
 
 //checks if the input was correct
 function confirmCorrect() {
     confirming = true; 
-	if (isCorrect()) {
-	    win();
-	} else {
-	    lose();
-	}
+    if (isCorrect()) {
+        win();
+    } else {
+        lose();
+    }
 }
 
 //user wins
 function win() {
-	winCount++;
+    winCount++;
     
     //increase track length after winsPerLength wins
-	winsPerLengthCount++; 
+    winsPerLengthCount++; 
     if (winsPerLengthCount == winsPerLength && trackLength < keysMax) {
         trackLength++;
         winsPerLengthCount = 0; 
     }
 
-	document.getElementById("wins").innerHTML = "Wins: " + winCount;
+    document.getElementById("wins").innerHTML = "Wins: " + winCount;
     setTimeout(nextTrack, 500);
 }
 
 //user loses
 function lose() {
-	lossCount++;
-	document.getElementById("life" + lossCount).style.display = "none";
+    lossCount++;
+    document.getElementById("life" + lossCount).style.display = "none";
+    resetTimer();
+    timerPaused = true; 
 
     if (lossCount < 3) {
         setTimeout(nextTrack, 500);
@@ -420,42 +459,14 @@ function clearStaff() {
 
 //remove lives when user has lost
 function removeLife() {
-	var ulElem = document.getElementById("lives");
-	var i = 0;
-	
-	if (!isCorrect()) {
-		ulElem.removeChild(ulElem.childNodes[i]);
-		i++;
-	}
-}
-
-//TIMER CODE: INCOMPLETE SO COMMENTED OUT
-/*    var timer1 = document.getElementById('timer');
-    var seconds = 0;
-    var minutes = 1;
-    var t;
-
-function incrementTimer() {
-    seconds--;
-    if (seconds < 0) {
-        seconds = 59;
-        minutes--;
-        if (minutes < 0) {
-            minutes = 59;
-        }
+    var ulElem = document.getElementById("lives");
+    var i = 0;
+    
+    if (!isCorrect()) {
+        ulElem.removeChild(ulElem.childNodes[i]);
+        i++;
     }
-
-    timer1.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "0") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-    runTimer();
 }
-
-function runTimer() {
-    if (seconds>0 || minutes>0) {
-        t = setTimeout(incrementTimer, 1000); 
-    } 
-}
-runTimer();
-*/
 
 //easter egg: sheep runs across screen
 function easterEgg() {
@@ -493,12 +504,57 @@ function easterEgg() {
  
  //shows instructional popup
  function instructAppear() {
-	 pause();
-	 $("#instructions").animate({bottom: '950px'}, 1000);
+     pause();
+     $("#instructions").animate({bottom: '950px'}, 1000);
  }
  
  //dismisses instructional popup
  function instructDismiss() {
-	 $("#instructions").animate({bottom: '-550px'}, 1000);
-	 pause();
+     $("#instructions").animate({bottom: '-550px'}, 1000);
+     pause();
+     playTrack();
+ }
+
+ function resetTimer() { 
+    seconds = 0;
+    timer.textContent = "0:00";
+}
+ 
+//the seconds that still remain after the user plays the correct notes
+var leftover;
+ 
+//recursive timer that resets to 0:00 after the user moves on to the next challenge.
+//the timer starts counting down after the generated track is finished playing
+ 
+//the timer will call the lose() function when one of the following occur:
+//*Note* a complete sequence is when the keysPressed.length == track.length
+ 
+//1. The timer reaches 0.00 without user input
+//2. User has only entered a partially complete sequence (whether it was going to be correct or not) when the timer has reached 0.00
+//3. User enters a complete sequence before the timer reaches 0.00 but that sequence is incorrect 
+ 
+//bug: the timer is unreliable when condition #3 occurs. it will reset the timer when incorrect, but it sometimes still continues the countdown.
+function runTimer() {
+    if (!timerPaused) {
+ 
+        seconds--;
+        if (seconds < 0) {
+            seconds = 8;//set the time length of countdown
+        }
+        if(leftover > 0 && isCorrect()) {
+            seconds = 0;
+        }
+ 
+        timer.textContent = "0:" + (seconds > 9 ? seconds : "0" + seconds);
+        leftover = 8 - seconds;
+ 
+        if (seconds > 0) {
+            setTimeout(runTimer, 1000); 
+        }
+
+        if (seconds == 0 && !isCorrect() && keysPressed.length <= track.length) {
+            lose(); 
+        }
+        
+    }
  }
