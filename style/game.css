@@ -35,7 +35,6 @@ html, body {
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
-	display: inline;
 }
 
 #keyboard, #transparent, .keys, #overlay {
@@ -66,9 +65,11 @@ html, body {
 }
 
 #lives {
-	max-width: 150px;
 	display: inline-block;
-	margin: 0 0 15px 650px;
+	max-width: 150px;
+    position: absolute;
+    z-index:  4;
+    top:  2%;
 }
 
 #staff {
@@ -84,12 +85,6 @@ html, body {
 }
 
 
-#topbar {
-	position:relative;
-	z-index:1;
-	margin-right:100px;
-	/*margin-top:3px;*/
-}
 
 #timer {
     position:  absolute; 
@@ -98,13 +93,6 @@ html, body {
     font-family: Quicksand;
     font-size:40px;
     color:red;
-}
-
-ul {
-	list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
 }
 
 
@@ -144,4 +132,5 @@ ul {
     height: 98%;
     width: 100%;
     display:  none;
+    z-index:  5; 
 }

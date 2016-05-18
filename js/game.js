@@ -14,6 +14,12 @@ var livesHeight = 50;
 //default font size for the highscore
 var scoreFontSize = 30;
 
+//default font size for the timer
+var timerFontSize = 40;
+
+//default size for menu buttons
+var menuButtonSize = 80;
+
 //default coordinates of image map
 var coords = [[3, 252, 109, 252, 109, 494, 143, 494, 143, 662, 3, 662]
 , [112, 254, 183, 491]
@@ -135,13 +141,18 @@ var stage = 0;
 //difficulty -- not yet implemented
 var difficulty = 0;
 
-
 //**TIMER**/
+
+//the timer itself
 var timer = document.getElementById('timer');
+
+//the number of seconds on the timer
 var seconds = 0;
-var t;
+
+//the delay between timer ticks
 var waitDelay = 1000;
-var maxLives = 5;
+
+//true if the timer is paused
 var timerPaused = false; 
 
 //**PAGE LOADING SEQUENCE**
@@ -201,6 +212,13 @@ function resizeMap() {
     document.getElementById("lives").style.height = Math.round(livesHeight * sizeRatio) + "px";
     document.getElementById("wins").style.width = Math.round(img.clientWidth) + "px";
     document.getElementById("wins").style.fontSize = (scoreFontSize * sizeRatio) + "px";
+    document.getElementById("timer").style.fontSize = (timerFontSize * sizeRatio) + "px";
+    document.getElementById("menubutton").style.width = (menuButtonSize * sizeRatio) + "px";
+    document.getElementById("menubutton").style.height = (menuButtonSize * sizeRatio) + "px";
+    document.getElementById("settingsbutton").style.width = (menuButtonSize * sizeRatio) + "px";
+    document.getElementById("settingsbutton").style.height = (menuButtonSize * sizeRatio) + "px";
+    document.getElementById("topbar").style.width = Math.round(img.clientWidth * 0.9) + "px";
+    document.getElementById("lives").style.left = Math.round(img.clientWidth * 0.65) + "px";
 }
 //fires when the key is pressed
 function playNote(x) {
@@ -252,16 +270,6 @@ function endNote(x) {
         }
     }
 
-    /*if (seconds == 0 && !isCorrect()) {
-            if(keysPressed.length == 0) {
-                lose();
-            } else if (keysPressed.length < track.length) {
-                lose();
-            } else if (keysPressed.length == track.length) {
-                seconds = 0;
-                lose();
-            }
-     }*/
 }
 
 function easterEggMatch() {
