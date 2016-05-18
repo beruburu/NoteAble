@@ -412,7 +412,7 @@ function confirmCorrect() {
 
 //user wins
 function win() {
-	winCount++;
+	//winCount++;
     
     //increase track length after winsPerLength wins
 	winsPerLengthCount++; 
@@ -421,8 +421,10 @@ function win() {
         winsPerLengthCount = 0; 
     }
 
-	document.getElementById("wins").innerHTML = "Wins: " + winCount;
+    document.getElementById("points").innerHTML = increaseScore();
     setTimeout(nextTrack, 500);
+    setTimeout(resetScore, 500);
+    resetMultiplier();
 }
 
 //user loses
@@ -534,16 +536,38 @@ function easterEgg() {
     seconds = 0;
     timer.textContent = "0:00";
 }
+
+//the length of the timer's countdown in seconds
+var countdownLength = 8;
  
-//the seconds that still remain after the user plays the correct notes
+//the seconds that still remain after the user plays the correct notes before timer end
 var leftover;
+
+//the base points that combines with a multiplier
+var base = 10;
+
+//the user's score so far
+var runningScore = 0;
+
+//the multiplier based on how many seconds are left after the user's correct input
+var multiplier;
+
+//returns the user's score so far in the game
+function increaseScore() {
+    runningScore = runningScore + (multiplier*base);
+    return runningScore;
+}
+
+//resets the current score
+function resetMultiplier() {
+    multiplier = 0;
+}
  
 //recursive timer that resets to 0:00 after the user moves on to the next challenge.
 //the timer starts counting down after the generated track is finished playing
  
 //the timer will call the lose() function when one of the following occur:
 //*Note* a complete sequence is when the keysPressed.length == track.length
- 
 //1. The timer reaches 0.00 without user input
 //2. User has only entered a partially complete sequence (whether it was going to be correct or not) when the timer has reached 0.00
 //3. User enters a complete sequence before the timer reaches 0.00 but that sequence is incorrect 
@@ -554,14 +578,17 @@ function runTimer() {
  
         seconds--;
         if (seconds < 0) {
-            seconds = 8;//set the time length of countdown
+            seconds = countdownLength;//set the time length of countdown
         }
+
+        multiplier = (countdownLength - leftover) - 1;
+
         if(leftover > 0 && isCorrect()) {
             seconds = 0;
         }
  
         timer.textContent = "0:" + (seconds > 9 ? seconds : "0" + seconds);
-        leftover = 8 - seconds;
+        leftover = countdownLength - seconds;
  
         if (seconds > 0) {
             setTimeout(runTimer, 1000); 
@@ -573,4 +600,3 @@ function runTimer() {
         
     }
  }
-
