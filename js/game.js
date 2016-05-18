@@ -509,6 +509,7 @@ function easterEgg() {
  //shows game over screen
  function gameOver() {
         pause(); 
+		document.getElementById("score").innerHTML = runningScore;
         $("#gameover").animate({bottom: '550px'});  
  }
 

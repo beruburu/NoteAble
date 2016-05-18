@@ -108,7 +108,7 @@
 			<div id="scorecontent">
 				<div id="scoreheading">Score</div>
                 <!--Temp score values are hard coded until scores system is working-->
-				<div id="score">5947</div>
+				<div id="score"></div>
 				<div id="bestscore">Personal Best: 6813</div>
 			</div>
 			<div id="gameoverbuttons">
