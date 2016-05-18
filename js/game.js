@@ -124,6 +124,12 @@ var paused = false;
 //true if createTrack should be resumed after unpausing
 var resumeTrack = false; 
 
+//sound plays when user wins
+var winSound = new Audio('sounds/C.wav');
+
+//sound plays when user loses
+var loseSound = new Audio('sounds/ASharp.wav');
+
 //**DIFFICULTY LEVEL**
 
 //the length of the track
@@ -404,16 +410,16 @@ function isCorrect() {
 function confirmCorrect() {
     confirming = true; 
 	if (isCorrect()) {
-	    win();
+	    setTimeout(win, 1000);
 	} else {
-	    lose();
+	    setTimeout(lose, 1000);
 	}
 }
 
 //user wins
 function win() {
 	//winCount++;
-    
+    winSound.play();
     //increase track length after winsPerLength wins
 	winsPerLengthCount++; 
     if (winsPerLengthCount == winsPerLength && trackLength < keysMax) {
@@ -422,20 +428,21 @@ function win() {
     }
 
     document.getElementById("points").innerHTML = increaseScore();
-    setTimeout(nextTrack, 500);
-    setTimeout(resetScore, 500);
+    setTimeout(nextTrack, 1500);
+    setTimeout(resetScore, 1500);
     resetMultiplier();
 }
 
 //user loses
 function lose() {
+	loseSound.play();
 	lossCount++;
 	document.getElementById("life" + lossCount).style.display = "none";
 	resetTimer();
 	timerPaused = true; 
 
     if (lossCount < 3) {
-        setTimeout(nextTrack, 500);
+        setTimeout(nextTrack, 1500);
     } else {
         gameOver();
     }
