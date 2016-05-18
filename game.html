@@ -24,19 +24,28 @@
 
         <!--Top menu bar-->
 		<div id="topbar">
-            <!--Container for music notes showing user's lives-->
-            <div id="lives">
-                <img src="images/lives.png" alt="life" class="lifeimg" id="life1">
-                <img src="images/lives.png" alt="life" class="lifeimg" id="life2">
-                <img src="images/lives.png" alt="life" class="lifeimg" id="life3">
-            </div>
+	        <!--Menu button-->
+            <button id="menubutton"></button> 
+            <!--Settings button-->   
+            <button id="settingsbutton"></button>
 		</div>
+
+        
+
 		
+        <!--Container for music notes showing user's lives-->
+        <div id="lives">
+            <img src="images/lives.png" alt="life" class="lifeimg" id="life1">
+            <img src="images/lives.png" alt="life" class="lifeimg" id="life2">
+            <img src="images/lives.png" alt="life" class="lifeimg" id="life3">
+        </div>
+
+
         <!--Sheep image for easter egg-->
 		<img src="images/easteregg/rainbowsheep.gif" id="sheep" alt="sheep">
 
         <!--Blank keyboard image-->
-        <img src="images/NoteAble_Keyboard_shapes.png" id="keyboard" alt="keyboard">
+        <img src="images/NoteAble_Keyboard.png" id="keyboard" alt="keyboard">
 
         <!--Coloured key images for all notes-->
         <img src="images/c.png" id="keyC" class="keys" alt="c">
@@ -84,6 +93,9 @@
             Wins: 0
         </div>
         
+        <!-- Timer -->
+        <div id = "timer"><time>0:00</time></div>
+        
         <!--A transparent overlay over the screen during pause or game over-->
         <div id="overlay">
         </div>
@@ -115,6 +127,7 @@
             	<button id="confirmbutton" onclick="instructDismiss();">Okay!</button>
 			</div>     
 		</div>
+        
 
     </body>
 </html>

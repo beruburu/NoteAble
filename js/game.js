@@ -14,6 +14,12 @@ var livesHeight = 50;
 //default font size for the highscore
 var scoreFontSize = 30;
 
+//default font size for the timer
+var timerFontSize = 40;
+
+//default size for menu buttons
+var menuButtonSize = 80;
+
 //default coordinates of image map
 var coords = [[3, 252, 109, 252, 109, 494, 143, 494, 143, 662, 3, 662]
 , [112, 254, 183, 491]
@@ -76,9 +82,12 @@ var keys = ["C", "CSharp", "D", "DSharp", "E", "F", "FSharp", "G", "GSharp", "A"
 //arrays of keys pressed
 var keysPressed = [];
 
+<<<<<<< HEAD
 //whether pressed keys have been unpressed or not; 1= still pressed
 var keyValues = [];
 
+=======
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 //the maximum length of the user sequence
 var keysMax = 9;
 
@@ -99,11 +108,23 @@ var i = 0;
 //array of notes for the random track
 var track = [];
 
+<<<<<<< HEAD
 //**OTHER VARIABLES**
+=======
+//**EASTER EGG**
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 
 //array of notes to activate the easter egg
 var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
 
+<<<<<<< HEAD
+=======
+//true if easter egg is currently running
+var easterEggRunning = false; 
+
+//**OTHER VARIABLES**
+
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 //true if the keyboard is disabled
 var disabled = false;
 
@@ -135,6 +156,7 @@ var stage = 0;
 //difficulty -- not yet implemented
 var difficulty = 0;
 
+<<<<<<< HEAD
 
 //**TIMER**/
 var timer = document.getElementById('timer');
@@ -142,6 +164,20 @@ var seconds = 0;
 var t;
 var waitDelay = 1000;
 var maxLives = 5;
+=======
+//**TIMER**/
+
+//the timer itself
+var timer = document.getElementById('timer');
+
+//the number of seconds on the timer
+var seconds = 0;
+
+//the delay between timer ticks
+var waitDelay = 1000;
+
+//true if the timer is paused
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 var timerPaused = false; 
 
 //**PAGE LOADING SEQUENCE**
@@ -201,6 +237,16 @@ function resizeMap() {
     document.getElementById("lives").style.height = Math.round(livesHeight * sizeRatio) + "px";
     document.getElementById("wins").style.width = Math.round(img.clientWidth) + "px";
     document.getElementById("wins").style.fontSize = (scoreFontSize * sizeRatio) + "px";
+<<<<<<< HEAD
+=======
+    document.getElementById("timer").style.fontSize = (timerFontSize * sizeRatio) + "px";
+    document.getElementById("menubutton").style.width = (menuButtonSize * sizeRatio) + "px";
+    document.getElementById("menubutton").style.height = (menuButtonSize * sizeRatio) + "px";
+    document.getElementById("settingsbutton").style.width = (menuButtonSize * sizeRatio) + "px";
+    document.getElementById("settingsbutton").style.height = (menuButtonSize * sizeRatio) + "px";
+    document.getElementById("topbar").style.width = Math.round(img.clientWidth * 0.9) + "px";
+    document.getElementById("lives").style.left = Math.round(img.clientWidth * 0.65) + "px";
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 }
 //fires when the key is pressed
 function playNote(x) {
@@ -211,11 +257,17 @@ function playNote(x) {
         keySounds[x].play();
 
         keysPressed.push(x);
+<<<<<<< HEAD
         keyValues.push(1);
 
         if (keysPressed.length > keysMax) {
             keysPressed.shift();
             keyValues.shift();
+=======
+
+        if (keysPressed.length > keysMax) {
+            keysPressed.shift();
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
         }
 
         if (keysPressed.length == track.length && !easterEggMatch()) {
@@ -237,6 +289,7 @@ function endNoteTimer(x) {
 function endNote(x) {
 
     document.getElementById("key" + keys[x]).style.display = "none";
+<<<<<<< HEAD
     
     //check for a match once the user has entered enough keys
     if (keysPressed.length == track.length) {
@@ -262,6 +315,25 @@ function endNote(x) {
                 lose();
             }
      }*/
+=======
+
+
+
+    //check for a match once the user has entered enough keys
+        if (keysPressed.length == track.length) {
+            //if the user has started the easter egg sequence, do not confirm input
+            //if confirmCorrect has already been fired for this sequence, do not confirm input
+            if (!easterEggMatch() && !confirming) {
+                confirmCorrect();
+            }
+        } else if (keysPressed.length == easterEggSeq.length) {
+            //check if input matches easter egg sequence
+            if (easterEggMatch()) {
+                easterEgg();
+            }
+        }
+
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 }
 
 function easterEggMatch() {
@@ -331,7 +403,11 @@ function displayCompNotes() {
 function playTrack() {
     disabled = true; 
     resetTimer();
+<<<<<<< HEAD
     createTrack();
+=======
+	createTrack();
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
     i = 0;    
     //the setTimeout delay consists of: length of track, delay after final note, and 
     //a transition delay to transition to runTimer() smoothly
@@ -342,8 +418,13 @@ function playTrack() {
 function createTrack() {
     if (!paused) {
         
+<<<<<<< HEAD
         var position;
         i++;
+=======
+	    var position;
+	    i++;
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 
         //remove colours from previous key
         if (track.length > 0) {
@@ -351,6 +432,7 @@ function createTrack() {
             document.getElementById("key" + lastKey).style.display = "none";
         }
 
+<<<<<<< HEAD
         if (i < trackLength) {
             position = Math.floor((Math.random() * 11) + 0);
         
@@ -358,6 +440,15 @@ function createTrack() {
             track.push(position);       
             keySounds[position].play();
             displayCompNotes();
+=======
+	    if (i < trackLength) {
+		    position = Math.floor((Math.random() * 11) + 0);
+        
+            keySounds[position].addEventListener("ended", createTrack); 
+		    track.push(position);		
+		    keySounds[position].play();
+		    displayCompNotes();
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
         } else {
             for (x = 0; x < keySounds.length; x++) {
                 keySounds[x].removeEventListener("ended", createTrack);
@@ -365,7 +456,11 @@ function createTrack() {
             setTimeout(clearStaff, staffDelay);
             setTimeout(runTimer, staffDelay);
             timerPaused = false; 
+<<<<<<< HEAD
         }
+=======
+	    }
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 
     } else {
         //set track to resume when the game is unpaused
@@ -375,6 +470,7 @@ function createTrack() {
 
 //compares user input with computer's track
 function isCorrect() {
+<<<<<<< HEAD
     var confirm = 0;
     for(i = 0; i < track.length; i++) {
         if(keysPressed[i] == track[i]) {
@@ -388,39 +484,80 @@ function isCorrect() {
     } else {
         return false;
     }
+=======
+	var confirm = 0;
+	for(i = 0; i < track.length; i++) {
+		if(keysPressed[i] == track[i]) {
+			confirm++;
+		}
+	}
+
+
+    if(confirm == track.length) {
+		return true;
+	} else {
+		return false;
+	}
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 }
 
 //checks if the input was correct
 function confirmCorrect() {
     confirming = true; 
+<<<<<<< HEAD
     if (isCorrect()) {
         win();
     } else {
         lose();
     }
+=======
+	if (isCorrect()) {
+	    win();
+	} else {
+	    lose();
+	}
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 }
 
 //user wins
 function win() {
+<<<<<<< HEAD
     winCount++;
     
     //increase track length after winsPerLength wins
     winsPerLengthCount++; 
+=======
+	winCount++;
+    
+    //increase track length after winsPerLength wins
+	winsPerLengthCount++; 
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
     if (winsPerLengthCount == winsPerLength && trackLength < keysMax) {
         trackLength++;
         winsPerLengthCount = 0; 
     }
 
+<<<<<<< HEAD
     document.getElementById("wins").innerHTML = "Wins: " + winCount;
+=======
+	document.getElementById("wins").innerHTML = "Wins: " + winCount;
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
     setTimeout(nextTrack, 500);
 }
 
 //user loses
 function lose() {
+<<<<<<< HEAD
     lossCount++;
     document.getElementById("life" + lossCount).style.display = "none";
     resetTimer();
     timerPaused = true; 
+=======
+	lossCount++;
+	document.getElementById("life" + lossCount).style.display = "none";
+	resetTimer();
+	timerPaused = true; 
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 
     if (lossCount < 3) {
         setTimeout(nextTrack, 500);
@@ -442,7 +579,10 @@ function nextTrack() {
 function clearUserInput() {
     clearStaff();
     keysPressed = [];
+<<<<<<< HEAD
     keyValues = [];
+=======
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
     confirming = false; 
 }
 
@@ -459,6 +599,7 @@ function clearStaff() {
 
 //remove lives when user has lost
 function removeLife() {
+<<<<<<< HEAD
     var ulElem = document.getElementById("lives");
     var i = 0;
     
@@ -466,10 +607,25 @@ function removeLife() {
         ulElem.removeChild(ulElem.childNodes[i]);
         i++;
     }
+=======
+	var ulElem = document.getElementById("lives");
+	var i = 0;
+	
+	if (!isCorrect()) {
+		ulElem.removeChild(ulElem.childNodes[i]);
+		i++;
+	}
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
 }
 
 //easter egg: sheep runs across screen
 function easterEgg() {
+<<<<<<< HEAD
+=======
+    if (!easterEggRunning) {
+        easterEggRunning = true; 
+        timerPaused = true; 
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
         $("#sheep").css("display", "inline");
 
         var width = "+=" + $(document).width();
@@ -478,8 +634,16 @@ function easterEgg() {
         }, 5000, function () {
             $("#sheep").css("display", "none");
             $("#sheep").css("left", "8px");
+<<<<<<< HEAD
             nextTrack();
         });
+=======
+            easterEggRunning = false; 
+            nextTrack();
+        });
+        
+    }
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
  };
 
  //shows game over screen
@@ -510,9 +674,15 @@ function easterEgg() {
  
  //dismisses instructional popup
  function instructDismiss() {
+<<<<<<< HEAD
      $("#instructions").animate({bottom: '-550px'}, 1000);
      pause();
      playTrack();
+=======
+	 $("#instructions").animate({bottom: '-550px'}, 1000);
+	 pause();
+	 playTrack();
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
  }
 
  function resetTimer() { 
@@ -552,9 +722,18 @@ function runTimer() {
             setTimeout(runTimer, 1000); 
         }
 
+<<<<<<< HEAD
         if (seconds == 0 && !isCorrect() && keysPressed.length <= track.length) {
+=======
+        if (seconds == 0 && !isCorrect()) {
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
             lose(); 
         }
         
     }
+<<<<<<< HEAD
  }
+=======
+ }
+
+>>>>>>> 9d20fade7ed956eb10c4330780fc2d1463102216
