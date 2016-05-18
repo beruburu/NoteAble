@@ -43,13 +43,33 @@
 	<body>
 		<div id="highscores">
             <div id="heading">High Scores</div>
-			<div id="highscorescontent">
-				    <div id="score1">1. <?echo $highscores[0][0];?>..........<?echo $highscores[0][1];?></div>
-				    <div id="score2">2. <?echo $highscores[1][0];?>..........<?echo $highscores[1][1];?></div>
-				    <div id="score3">3. <?echo $highscores[2][0];?>..........<?echo $highscores[3][1];?></div>
-				    <div id="score4">4. <?echo $highscores[3][0];?>..........<?echo $highscores[4][1];?></div>
-				    <div id="score5">5. <?echo $highscores[4][0];?>..........<?echo $highscores[5][1];?></div>
-			</div>
+                    <table id="scores">
+                        <tr>
+                            <td>1.</td>
+                            <td><?echo $highscores[0][0];?></td>
+                            <td><?echo $highscores[0][1];?></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td><?echo $highscores[1][0];?></td>
+                            <td><?echo $highscores[1][1];?></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td><?echo $highscores[2][0];?></td>
+                            <td><?echo $highscores[2][1];?></td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td><?echo $highscores[3][0];?></td>
+                            <td><?echo $highscores[3][1];?></td>
+                        </tr> 
+                        <tr>
+                            <td>5.</td>
+                            <td><?echo $highscores[4][0];?></td>
+                            <td><?echo $highscores[4][1];?></td>
+                        </tr> 
+                    </table>
 			<div id="button">
             	<button id="confirmbutton" onclick="instructDismiss();">Okay!</button>
 			</div>     
