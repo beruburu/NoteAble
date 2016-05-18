@@ -10,6 +10,34 @@ html, body {
     width: 100%;
 }
 
+#menubutton {
+    height: 80px;
+    width: 80px;
+    background-color: #ED008C;
+    border-radius: 0 0 0 20px;
+    outline: none;
+	border: none;
+    background-image: url("../images/menubutton.png");
+    background-size: 55%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#settingsbutton {
+    height: 80px;
+    width: 80px;
+	margin: 0 0 0 42px;
+    background-color: #ED008C; 
+    border-radius: 0 0 20px 0;
+    outline: none;
+	border: none;
+    background-image: url("../images/settingscog.png");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+	display: inline;
+}
+
 #keyboard, #transparent, .keys, #overlay {
     max-height: 98%;
     max-width: 100%;
@@ -37,6 +65,12 @@ html, body {
     display:  none;
 }
 
+#lives {
+	max-width: 150px;
+	display: inline-block;
+	margin: 0 0 15px 650px;
+}
+
 #staff {
     position:  absolute;
     left:  0;
@@ -54,7 +88,7 @@ html, body {
 	position:relative;
 	z-index:1;
 	margin-right:100px;
-	margin-top:3px;
+	/*margin-top:3px;*/
 }
 
 #timer {
