@@ -82,9 +82,6 @@ var keys = ["C", "CSharp", "D", "DSharp", "E", "F", "FSharp", "G", "GSharp", "A"
 //arrays of keys pressed
 var keysPressed = [];
 
-//whether pressed keys have been unpressed or not; 1= still pressed
-var keyValues = [];
-
 //the maximum length of the user sequence
 var keysMax = 9;
 
@@ -105,10 +102,15 @@ var i = 0;
 //array of notes for the random track
 var track = [];
 
-//**OTHER VARIABLES**
+//**EASTER EGG**
 
 //array of notes to activate the easter egg
 var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
+
+//true if easter egg is currently running
+var easterEggRunning = false; 
+
+//**OTHER VARIABLES**
 
 //true if the keyboard is disabled
 var disabled = false;
@@ -229,11 +231,9 @@ function playNote(x) {
         keySounds[x].play();
 
         keysPressed.push(x);
-        keyValues.push(1);
 
         if (keysPressed.length > keysMax) {
             keysPressed.shift();
-            keyValues.shift();
         }
 
         if (keysPressed.length == track.length && !easterEggMatch()) {
@@ -255,20 +255,22 @@ function endNoteTimer(x) {
 function endNote(x) {
 
     document.getElementById("key" + keys[x]).style.display = "none";
-    
+
+
+
     //check for a match once the user has entered enough keys
-    if (keysPressed.length == track.length) {
-        //if the user has started the easter egg sequence, do not confirm input
-        //if confirmCorrect has already been fired for this sequence, do not confirm input
-        if (!easterEggMatch() && !confirming) {
-            confirmCorrect(); 
+        if (keysPressed.length == track.length) {
+            //if the user has started the easter egg sequence, do not confirm input
+            //if confirmCorrect has already been fired for this sequence, do not confirm input
+            if (!easterEggMatch() && !confirming) {
+                confirmCorrect();
+            }
+        } else if (keysPressed.length == easterEggSeq.length) {
+            //check if input matches easter egg sequence
+            if (easterEggMatch()) {
+                easterEgg();
+            }
         }
-    } else if (keysPressed.length == easterEggSeq.length) {
-        //check if input matches easter egg sequence
-        if (easterEggMatch()) { 
-            easterEgg();  
-        }
-    }
 
 }
 
@@ -450,7 +452,6 @@ function nextTrack() {
 function clearUserInput() {
     clearStaff();
     keysPressed = [];
-    keyValues = [];
     confirming = false; 
 }
 
@@ -478,6 +479,9 @@ function removeLife() {
 
 //easter egg: sheep runs across screen
 function easterEgg() {
+    if (!easterEggRunning) {
+        easterEggRunning = true; 
+        timerPaused = true; 
         $("#sheep").css("display", "inline");
 
         var width = "+=" + $(document).width();
@@ -486,8 +490,11 @@ function easterEgg() {
         }, 5000, function () {
             $("#sheep").css("display", "none");
             $("#sheep").css("left", "8px");
+            easterEggRunning = false; 
             nextTrack();
         });
+        
+    }
  };
 
  //shows game over screen
@@ -560,7 +567,7 @@ function runTimer() {
             setTimeout(runTimer, 1000); 
         }
 
-        if (seconds == 0 && !isCorrect() && keysPressed.length <= track.length) {
+        if (seconds == 0 && !isCorrect()) {
             lose(); 
         }
         
