@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="style/style.css">
         <link rel="stylesheet" type="text/css" href="style/game.css">
         <link rel="stylesheet" type="text/css" href="style/mainmenu.css">
+        <link rel="stylesheet" type="text/css" href="style/highscorespopup.css">
         <script src="js/mainmenu.js" defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>   
         <meta charset="utf-8" />
@@ -18,14 +19,14 @@
 
           <!--Container for the top bar-->
           <div id="menubar">
-              <div id="title">Select a Level</div>
-              <button id="backbutton"></button>    
+              <div id="title">Select a Stage</div>
+              <button id="backbutton" onclick="goBack()"></button>    
               <button id="settingsbutton"></button> 
           </div>
 
           <!--Container of main elements-->
           <div id="maincontainer">
-              <button id="highscorebutton">High Scores</button>
+              <button id="highscorebutton" onclick="showHighScores()">High Scores</button>
                 <div id="levelcontainer">
                     <div id="novice">
                         <div id="novicenote"></div>    
@@ -33,8 +34,8 @@
                             Novice
                         </div>
                         <div id="novicecontent">
-                            <button id="ns1">Stage 1</button>
-                            <button id="ns2">Stage 2</button>
+                            <button id="ns1" onclick="loadGame(0, 0)">Level 1</button>
+                            <button id="ns2" onclick="loadGame(0, 1)">Level 2</button>
                         </div>
                     </div>
                     <div id="intermediate">
@@ -43,8 +44,8 @@
                             Intermediate
                         </div>
                         <div id="intermediatecontent">
-                        <button id="is1">Stage 1</button>
-                        <button id="is2">Stage 2</button>
+                        <button id="is1" onclick="loadGame(1, 0)">Level 1</button>
+                        <button id="is2" onclick="loadGame(1, 1)">Level 2</button>
                         </div>
                     </div>
                     <div id="advanced">
@@ -53,12 +54,49 @@
                             Advanced
                         </div>
                         <div id="advancedcontent">
-                        <button id="as1">Stage 1</button>
-                        <button id="as2">Stage 2</button>
+                        <button id="as1" onclick="loadGame(2, 0)">Level 1</button>
+                        <button id="as2" onclick="loadGame(2, 1)">Level 2</button>
                         </div>
                     </div>
                 </div>  
           </div>
+
+          
+        <!--Global high scores popup-->
+        <div id="highscores">
+            <div id="hsheading">High Scores</div>
+                    <table id="scores">
+                        <tr>
+                            <td>1.</td>
+                            <td id="hsname1"></td>
+                            <td id="hsscore1"></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td id="hsname2"></td>
+                            <td id="hsscore2"></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td id="hsname3"></td>
+                            <td id="hsscore3"></td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td id="hsname4"></td>
+                            <td id="hsscore4"></td>
+                        </tr> 
+                        <tr>
+                            <td>5.</td>
+                            <td id="hsname5"></td>
+                            <td id="hsscore5"></td>
+                        </tr> 
+                    </table>
+			<div id="hsbutton">
+            	<button id="hsconfirmbutton" onclick="dismissHighScores()">Okay!</button>
+			</div>     
+		</div>
+
       </div>
     </body>
 </html>

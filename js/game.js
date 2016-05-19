@@ -49,29 +49,29 @@ var staffDelay = 1000;
 //enter sound values into array
 var keySounds = [];
 keySounds[0] = new Audio();
-keySounds[0].src = "sounds/c.wav";
+keySounds[0].src = "sounds/c.mp3";
 keySounds[1] = new Audio();
-keySounds[1].src = "sounds/cSharp.wav";
+keySounds[1].src = "sounds/cSharp.mp3";
 keySounds[2] = new Audio();
-keySounds[2].src = "sounds/d.wav";
+keySounds[2].src = "sounds/d.mp3";
 keySounds[3] = new Audio();
-keySounds[3].src = "sounds/dSharp.wav";
+keySounds[3].src = "sounds/dSharp.mp3";
 keySounds[4] = new Audio();
-keySounds[4].src = "sounds/e.wav";
+keySounds[4].src = "sounds/e.mp3";
 keySounds[5] = new Audio();
-keySounds[5].src = "sounds/f.wav";
+keySounds[5].src = "sounds/f.mp3";
 keySounds[6] = new Audio();
-keySounds[6].src = "sounds/fSharp.wav";
+keySounds[6].src = "sounds/fSharp.mp3";
 keySounds[7] = new Audio();
-keySounds[7].src = "sounds/g.wav";
+keySounds[7].src = "sounds/g.mp3";
 keySounds[8] = new Audio();
-keySounds[8].src = "sounds/gSharp.wav";
+keySounds[8].src = "sounds/gSharp.mp3";
 keySounds[9] = new Audio();
-keySounds[9].src = "sounds/a.wav";
+keySounds[9].src = "sounds/a.mp3";
 keySounds[10] = new Audio();
-keySounds[10].src = "sounds/aSharp.wav";
+keySounds[10].src = "sounds/aSharp.mp3";
 keySounds[11] = new Audio();
-keySounds[11].src = "sounds/b.wav";
+keySounds[11].src = "sounds/b.mp3";
 
 //names of all keys
 var keys = ["c", "cSharp", "d", "dSharp", "e", "f", "fSharp", "g", "gSharp", "a", "aSharp", "b"];
@@ -620,14 +620,6 @@ function resetMultiplier() {
  
 //recursive timer that resets to 0:00 after the user moves on to the next challenge.
 //the timer starts counting down after the generated track is finished playing
- 
-//the timer will call the lose() function when one of the following occur:
-//*Note* a complete sequence is when the keysPressed.length == track.length
-//1. The timer reaches 0.00 without user input
-//2. User has only entered a partially complete sequence (whether it was going to be correct or not) when the timer has reached 0.00
-//3. User enters a complete sequence before the timer reaches 0.00 but that sequence is incorrect 
- 
-//bug: the timer is unreliable when condition #3 occurs. it will reset the timer when incorrect, but it sometimes still continues the countdown.
 function runTimer() {
     if (!timerPaused) {
  
@@ -657,7 +649,7 @@ function runTimer() {
  }
 
  
-
+//checks if user made them top 5 scores and checks their position
 function checkHighScore() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -695,23 +687,29 @@ function checkHighScore() {
 }
 
 
+//brings up the high scores popup
 function showHighScores() {
      getHighScores();
 	 $("#highscores").animate({bottom: '1750px'}, 1000);  
 }
 
+//hides the high scores popup
 function dismissHighScores() {
 	 $("#highscores").animate({bottom: '-1350px'}, 1000);
      $("#gameover").animate({bottom: '550px'});  
 }
+
+//brings up the enter high scores popup
 function enterHighScores() {
 	 $("#enterhighscore").animate({bottom: '1350px'}, 1000);    
 }
 
+//hides the enter high scores popup
 function dismissEnterHighScores() {
 	 $("#enterhighscore").animate({bottom: '-950px'}, 1000);
 }
 
+//submits new high score into the database
 function submitScore() {
     if (validateName()) {
         var name = document.getElementById("enterinitials").value;
@@ -728,10 +726,13 @@ function submitScore() {
         xmlhttp.send();
     }
 }
+
+//checks that high score name is only valid characters
 function validateName() {
     return true; 
 }
 
+//loads the high scores from the database
 function getHighScores() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
