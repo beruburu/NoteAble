@@ -49,32 +49,32 @@ var staffDelay = 1000;
 //enter sound values into array
 var keySounds = [];
 keySounds[0] = new Audio();
-keySounds[0].src = "sounds/C.wav";
+keySounds[0].src = "sounds/c.wav";
 keySounds[1] = new Audio();
-keySounds[1].src = "sounds/CSharp.wav";
+keySounds[1].src = "sounds/cSharp.wav";
 keySounds[2] = new Audio();
-keySounds[2].src = "sounds/D.wav";
+keySounds[2].src = "sounds/d.wav";
 keySounds[3] = new Audio();
-keySounds[3].src = "sounds/DSharp.wav";
+keySounds[3].src = "sounds/dSharp.wav";
 keySounds[4] = new Audio();
-keySounds[4].src = "sounds/E.wav";
+keySounds[4].src = "sounds/e.wav";
 keySounds[5] = new Audio();
-keySounds[5].src = "sounds/F.wav";
+keySounds[5].src = "sounds/f.wav";
 keySounds[6] = new Audio();
-keySounds[6].src = "sounds/FSharp.wav";
+keySounds[6].src = "sounds/fSharp.wav";
 keySounds[7] = new Audio();
-keySounds[7].src = "sounds/G.wav";
+keySounds[7].src = "sounds/g.wav";
 keySounds[8] = new Audio();
-keySounds[8].src = "sounds/GSharp.wav";
+keySounds[8].src = "sounds/gSharp.wav";
 keySounds[9] = new Audio();
-keySounds[9].src = "sounds/A.wav";
+keySounds[9].src = "sounds/a.wav";
 keySounds[10] = new Audio();
-keySounds[10].src = "sounds/ASharp.wav";
+keySounds[10].src = "sounds/aSharp.wav";
 keySounds[11] = new Audio();
-keySounds[11].src = "sounds/B.wav";
+keySounds[11].src = "sounds/.wav";
 
 //names of all keys
-var keys = ["C", "CSharp", "D", "DSharp", "E", "F", "FSharp", "G", "GSharp", "A", "ASharp", "B"];
+var keys = ["c", "cSharp", "d", "dSharp", "e", "f", "fSharp", "g", "gSharp", "a", "aSharp", "b"];
 
 
 //***USER INPUT***
