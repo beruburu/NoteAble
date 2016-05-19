@@ -380,13 +380,11 @@ function displayCompNotes() {
 
 //starts creation of computer's track
 function playTrack() {
+    //alert("PLAY TRACK");
     disabled = true; 
     resetTimer();
 	createTrack();
     i = 0;    
-    //the setTimeout delay consists of: length of track, delay after final note, and 
-    //a transition delay to transition to runTimer() smoothly
-    //setTimeout(runTimer, (trackLength*1000)+staffDelay+waitDelay);
 }
 
 //recursive function to create the random track one note at a time
@@ -749,4 +747,9 @@ function getHighScores() {
 
     xmlhttp.open("GET", "../php/gethighscores.php", true);
     xmlhttp.send();
+}
+
+//will later open a drop-down menu, but currently just links to the main menu
+function loadMenu() {
+    location.href = "mainmenu.html";
 }
