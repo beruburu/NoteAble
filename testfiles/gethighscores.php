@@ -15,7 +15,7 @@
         $sql .= " ORDER BY Score DESC";
         $sql .= " LIMIT 5";
 
-        $highscores = array(); 
+        $highscores = ""; 
         $rownum = 0; 
 
         $scoreposition = -1;
@@ -27,7 +27,9 @@
                 $name = $row['Name'];
                 $score = $row['Score'];
 
-                $highscores[$rownum] = array($name, $score);
+                //$highscores[$rownum] = array($name, $score);
+
+                $highscores .=  $name . "}" . $score . "{";
 
                 if (isset($_GET['Score']) && $score < $_GET['Score'] && $scoreposition == -1) {
 
@@ -39,18 +41,10 @@
             }
         }
 
-        
-        echo $scoreposition; 
+        if (isset($_GET['Score'])) {
+            echo $scoreposition; 
+        } else {
+            echo $highscores; 
+        }
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title></title>
-    </head>
-    <body>
-        
-    </body>
-</html>

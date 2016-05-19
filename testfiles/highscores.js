@@ -1,7 +1,18 @@
-var score = 800; //test value
+var score = 800; //test value 
 
 checkHighScore(); 
 
+function getHighScores() {
+    alert("TEST");
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            alert(xmlhttp.responseText);
+    };
+
+    xmlhttp.open("GET", "gethighscores.php", true);
+    xmlhttp.send();
+}
 
 function checkHighScore() {
     var xmlhttp = new XMLHttpRequest();
@@ -36,6 +47,10 @@ function checkHighScore() {
         
     xmlhttp.open("GET", "gethighscores.php?Score=" + score, true);
     xmlhttp.send();
+}
+
+function getHighScores() {
+    
 }
 
 function submitScore() {
