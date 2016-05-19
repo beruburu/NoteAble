@@ -71,7 +71,7 @@ keySounds[9].src = "sounds/a.wav";
 keySounds[10] = new Audio();
 keySounds[10].src = "sounds/aSharp.wav";
 keySounds[11] = new Audio();
-keySounds[11].src = "sounds/.wav";
+keySounds[11].src = "sounds/b.wav";
 
 //names of all keys
 var keys = ["c", "cSharp", "d", "dSharp", "e", "f", "fSharp", "g", "gSharp", "a", "aSharp", "b"];
@@ -94,6 +94,12 @@ var winCount = 0;
 //the number of times the user has lost
 var lossCount = 0; 
 
+//sound plays when user wins
+var winSound = new Audio('sounds/win.wav');
+
+//sound plays when user loses
+var loseSound = new Audio('sounds/lose.wav');
+
 //**COMPUTER GENERATED TRACK**
 
 //the current position when playing through the track
@@ -102,13 +108,44 @@ var i = 0;
 //array of notes for the random track
 var track = [];
 
-//**EASTER EGG**
+//**EASTER EGG
 
 //array of notes to activate the easter egg
 var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
 
 //true if easter egg is currently running
 var easterEggRunning = false; 
+
+
+//enter easter egg sheep sound values into array
+var eeSounds = [];
+eeSounds[0] = new Audio();
+eeSounds[0].src = "sounds/sheep/c.wav";
+eeSounds[1] = new Audio();
+eeSounds[1].src = "sounds/sheep/cSharp.wav";
+eeSounds[2] = new Audio();
+eeSounds[2].src = "sounds/sheep/d.wav";
+eeSounds[3] = new Audio();
+eeSounds[3].src = "sounds/sheep/dSharp.wav";
+eeSounds[4] = new Audio();
+eeSounds[4].src = "sounds/sheep/e.wav";
+eeSounds[5] = new Audio();
+eeSounds[5].src = "sounds/sheep/f.wav";
+eeSounds[6] = new Audio();
+eeSounds[6].src = "sounds/sheep/fSharp.wav";
+eeSounds[7] = new Audio();
+eeSounds[7].src = "sounds/sheep/g.wav";
+eeSounds[8] = new Audio();
+eeSounds[8].src = "sounds/sheep/gSharp.wav";
+eeSounds[9] = new Audio();
+eeSounds[9].src = "sounds/sheep/a.wav";
+eeSounds[10] = new Audio();
+eeSounds[10].src = "sounds/sheep/aSharp.wav";
+eeSounds[11] = new Audio();
+eeSounds[11].src = "sounds/sheep/b.wav";
+
+//true for one sequence after easter egg
+var useEESounds = false; 
 
 //**OTHER VARIABLES**
 
@@ -123,12 +160,6 @@ var paused = false;
 
 //true if createTrack should be resumed after unpausing
 var resumeTrack = false; 
-
-//sound plays when user wins
-var winSound = new Audio('sounds/c.wav');
-
-//sound plays when user loses
-var loseSound = new Audio('sounds/aSharp.wav');
 
 //**DIFFICULTY LEVEL**
 
@@ -166,8 +197,6 @@ var timerPaused = false;
 //**PAGE LOADING SEQUENCE**
 loadPage();
 instructAppear();
-//TEST
-getHighScores();
 
 //sets up the page
 function loadPage() {
@@ -234,8 +263,13 @@ function playNote(x) {
     //check if key has been disabled
     if (!disabled) { 
         document.getElementById("key" + keys[x]).style.display = "inline";
-        keySounds[x].currentTime = 0;
-        keySounds[x].play();
+        if (useEESounds) {
+            eeSounds[x].currentTime = 0;
+            eeSounds[x].play();
+        } else {
+            keySounds[x].currentTime = 0;
+            keySounds[x].play();
+        }
 
         keysPressed.push(x);
 
@@ -371,13 +405,20 @@ function createTrack() {
 	    if (i < trackLength) {
 		    position = Math.floor((Math.random() * 11) + 0);
         
-            keySounds[position].addEventListener("ended", createTrack); 
-		    track.push(position);		
-		    keySounds[position].play();
+		    track.push(position);
+            //use special sounds for track after easter egg
+            if (useEESounds) {
+                eeSounds[position].play();
+                eeSounds[position].addEventListener("ended", createTrack); 
+            } else {
+		        keySounds[position].play();
+                keySounds[position].addEventListener("ended", createTrack); 
+            }		
 		    displayCompNotes();
         } else {
             for (x = 0; x < keySounds.length; x++) {
                 keySounds[x].removeEventListener("ended", createTrack);
+                eeSounds[x].removeEventListener("ended", createTrack);
             } 
             setTimeout(clearStaff, staffDelay);
             setTimeout(runTimer, staffDelay);
@@ -409,6 +450,8 @@ function isCorrect() {
 
 //checks if the input was correct
 function confirmCorrect() {
+    //return to regular sounds after one sequence
+    useEESounds = false; 
     confirming = true; 
 	if (isCorrect()) {
 	    setTimeout(win, 1000);
@@ -490,6 +533,7 @@ function removeLife() {
 //easter egg: sheep runs across screen
 function easterEgg() {
     if (!easterEggRunning) {
+        useEESounds = true; 
         easterEggRunning = true; 
         timerPaused = true; 
         $("#sheep").css("display", "inline");
@@ -513,8 +557,7 @@ function easterEgg() {
 		document.getElementById("score").innerHTML = runningScore;
 
         //check if user has won
-		checkHighScore();
-        //$("#gameover").animate({bottom: '550px'});  
+		checkHighScore();  
  }
 
  //pauses and unpauses the game
@@ -642,7 +685,7 @@ function checkHighScore() {
                 document.getElementById("position").innerHTML = heading;
                 enterHighScores();
             } else {
-                showHighScores();
+                $("#gameover").animate({bottom: '550px'});
             }
         }
     };
