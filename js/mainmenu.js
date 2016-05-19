@@ -17,6 +17,7 @@ $(document).ready(function () {
             div.animate({ height: '15%' }, "slow");
             $("#intermediate").animate({ top: '37%' });
             $("#advanced").animate({ top: '64%' });
+			$("#novicecontent").slideToggle();
             expanded = false;
         }
     });
@@ -28,7 +29,7 @@ $(document).ready(function () {
         var div = $("#intermediate");
 
         if (!expanded) {
-            $("div").animate({top: '10%'});
+			div.animate({ top: '10%'}, "slow")
             div.animate({ height: '56%' }, "slow");
             $("#novice").animate({ top: '100%' });
             $("#advanced").animate({ top: '100%' });
