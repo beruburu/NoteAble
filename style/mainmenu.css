@@ -73,13 +73,14 @@ body {
     width: 60%;
     position: relative;
     left: 20%;
+    overflow: hidden;
 }
 
 #novice {
     height: 15%;
     width: 100%;
     background-color: #FFFFFF;
-    position: absolute;
+    position: relative;
     top: 10%;
     border-radius: 20px;
     outline: none;
@@ -94,8 +95,7 @@ body {
     left: 20.25%;
     top: 26%;
     width: 10%;
-    height: 25%;
-    
+    height: 25%;   
 }
 
 #noviceword {
@@ -114,11 +114,18 @@ body {
     top: 37%;
     border-radius: 20px; 
     outline: none;
+    cursor: pointer;
+}
+
+#intermediatenote {
     background-image: url("../images/intermediate.png");
     background-repeat: no-repeat;
-    background-position: 10%;
-    background-size: 10%;
-    cursor: pointer;
+    background-size: 85%;
+    position: absolute;
+    left: 10%;
+    top: 30%;
+    width: 10%;
+    height: 60%;    
 }
 
 #intermediateword {
@@ -165,4 +172,66 @@ body {
     color: #FFFFFF;
     border-radius: 7px;
     cursor: pointer;
+}
+
+#novicecontent {
+    display: none;
+    padding : 5px;
+}
+
+#ns1 {
+    height: 25%;
+    width: 90%;
+    background-color: #98fc69;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    border-radius: 10px;
+    outline: none;
+    font-family: Quicksand;
+    font-size: 130%;
+}
+
+#ns2 {
+    height: 25%;
+    width: 90%;
+    background-color: #18c91c;
+    position: absolute;
+    top: 60%;
+    left: 5%;
+    border-radius: 10px;
+    outline: none;
+    font-family: Quicksand;
+    font-size: 130%;
+}
+
+#intermediatecontent {
+    display: none;
+    padding : 5px;
+}
+
+#is1 {
+    height: 25%;
+    width: 90%;
+    background-color: #85ffe8;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    border-radius: 10px;
+    outline: none;
+    font-family: Quicksand;
+    font-size: 130%;
+}
+
+#is2 {
+    height: 25%;
+    width: 90%;
+    background-color: #27b6ad;
+    position: absolute;
+    top: 60%;
+    left: 5%;
+    border-radius: 10px;
+    outline: none;
+    font-family: Quicksand;
+    font-size: 130%;
 }
