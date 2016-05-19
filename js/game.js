@@ -82,9 +82,6 @@ var keys = ["C", "CSharp", "D", "DSharp", "E", "F", "FSharp", "G", "GSharp", "A"
 //arrays of keys pressed
 var keysPressed = [];
 
-//whether pressed keys have been unpressed or not; 1= still pressed
-var keyValues = [];
-
 //the maximum length of the user sequence
 var keysMax = 9;
 
@@ -105,10 +102,15 @@ var i = 0;
 //array of notes for the random track
 var track = [];
 
-//**OTHER VARIABLES**
+//**EASTER EGG**
 
 //array of notes to activate the easter egg
 var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
+
+//true if easter egg is currently running
+var easterEggRunning = false; 
+
+//**OTHER VARIABLES**
 
 //true if the keyboard is disabled
 var disabled = false;
@@ -121,6 +123,12 @@ var paused = false;
 
 //true if createTrack should be resumed after unpausing
 var resumeTrack = false; 
+
+//sound plays when user wins
+var winSound = new Audio('sounds/C.wav');
+
+//sound plays when user loses
+var loseSound = new Audio('sounds/ASharp.wav');
 
 //**DIFFICULTY LEVEL**
 
@@ -229,11 +237,9 @@ function playNote(x) {
         keySounds[x].play();
 
         keysPressed.push(x);
-        keyValues.push(1);
 
         if (keysPressed.length > keysMax) {
             keysPressed.shift();
-            keyValues.shift();
         }
 
         if (keysPressed.length == track.length && !easterEggMatch()) {
@@ -255,20 +261,22 @@ function endNoteTimer(x) {
 function endNote(x) {
 
     document.getElementById("key" + keys[x]).style.display = "none";
-    
+
+
+
     //check for a match once the user has entered enough keys
-    if (keysPressed.length == track.length) {
-        //if the user has started the easter egg sequence, do not confirm input
-        //if confirmCorrect has already been fired for this sequence, do not confirm input
-        if (!easterEggMatch() && !confirming) {
-            confirmCorrect(); 
+        if (keysPressed.length == track.length) {
+            //if the user has started the easter egg sequence, do not confirm input
+            //if confirmCorrect has already been fired for this sequence, do not confirm input
+            if (!easterEggMatch() && !confirming) {
+                confirmCorrect();
+            }
+        } else if (keysPressed.length == easterEggSeq.length) {
+            //check if input matches easter egg sequence
+            if (easterEggMatch()) {
+                easterEgg();
+            }
         }
-    } else if (keysPressed.length == easterEggSeq.length) {
-        //check if input matches easter egg sequence
-        if (easterEggMatch()) { 
-            easterEgg();  
-        }
-    }
 
 }
 
@@ -402,16 +410,16 @@ function isCorrect() {
 function confirmCorrect() {
     confirming = true; 
 	if (isCorrect()) {
-	    win();
+	    setTimeout(win, 1000);
 	} else {
-	    lose();
+	    setTimeout(lose, 1000);
 	}
 }
 
 //user wins
 function win() {
-	winCount++;
-    
+	//winCount++;
+    winSound.play();
     //increase track length after winsPerLength wins
 	winsPerLengthCount++; 
     if (winsPerLengthCount == winsPerLength && trackLength < keysMax) {
@@ -419,19 +427,22 @@ function win() {
         winsPerLengthCount = 0; 
     }
 
-	document.getElementById("wins").innerHTML = "Wins: " + winCount;
-    setTimeout(nextTrack, 500);
+    document.getElementById("points").innerHTML = increaseScore();
+    setTimeout(nextTrack, 1500);
+    setTimeout(resetScore, 1500);
+    resetMultiplier();
 }
 
 //user loses
 function lose() {
+	loseSound.play();
 	lossCount++;
 	document.getElementById("life" + lossCount).style.display = "none";
 	resetTimer();
 	timerPaused = true; 
 
     if (lossCount < 3) {
-        setTimeout(nextTrack, 500);
+        setTimeout(nextTrack, 1500);
     } else {
         gameOver();
     }
@@ -450,7 +461,6 @@ function nextTrack() {
 function clearUserInput() {
     clearStaff();
     keysPressed = [];
-    keyValues = [];
     confirming = false; 
 }
 
@@ -478,6 +488,9 @@ function removeLife() {
 
 //easter egg: sheep runs across screen
 function easterEgg() {
+    if (!easterEggRunning) {
+        easterEggRunning = true; 
+        timerPaused = true; 
         $("#sheep").css("display", "inline");
 
         var width = "+=" + $(document).width();
@@ -486,13 +499,17 @@ function easterEgg() {
         }, 5000, function () {
             $("#sheep").css("display", "none");
             $("#sheep").css("left", "8px");
+            easterEggRunning = false; 
             nextTrack();
         });
+        
+    }
  };
 
  //shows game over screen
  function gameOver() {
         pause(); 
+		document.getElementById("score").innerHTML = runningScore;
         $("#gameover").animate({bottom: '550px'});  
  }
 
@@ -527,16 +544,38 @@ function easterEgg() {
     seconds = 0;
     timer.textContent = "0:00";
 }
+
+//the length of the timer's countdown in seconds
+var countdownLength = 8;
  
-//the seconds that still remain after the user plays the correct notes
+//the seconds that still remain after the user plays the correct notes before timer end
 var leftover;
+
+//the base points that combines with a multiplier
+var base = 10;
+
+//the user's score so far
+var runningScore = 0;
+
+//the multiplier based on how many seconds are left after the user's correct input
+var multiplier;
+
+//returns the user's score so far in the game
+function increaseScore() {
+    runningScore = runningScore + (multiplier*base);
+    return runningScore;
+}
+
+//resets the current score
+function resetMultiplier() {
+    multiplier = 0;
+}
  
 //recursive timer that resets to 0:00 after the user moves on to the next challenge.
 //the timer starts counting down after the generated track is finished playing
  
 //the timer will call the lose() function when one of the following occur:
 //*Note* a complete sequence is when the keysPressed.length == track.length
- 
 //1. The timer reaches 0.00 without user input
 //2. User has only entered a partially complete sequence (whether it was going to be correct or not) when the timer has reached 0.00
 //3. User enters a complete sequence before the timer reaches 0.00 but that sequence is incorrect 
@@ -547,23 +586,25 @@ function runTimer() {
  
         seconds--;
         if (seconds < 0) {
-            seconds = 8;//set the time length of countdown
+            seconds = countdownLength;//set the time length of countdown
         }
+
+        multiplier = (countdownLength - leftover) - 1;
+
         if(leftover > 0 && isCorrect()) {
             seconds = 0;
         }
  
         timer.textContent = "0:" + (seconds > 9 ? seconds : "0" + seconds);
-        leftover = 8 - seconds;
+        leftover = countdownLength - seconds;
  
         if (seconds > 0) {
             setTimeout(runTimer, 1000); 
         }
 
-        if (seconds == 0 && !isCorrect() && keysPressed.length <= track.length) {
+        if (seconds == 0 && !isCorrect()) {
             lose(); 
         }
         
     }
  }
-
