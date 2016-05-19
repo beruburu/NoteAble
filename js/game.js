@@ -166,7 +166,8 @@ var timerPaused = false;
 //**PAGE LOADING SEQUENCE**
 loadPage();
 instructAppear();
-//playTrack();
+//TEST
+getHighScores();
 
 //sets up the page
 function loadPage() {
@@ -510,7 +511,10 @@ function easterEgg() {
  function gameOver() {
         pause(); 
 		document.getElementById("score").innerHTML = runningScore;
-        $("#gameover").animate({bottom: '550px'});  
+
+        //check if user has won
+		checkHighScore();
+        //$("#gameover").animate({bottom: '550px'});  
  }
 
  //pauses and unpauses the game
@@ -608,3 +612,97 @@ function runTimer() {
         
     }
  }
+
+ 
+
+function checkHighScore() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var position = parseInt(xmlhttp.responseText.charAt(0));
+            if (position > 0) {
+                var heading;
+                switch (position) {
+                    case 1:
+                        heading = "You placed first!";
+                        break;
+                    case 2:
+                        heading = "You placed second!";
+                        break;
+                    case 3:
+                        heading = "You placed third!";
+                        break;
+                    case 4:
+                        heading = "You placed fourth!";
+                        break;
+                    case 5:
+                        heading = "You placed fifth!";
+                        break;
+                }
+                document.getElementById("position").innerHTML = heading;
+                enterHighScores();
+            } else {
+                showHighScores();
+            }
+        }
+    };
+      
+    xmlhttp.open("GET", "../php/gethighscores.php?Score=" + runningScore, true);
+    xmlhttp.send(); 
+}
+
+
+function showHighScores() {
+     getHighScores();
+	 $("#highscores").animate({bottom: '1750px'}, 1000);  
+}
+
+function dismissHighScores() {
+	 $("#highscores").animate({bottom: '-1350px'}, 1000);
+     $("#gameover").animate({bottom: '550px'});  
+}
+function enterHighScores() {
+	 $("#enterhighscore").animate({bottom: '1350px'}, 1000);    
+}
+
+function dismissEnterHighScores() {
+	 $("#enterhighscore").animate({bottom: '-950px'}, 1000);
+}
+
+function submitScore() {
+    if (validateName()) {
+        var name = document.getElementById("enterinitials").value;
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                dismissEnterHighScores(); 
+                showHighScores();
+            }
+        };
+
+        xmlhttp.open("GET", "../php/updatescore.php?Name=" + name + "&Score=" + runningScore, true);
+        xmlhttp.send();
+    }
+}
+function validateName() {
+    return true; 
+}
+
+function getHighScores() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var result = xmlhttp.responseText;
+            var scores = result.split("{");
+            for (x = 0; x < 5; x++) {
+                var scoreValues = scores[x].split("}");
+                document.getElementById("hsname" + (x + 1)).innerHTML = scoreValues[0];
+                document.getElementById("hsscore" + (x + 1)).innerHTML = scoreValues[1];
+            }
+        }
+    };
+
+    xmlhttp.open("GET", "../php/gethighscores.php", true);
+    xmlhttp.send();
+}

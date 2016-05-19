@@ -10,6 +10,12 @@
         <link rel="stylesheet" type="text/css" href="style/gameoverpopup.css">
 		<!--Style sheet for instructions popup-->
 		<link rel="stylesheet" type="text/css" href="style/instructionpopup.css">
+		<!--Style sheet for high scores popup-->
+		<link rel="stylesheet" type="text/css" href="style/highscorespopup.css">
+		<!--Style sheet for enter high scores popup-->
+		<link rel="stylesheet" type="text/css" href="style/enterhighscorespopup.css">
+        <!--Javascript for high scores-->        
+        <script src="js/highscores.js" defer></script>
         <!--Javascript for this page-->
         <script src="js/game.js" defer></script>
         <!--JQuery reference-->
@@ -117,6 +123,7 @@
 			</div>     
 		</div>
 		
+        <!--Instructions popup-->
 		<div id="instructions">
             <div id="heading">Instructions</div>
 			<div id="instructioncontent">
@@ -129,6 +136,57 @@
 			</div>     
 		</div>
         
+        
+        <!--Enter high score popup-->
+		<div id="enterhighscore">
+                <div id="heading"><h1 id="position"></h1></div>
+			    <div id="enterhighscorecontent">
+				    <div id="initialsheading">Enter Your Initials</div>
+				    <div id="initials">
+					    <input type="text" name="initials" id="enterinitials" maxlength="3"></input>
+				    </div>
+			    </div>
+			    <div id="enterhighscorebuttons">
+				    <div id="ehsbutton">
+            		    <button id="submithighscore" onclick="submitScore()">Submit</button>
+				    </div>
+			    </div>
+		</div>
+        
+        <!--Global high scores popup-->
+        <div id="highscores">
+            <div id="hsheading">High Scores</div>
+                    <table id="scores">
+                        <tr>
+                            <td>1.</td>
+                            <td id="hsname1"></td>
+                            <td id="hsscore1"></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td id="hsname2"></td>
+                            <td id="hsscore2"></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td id="hsname3"></td>
+                            <td id="hsscore3"></td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td id="hsname4"></td>
+                            <td id="hsscore4"></td>
+                        </tr> 
+                        <tr>
+                            <td>5.</td>
+                            <td id="hsname5"></td>
+                            <td id="hsscore5"></td>
+                        </tr> 
+                    </table>
+			<div id="hsbutton">
+            	<button id="hsconfirmbutton" onclick="dismissHighScores()">Okay!</button>
+			</div>     
+		</div>
 
     </body>
 </html>

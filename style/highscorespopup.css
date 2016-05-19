@@ -17,7 +17,7 @@
 	src: url("../style/Quicksand-Bold.otf");
 }
         
-#heading {
+#hsheading {
     font-family: Quicksand;
     font-size: 42px;
 	font-weight: bold;
@@ -39,12 +39,12 @@
     background-color:  #ffb6b9; 
 }
 
-#button {
+#hsbutton {
 	padding-top: 10%;
 	padding-left: 193px;
 }
 
-#confirmbutton {
+#hsconfirmbutton {
     background-color: #FFFFFF;
     border-radius: 6px;
     border: none;
@@ -58,7 +58,7 @@
     color: #ff3b42;
 }
 
-#confirmbutton:active {
+#hsconfirmbutton:active {
 	color: #ffffff;
 	background-color: #ffb6b9;
 }
