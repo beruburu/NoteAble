@@ -71,7 +71,7 @@ keySounds[9].src = "sounds/a.wav";
 keySounds[10] = new Audio();
 keySounds[10].src = "sounds/aSharp.wav";
 keySounds[11] = new Audio();
-keySounds[11].src = "sounds/.wav";
+keySounds[11].src = "sounds/b.wav";
 
 //names of all keys
 var keys = ["c", "cSharp", "d", "dSharp", "e", "f", "fSharp", "g", "gSharp", "a", "aSharp", "b"];
@@ -93,6 +93,12 @@ var winCount = 0;
 
 //the number of times the user has lost
 var lossCount = 0; 
+
+//sound plays when user wins
+var winSound = new Audio('sounds/win.wav');
+
+//sound plays when user loses
+var loseSound = new Audio('sounds/lose.wav');
 
 //**COMPUTER GENERATED TRACK**
 
@@ -123,12 +129,6 @@ var paused = false;
 
 //true if createTrack should be resumed after unpausing
 var resumeTrack = false; 
-
-//sound plays when user wins
-var winSound = new Audio('sounds/c.wav');
-
-//sound plays when user loses
-var loseSound = new Audio('sounds/aSharp.wav');
 
 //**DIFFICULTY LEVEL**
 
@@ -166,8 +166,6 @@ var timerPaused = false;
 //**PAGE LOADING SEQUENCE**
 loadPage();
 instructAppear();
-//TEST
-getHighScores();
 
 //sets up the page
 function loadPage() {
@@ -513,8 +511,7 @@ function easterEgg() {
 		document.getElementById("score").innerHTML = runningScore;
 
         //check if user has won
-		checkHighScore();
-        //$("#gameover").animate({bottom: '550px'});  
+		checkHighScore();  
  }
 
  //pauses and unpauses the game
@@ -642,7 +639,7 @@ function checkHighScore() {
                 document.getElementById("position").innerHTML = heading;
                 enterHighScores();
             } else {
-                showHighScores();
+                $("#gameover").animate({bottom: '550px'});
             }
         }
     };
