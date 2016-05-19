@@ -125,10 +125,10 @@ var paused = false;
 var resumeTrack = false; 
 
 //sound plays when user wins
-var winSound = new Audio('sounds/C.wav');
+var winSound = new Audio('sounds/c.wav');
 
 //sound plays when user loses
-var loseSound = new Audio('sounds/ASharp.wav');
+var loseSound = new Audio('sounds/aSharp.wav');
 
 //**DIFFICULTY LEVEL**
 
