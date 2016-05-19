@@ -1,4 +1,7 @@
+//true if a stage control has been expanded
 var expanded = false;
+
+//true if a button has been clicked
 var haltAnimation = false; 
 
 //Expands novice stage to reveal two levels when clicked
@@ -16,7 +19,7 @@ $(document).ready(function () {
             expanded = true;
 
         } else {
-            if (!haltAnimation) {
+            if (!haltAnimation) { //don't shrink the control after the button has been clicked
                 div.animate({ height: '15%' }, "slow");
                 $("#noviceword").animate({ top: '37%' });
                 $("#novicenote").animate({ top: '26%' });
@@ -45,7 +48,7 @@ $(document).ready(function () {
             expanded = true;
 
         } else {
-            if (!haltAnimation) {
+            if (!haltAnimation) { //don't shrink the control after the button has been clicked
                 $("#intermediatecontent").slideToggle();
                 div.animate({ height: '15%' }, "slow");
                 div.animate({ top: '22%' }, "slow");            
@@ -59,7 +62,7 @@ $(document).ready(function () {
     });
 });
 
-//Expands advanced stage to reveal two levels when clicked
+//Expands advanced (staff) stage to reveal two levels when clicked
 $(document).ready(function () {
     $("#advanced").click(function () {
         var div = $("#advanced");
@@ -75,7 +78,7 @@ $(document).ready(function () {
             expanded = true;
 
         } else {
-            if (!haltAnimation) {
+            if (!haltAnimation) { //don't shrink the control after the button has been clicked
                 $("#advancedcontent").slideToggle();
                 div.animate({ height: '15%' }, "slow");
                 div.animate({ top: '64%' }, "slow");
@@ -91,7 +94,7 @@ $(document).ready(function () {
 });
 
 
-//loads the game for the appropriate butoon click
+//loads the game for the appropriate button click
 function loadGame(stage, difficulty) {
     //only allow novice & intermediate stages, difficulty level 1, for now
     if (difficulty == 0 && stage < 2) {

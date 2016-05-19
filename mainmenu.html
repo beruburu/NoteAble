@@ -4,10 +4,15 @@
     <head>
         <!--Basic style sheet-->
         <link rel="stylesheet" type="text/css" href="style/style.css">
+        <!--Game page style sheet-->
         <link rel="stylesheet" type="text/css" href="style/game.css">
+        <!--Main menu style sheet-->
         <link rel="stylesheet" type="text/css" href="style/mainmenu.css">
+        <!--Style sheet for high scores popup-->
         <link rel="stylesheet" type="text/css" href="style/highscorespopup.css">
+        <!--Javascript for this page-->
         <script src="js/mainmenu.js" defer></script>
+        <!--JQuery link-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>   
         <meta charset="utf-8" />
         <title>Main Menu</title>
@@ -28,6 +33,7 @@
           <div id="maincontainer">
               <button id="highscorebutton" onclick="showHighScores()">High Scores</button>
                 <div id="levelcontainer">
+                    <!--Novice (Shapes) Stage-->
                     <div id="novice">
                         <div id="novicenote"></div>    
                         <div id="noviceword">
@@ -38,6 +44,7 @@
                             <button id="ns2" onclick="loadGame(0, 1)">Level 2</button>
                         </div>
                     </div>
+                    <!--Intermediate (Letters) Stage-->
                     <div id="intermediate">
                         <div id="intermediatenote"></div>
                         <div id="intermediateword">
@@ -48,6 +55,7 @@
                         <button id="is2" onclick="loadGame(1, 1)">Level 2</button>
                         </div>
                     </div>
+                    <!--Advanced (Staff) Stage-->
                     <div id="advanced">
                         <div id="advancednote"></div>
                         <div id="advancedword">

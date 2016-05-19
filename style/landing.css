@@ -46,3 +46,8 @@ img.roundpiano {
 	border: 2px solid #000000;
 	width: 100px;
 }
+
+.button:hover {
+    color:  #FFFFFF;
+    background-color: #9c298c;
+}
