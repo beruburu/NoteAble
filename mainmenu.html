@@ -6,6 +6,8 @@
         <link rel="stylesheet" type="text/css" href="style/style.css">
         <link rel="stylesheet" type="text/css" href="style/game.css">
         <link rel="stylesheet" type="text/css" href="style/mainmenu.css">
+        <script src="js/mainmenu.js" defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>   
         <meta charset="utf-8" />
         <title>Main Menu</title>
     </head>
@@ -25,15 +27,22 @@
           <div id="maincontainer">
               <button id="highscorebutton">High Scores</button>
                 <div id="levelcontainer">
-                    <button id="novice">
-                        Novice
-                    </button>
-                    <button id="intermediate">
-                        Intermediate
-                    </button>
-                    <button id="advanced">
-                        Advanced
-                    </button>
+                    <div id="novice">
+                        <div id="novicenote"></div>    
+                        <div id="noviceword">
+                            Novice
+                        </div>
+                    </div>
+                    <div id="intermediate">
+                        <div id="intermediateword">
+                            Intermediate
+                        </div>
+                    </div>
+                    <div id="advanced">
+                        <div id="advancedword">
+                            Advanced
+                        </div>
+                    </div>
                 </div>  
           </div>
       </div>
