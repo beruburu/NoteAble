@@ -8,7 +8,7 @@ var maxWidth = 1027;
 var staffTop = 81;
 var staffHeight = 143;
 
-//default height of the lives list
+//default height of lives list
 var livesHeight = 50; 
 
 //default font size for the highscore
