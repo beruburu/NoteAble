@@ -143,3 +143,10 @@ html, body {
     display:  none;
     z-index:  5; 
 }
+
+#countdown {
+	display: none;
+	height: 750px;
+	position: absolute;
+	z-index: 999;
+}
