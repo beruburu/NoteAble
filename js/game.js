@@ -194,6 +194,12 @@ var waitDelay = 1000;
 //true if the timer is paused
 var timerPaused = false; 
 
+ //timer for start countdown 
+var countdownTimer = null;
+
+//image number for countdown graphic
+var countdownImageNumber = 1;
+
 //**PAGE LOADING SEQUENCE**
 loadPage();
 instructAppear();
@@ -572,6 +578,26 @@ function easterEgg() {
     resumeTrack = false;    
  }
  
+//changes the countdown number graphic
+function changeCountdownIMG(){
+	var countdownIMG = document.getElementById('countdown');
+	
+	countdownImageNumber = (countdownImageNumber + 1) % 5;
+	countdownIMG.src = "images/countdown" + countdownImageNumber + ".png";
+}
+
+//countdown to start the game
+function countdown(){
+	var countdownIMG = document.getElementById('countdown');
+		
+	countdownIMG.style.display = 'block';
+	countdownTimer = setInterval('changeCountdownIMG();', 1000);
+	setTimeout(function( ) { clearInterval( countdownTimer ); }, 3000);
+	setTimeout(function() {
+		countdownIMG.style.display='none'
+	}, 4000);
+}
+ 
  //shows instructional popup
  function instructAppear() {
 	 pause();
@@ -581,7 +607,8 @@ function easterEgg() {
  //dismisses instructional popup
  function instructDismiss() {
 	 $("#instructions").animate({bottom: '-550px'}, 1000);
-	 pause();
+	 setTimeout("countdown();", 1000);
+	 setTimeout("pause();", 6000);
 	 playTrack();
  }
 
