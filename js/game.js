@@ -607,9 +607,13 @@ function countdown(){
  //dismisses instructional popup
  function instructDismiss() {
 	 $("#instructions").animate({bottom: '-550px'}, 1000);
+
+     //start countdown
 	 setTimeout("countdown();", 1000);
+
+     //unpause the game and play the first track when the countdown is complete
 	 setTimeout("pause();", 6000);
-	 playTrack();
+     setTimeout(playTrack, 6000)
  }
 
  function resetTimer() { 
