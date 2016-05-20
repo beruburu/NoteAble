@@ -49,29 +49,29 @@ var staffDelay = 1000;
 //enter sound values into array
 var keySounds = [];
 keySounds[0] = new Audio();
-keySounds[0].src = "sounds/c.wav";
+keySounds[0].src = "sounds/c.mp3";
 keySounds[1] = new Audio();
-keySounds[1].src = "sounds/cSharp.wav";
+keySounds[1].src = "sounds/cSharp.mp3";
 keySounds[2] = new Audio();
-keySounds[2].src = "sounds/d.wav";
+keySounds[2].src = "sounds/d.mp3";
 keySounds[3] = new Audio();
-keySounds[3].src = "sounds/dSharp.wav";
+keySounds[3].src = "sounds/dSharp.mp3";
 keySounds[4] = new Audio();
-keySounds[4].src = "sounds/e.wav";
+keySounds[4].src = "sounds/e.mp3";
 keySounds[5] = new Audio();
-keySounds[5].src = "sounds/f.wav";
+keySounds[5].src = "sounds/f.mp3";
 keySounds[6] = new Audio();
-keySounds[6].src = "sounds/fSharp.wav";
+keySounds[6].src = "sounds/fSharp.mp3";
 keySounds[7] = new Audio();
-keySounds[7].src = "sounds/g.wav";
+keySounds[7].src = "sounds/g.mp3";
 keySounds[8] = new Audio();
-keySounds[8].src = "sounds/gSharp.wav";
+keySounds[8].src = "sounds/gSharp.mp3";
 keySounds[9] = new Audio();
-keySounds[9].src = "sounds/a.wav";
+keySounds[9].src = "sounds/a.mp3";
 keySounds[10] = new Audio();
-keySounds[10].src = "sounds/aSharp.wav";
+keySounds[10].src = "sounds/aSharp.mp3";
 keySounds[11] = new Audio();
-keySounds[11].src = "sounds/.wav";
+keySounds[11].src = "sounds/b.mp3";
 
 //names of all keys
 var keys = ["c", "cSharp", "d", "dSharp", "e", "f", "fSharp", "g", "gSharp", "a", "aSharp", "b"];
@@ -94,6 +94,12 @@ var winCount = 0;
 //the number of times the user has lost
 var lossCount = 0; 
 
+//sound plays when user wins
+var winSound = new Audio('sounds/win.wav');
+
+//sound plays when user loses
+var loseSound = new Audio('sounds/lose.wav');
+
 //**COMPUTER GENERATED TRACK**
 
 //the current position when playing through the track
@@ -102,13 +108,44 @@ var i = 0;
 //array of notes for the random track
 var track = [];
 
-//**EASTER EGG**
+//**EASTER EGG
 
 //array of notes to activate the easter egg
 var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
 
 //true if easter egg is currently running
 var easterEggRunning = false; 
+
+
+//enter easter egg sheep sound values into array
+var eeSounds = [];
+eeSounds[0] = new Audio();
+eeSounds[0].src = "sounds/sheep/c.wav";
+eeSounds[1] = new Audio();
+eeSounds[1].src = "sounds/sheep/cSharp.wav";
+eeSounds[2] = new Audio();
+eeSounds[2].src = "sounds/sheep/d.wav";
+eeSounds[3] = new Audio();
+eeSounds[3].src = "sounds/sheep/dSharp.wav";
+eeSounds[4] = new Audio();
+eeSounds[4].src = "sounds/sheep/e.wav";
+eeSounds[5] = new Audio();
+eeSounds[5].src = "sounds/sheep/f.wav";
+eeSounds[6] = new Audio();
+eeSounds[6].src = "sounds/sheep/fSharp.wav";
+eeSounds[7] = new Audio();
+eeSounds[7].src = "sounds/sheep/g.wav";
+eeSounds[8] = new Audio();
+eeSounds[8].src = "sounds/sheep/gSharp.wav";
+eeSounds[9] = new Audio();
+eeSounds[9].src = "sounds/sheep/a.wav";
+eeSounds[10] = new Audio();
+eeSounds[10].src = "sounds/sheep/aSharp.wav";
+eeSounds[11] = new Audio();
+eeSounds[11].src = "sounds/sheep/b.wav";
+
+//true for one sequence after easter egg
+var useEESounds = false; 
 
 //**OTHER VARIABLES**
 
@@ -123,12 +160,6 @@ var paused = false;
 
 //true if createTrack should be resumed after unpausing
 var resumeTrack = false; 
-
-//sound plays when user wins
-var winSound = new Audio('sounds/c.wav');
-
-//sound plays when user loses
-var loseSound = new Audio('sounds/aSharp.wav');
 
 //**DIFFICULTY LEVEL**
 
@@ -166,8 +197,6 @@ var timerPaused = false;
 //**PAGE LOADING SEQUENCE**
 loadPage();
 instructAppear();
-//TEST
-getHighScores();
 
 //sets up the page
 function loadPage() {
@@ -234,8 +263,13 @@ function playNote(x) {
     //check if key has been disabled
     if (!disabled) { 
         document.getElementById("key" + keys[x]).style.display = "inline";
-        keySounds[x].currentTime = 0;
-        keySounds[x].play();
+        if (useEESounds) {
+            eeSounds[x].currentTime = 0;
+            eeSounds[x].play();
+        } else {
+            keySounds[x].currentTime = 0;
+            keySounds[x].play();
+        }
 
         keysPressed.push(x);
 
@@ -346,13 +380,11 @@ function displayCompNotes() {
 
 //starts creation of computer's track
 function playTrack() {
+    //alert("PLAY TRACK");
     disabled = true; 
     resetTimer();
 	createTrack();
     i = 0;    
-    //the setTimeout delay consists of: length of track, delay after final note, and 
-    //a transition delay to transition to runTimer() smoothly
-    //setTimeout(runTimer, (trackLength*1000)+staffDelay+waitDelay);
 }
 
 //recursive function to create the random track one note at a time
@@ -371,13 +403,20 @@ function createTrack() {
 	    if (i < trackLength) {
 		    position = Math.floor((Math.random() * 11) + 0);
         
-            keySounds[position].addEventListener("ended", createTrack); 
-		    track.push(position);		
-		    keySounds[position].play();
+		    track.push(position);
+            //use special sounds for track after easter egg
+            if (useEESounds) {
+                eeSounds[position].play();
+                eeSounds[position].addEventListener("ended", createTrack); 
+            } else {
+		        keySounds[position].play();
+                keySounds[position].addEventListener("ended", createTrack); 
+            }		
 		    displayCompNotes();
         } else {
             for (x = 0; x < keySounds.length; x++) {
                 keySounds[x].removeEventListener("ended", createTrack);
+                eeSounds[x].removeEventListener("ended", createTrack);
             } 
             setTimeout(clearStaff, staffDelay);
             setTimeout(runTimer, staffDelay);
@@ -409,6 +448,8 @@ function isCorrect() {
 
 //checks if the input was correct
 function confirmCorrect() {
+    //return to regular sounds after one sequence
+    useEESounds = false; 
     confirming = true; 
 	if (isCorrect()) {
 	    setTimeout(win, 1000);
@@ -490,6 +531,7 @@ function removeLife() {
 //easter egg: sheep runs across screen
 function easterEgg() {
     if (!easterEggRunning) {
+        useEESounds = true; 
         easterEggRunning = true; 
         timerPaused = true; 
         $("#sheep").css("display", "inline");
@@ -513,8 +555,7 @@ function easterEgg() {
 		document.getElementById("score").innerHTML = runningScore;
 
         //check if user has won
-		checkHighScore();
-        //$("#gameover").animate({bottom: '550px'});  
+		checkHighScore();  
  }
 
  //pauses and unpauses the game
@@ -577,14 +618,6 @@ function resetMultiplier() {
  
 //recursive timer that resets to 0:00 after the user moves on to the next challenge.
 //the timer starts counting down after the generated track is finished playing
- 
-//the timer will call the lose() function when one of the following occur:
-//*Note* a complete sequence is when the keysPressed.length == track.length
-//1. The timer reaches 0.00 without user input
-//2. User has only entered a partially complete sequence (whether it was going to be correct or not) when the timer has reached 0.00
-//3. User enters a complete sequence before the timer reaches 0.00 but that sequence is incorrect 
- 
-//bug: the timer is unreliable when condition #3 occurs. it will reset the timer when incorrect, but it sometimes still continues the countdown.
 function runTimer() {
     if (!timerPaused) {
  
@@ -614,7 +647,7 @@ function runTimer() {
  }
 
  
-
+//checks if user made them top 5 scores and checks their position
 function checkHighScore() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -642,7 +675,7 @@ function checkHighScore() {
                 document.getElementById("position").innerHTML = heading;
                 enterHighScores();
             } else {
-                showHighScores();
+                $("#gameover").animate({bottom: '550px'});
             }
         }
     };
@@ -652,23 +685,29 @@ function checkHighScore() {
 }
 
 
+//brings up the high scores popup
 function showHighScores() {
      getHighScores();
 	 $("#highscores").animate({bottom: '1750px'}, 1000);  
 }
 
+//hides the high scores popup
 function dismissHighScores() {
 	 $("#highscores").animate({bottom: '-1350px'}, 1000);
      $("#gameover").animate({bottom: '550px'});  
 }
+
+//brings up the enter high scores popup
 function enterHighScores() {
 	 $("#enterhighscore").animate({bottom: '1350px'}, 1000);    
 }
 
+//hides the enter high scores popup
 function dismissEnterHighScores() {
 	 $("#enterhighscore").animate({bottom: '-950px'}, 1000);
 }
 
+//submits new high score into the database
 function submitScore() {
     if (validateName()) {
         var name = document.getElementById("enterinitials").value;
@@ -685,10 +724,13 @@ function submitScore() {
         xmlhttp.send();
     }
 }
+
+//checks that high score name is only valid characters
 function validateName() {
     return true; 
 }
 
+//loads the high scores from the database
 function getHighScores() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -705,4 +747,9 @@ function getHighScores() {
 
     xmlhttp.open("GET", "../php/gethighscores.php", true);
     xmlhttp.send();
+}
+
+//will later open a drop-down menu, but currently just links to the main menu
+function loadMenu() {
+    location.href = "mainmenu.html";
 }

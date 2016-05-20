@@ -2,14 +2,18 @@ html, body {
     height: 100%;
     width: 100%; 
     background-color: #454545;
-    overflow:  hidden;
+    overflow: hidden;
 }
 
 #container {
     height: 100%;
     width: 100%;
 }
-
+#topbar {
+	z-index: 4;
+	position: absolute;
+	width: 1027px;
+}
 #menubutton {
     height: 80px;
     width: 80px;
@@ -21,6 +25,7 @@ html, body {
     background-size: 55%;
     background-repeat: no-repeat;
     background-position: center;
+	cursor: pointer;
 }
 
 #settingsbutton {
@@ -35,6 +40,9 @@ html, body {
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
+	cursor: pointer;
+	float: right;
+    display:  none;
 }
 
 #keyboard, #transparent, .keys, #overlay {
