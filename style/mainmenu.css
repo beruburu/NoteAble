@@ -198,6 +198,7 @@ body {
     outline: none;
     font-family: Quicksand;
     font-size: 130%;
+    cursor: pointer;
 }
 
 #ns2 {
@@ -211,6 +212,7 @@ body {
     outline: none;
     font-family: Quicksand;
     font-size: 130%;
+    cursor: pointer;
 }
 
 #intermediatecontent {
@@ -229,6 +231,7 @@ body {
     outline: none;
     font-family: Quicksand;
     font-size: 130%;
+    cursor: pointer;
 }
 
 #is2 {
@@ -242,6 +245,7 @@ body {
     outline: none;
     font-family: Quicksand;
     font-size: 130%;
+    cursor: pointer;
 }
 
 #advancedcontent {
@@ -260,6 +264,7 @@ body {
     outline: none;
     font-family: Quicksand;
     font-size: 130%;
+    cursor: pointer;
 }
 
 #as2 {
@@ -273,4 +278,5 @@ body {
     outline: none;
     font-family: Quicksand;
     font-size: 130%;
+    cursor: pointer;
 }
