@@ -12,6 +12,7 @@ html, body {
 #topbar {
 	z-index: 4;
 	position: absolute;
+	width: 1027px;
 }
 #menubutton {
     height: 80px;
@@ -40,8 +41,7 @@ html, body {
     background-repeat: no-repeat;
     background-position: center;
 	cursor: pointer;
-	position: absolute;
-	left: 890px;
+	float: right;
 }
 
 #keyboard, #transparent, .keys, #overlay {
