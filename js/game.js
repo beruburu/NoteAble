@@ -468,14 +468,20 @@ function confirmCorrect() {
 function win() {
 	//winCount++;
     winSound.play();
+
+    document.getElementById("points").innerHTML = increaseScore();
     //increase track length after winsPerLength wins
 	winsPerLengthCount++; 
     if (winsPerLengthCount == winsPerLength && trackLength < keysMax) {
         trackLength++;
+        if(trackLength%2 == 0) {
+            base = base + 5;
+            countdownLength = countdownLength + 2;
+        }
         winsPerLengthCount = 0; 
     }
 
-    document.getElementById("points").innerHTML = increaseScore();
+    //document.getElementById("points").innerHTML = increaseScore();
     setTimeout(nextTrack, 1500);
     setTimeout(resetScore, 1500);
     resetMultiplier();
