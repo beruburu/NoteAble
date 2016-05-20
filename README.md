@@ -59,3 +59,6 @@ http://www.noteable.comxa.com
 
   ii.   The game currently freezes at the initial note sequence on most mobile browsers. 
         This is a known Javascript issue with audio playback that will be fixed for the next sprint. 
+
+  iii.	There are some issues with the image map when playing the game in Firefox. 
+		These will be addressed for the next sprint. In the meantime, please test with Google Chrome. 
