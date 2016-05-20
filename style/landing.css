@@ -38,7 +38,8 @@ img.roundpiano {
 .button {
 	position: absolute;
 	border-radius: 8px;
-	top: 70%;
+	top: 75%;
+    left: 46.25%;
 	background-color: #FFFFFF;
 	font-family: Quicksand;
 	font-size: 20px;
@@ -50,4 +51,15 @@ img.roundpiano {
 .button:hover {
     color:  #FFFFFF;
     background-color: #9c298c;
+    cursor: pointer;
+}
+
+#title {
+    position: absolute;
+    font-family: Quicksand;
+    z-index: 999;
+    font-size: 220%;
+    left: 44%;
+    top: 69%;
+    cursor: default;
 }
