@@ -42,6 +42,7 @@ html, body {
     background-position: center;
 	cursor: pointer;
 	float: right;
+    display:  none;
 }
 
 #keyboard, #transparent, .keys, #overlay {
