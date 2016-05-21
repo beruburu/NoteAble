@@ -261,7 +261,7 @@ function resizeMap() {
     document.getElementById("menubutton").style.height = (menuButtonSize * sizeRatio) + "px";
     document.getElementById("settingsbutton").style.width = (menuButtonSize * sizeRatio) + "px";
     document.getElementById("settingsbutton").style.height = (menuButtonSize * sizeRatio) + "px";
-    document.getElementById("topbar").style.width = Math.round(img.clientWidth * 0.9) + "px";
+    document.getElementById("topbar").style.width = Math.round(img.clientWidth * 0.999) + "px";
     document.getElementById("lives").style.left = Math.round(img.clientWidth * 0.65) + "px";
 }
 //fires when the key is pressed

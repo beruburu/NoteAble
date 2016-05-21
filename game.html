@@ -32,20 +32,23 @@
 		<div id="topbar">
 	        <!--Menu button-->
             <button id="menubutton" onclick="loadMenu()"></button> 
+	        <!-- Timer -->
+	        <div id = "timer"><time>0:00</time></div>
+	        <!--Div to display the user's win count (will later show score)-->
+	        <div id="wins">
+	            Score: <br>
+	            <div id= "points">0</div>
+	        </div>
+	        <!--Container for music notes showing user's lives-->
+	        <div id="lives">
+	            <img src="images/lives.png" alt="life" class="lifeimg" id="life1">
+	            <img src="images/lives.png" alt="life" class="lifeimg" id="life2">
+	            <img src="images/lives.png" alt="life" class="lifeimg" id="life3">
+	        </div>
             <!--Settings button-->   
             <button id="settingsbutton"></button>
 		</div>
 
-        
-
-		
-        <!--Container for music notes showing user's lives-->
-        <div id="lives">
-            <img src="images/lives.png" alt="life" class="lifeimg" id="life1">
-            <img src="images/lives.png" alt="life" class="lifeimg" id="life2">
-            <img src="images/lives.png" alt="life" class="lifeimg" id="life3">
-        </div>
-		
 		<!--Countdown to start game-->
 		<img src="images/countdown1.png" id="countdown">
 
@@ -95,15 +98,6 @@
         <!--The staff that displays the notes-->
         <div id="staff">
         </div>
-        
-        <!--Div to display the user's win count (will later show score)-->
-        <div id="wins">
-            Score: 
-            <div id= "points">0</div>
-        </div>
-        
-        <!-- Timer -->
-        <div id = "timer"><time>0:00</time></div>
         
         <!--A transparent overlay over the screen during pause or game over-->
         <div id="overlay">
