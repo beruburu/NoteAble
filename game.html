@@ -23,7 +23,9 @@
         <meta charset="utf-8" />
         <title>NoteAble</title>
     </head>
-    <body>
+
+    <!-- The best score is retrieved asynchronously through this function -->
+    <body onmouseover="getSessionScore()">
 		
         <!--Container for keyboard images-->
         <div id="container">
@@ -111,7 +113,8 @@
 				<div id="scoreheading">Score</div>
                 <!--Temp score values are hard coded until scores system is working-->
 				<div id="score"></div>
-				<div id="bestscore">Personal Best: 6813</div>
+				<div id="bestscore"></div>
+                <div id="bestscore1">Personal Best</div>
 			</div>
 			<div id="gameoverbuttons">
 				<button id="mainmenu"></button>

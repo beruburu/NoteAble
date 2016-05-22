@@ -749,6 +749,10 @@ function submitScore() {
     if (validateName()) {
         var name = document.getElementById("enterinitials").value;
 
+        //the best score retrieved from the game.html document itself, not from cookies
+        //not sure if it will be sent to updatescore.php
+        var bestscore = document.getElementById("bestscore").innerHTML; 
+
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -789,4 +793,21 @@ function getHighScores() {
 //will later open a drop-down menu, but currently just links to the main menu
 function loadMenu() {
     location.href = "mainmenu.html";
+}
+
+
+//sends the running score to score.php to get processed and set into session variables
+function getSessionScore() {
+    var myurl = './php/score.php';
+    var http = new XMLHttpRequest();
+    var modurl = myurl+"?score="+runningScore;
+    http.open("GET", modurl, true);
+    http.onreadystatechange = function() {
+        if (http.readyState == 4 && http.status == 200) {
+            if(runningScore > 0) {
+                document.getElementById("bestscore").innerHTML = http.responseText;
+            }
+        }
+    };
+    http.send();
 }
