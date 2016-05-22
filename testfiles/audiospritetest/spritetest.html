@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>AUDIO SPRITE TEST</title>
+        <script>
+            var sprite = new Audio();
+            sprite.src = "sprite.mp3";
+
+            function startAudio() {
+                sprite.load();
+                sprite.addEventListener("loadeddata", startPlayAudio);
+
+                document.getElementById("TEST").innerHTML += "LOADING ";
+                //sprite.addEventListener("loadeddata", testLoadedData);
+                //sprite.addEventListener("play", testPlay);
+                //sprite.addEventListener("playing", testPlaying);
+                //sprite.addEventListener("timeupdate", testTimeUpdate);
+            }
+            function startPlayAudio() {
+                sprite.currentTime = 2.5;
+                //document.getElementById("TEST").innerHTML += "LOADED CURRENTTIME=" + sprite.currentTime;
+                sprite.play();
+                sprite.addEventListener("playing", setAudioTimeout);
+                document.getElementById("TEST").innerHTML += "START ";
+
+            }
+            function setAudioTimeout() {
+                setTimeout(playAudio, 1200);
+            }
+            function playAudio() {
+                sprite.removeEventListener("playing", setAudioTimeout);
+                sprite.currentTime = 0;
+                setEndAudioTimeout();
+                //sprite.addEventListener("playing", setEndAudioTimeout);
+                sprite.addEventListener("ended", testEnded);
+            }
+            function setEndAudioTimeout() {
+                document.getElementById("TEST").innerHTML += "PAUSETIMEOUTSET ";
+                setTimeout(endAudio, 1200);
+            }
+            function testEnded() {
+                document.getElementById("TEST").innerHTML += "ENDED ";
+            }
+            function endAudio() {
+                document.getElementById("TEST").innerHTML += "PAUSED ";
+                sprite.removeEventListener("playing", setEndAudioTimeout);
+                sprite.pause();
+            }
+
+            function testLoadedData() {
+                document.getElementById("TEST").innerHTML += "LOADED ";
+                testSeeking();
+            }
+            function testPlay() {
+                document.getElementById("TEST").innerHTML += "PLAY ";
+                testSeeking();
+            }
+            function testPlaying() {
+                document.getElementById("TEST").innerHTML += "PLAYING ";
+                testSeeking();
+            }
+            function testTimeUpdate() {
+                document.getElementById("TEST").innerHTML += "TIME UPDATE ";
+            }
+            function testSeeking() {
+
+                if (sprite.seeking) {
+                    document.getElementById("TEST").innerHTML += "SEEKING ";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <button onclick="startAudio()">TEST</button>
+        <span id="TEST"></span>
+    </body>
+</html>
