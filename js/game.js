@@ -152,8 +152,8 @@ var useEESounds = false;
 //true if the keyboard is disabled
 var disabled = false;
 
-//true if confirmCorrect has been fired for this sequence
-var confirming = false;
+//true if this sequence has already been won or lost
+var sequenceComplete = false;
 
 //true if the game is paused
 var paused = false;
@@ -305,11 +305,11 @@ function endNote(x) {
 
 
 
-    //check for a match once the user has entered enough keys
-        if (keysPressed.length == track.length) {
+    //compare user input with key sequence
+        if (keysPressed.length <= track.length) {
             //if the user has started the easter egg sequence, do not confirm input
-            //if confirmCorrect has already been fired for this sequence, do not confirm input
-            if (!easterEggMatch() && !confirming) {
+            //if the sequence has already been won or lost, do not call confirmCorrect again
+            if (!easterEggMatch() && !sequenceComplete) {
                 confirmCorrect();
             }
         } else if (keysPressed.length == easterEggSeq.length) {
@@ -438,14 +438,14 @@ function createTrack() {
 //compares user input with computer's track
 function isCorrect() {
 	var confirm = 0;
-	for(i = 0; i < track.length; i++) {
+	for(i = 0; i < keysPressed.length; i++) {
 		if(keysPressed[i] == track[i]) {
 			confirm++;
 		}
 	}
 
 
-    if(confirm == track.length) {
+    if(confirm == keysPressed.length) {
 		return true;
 	} else {
 		return false;
@@ -456,10 +456,12 @@ function isCorrect() {
 function confirmCorrect() {
     //return to regular sounds after one sequence
     useEESounds = false; 
-    confirming = true; 
-	if (isCorrect()) {
+
+	if (isCorrect() && track.length == keysPressed.length) {
+	    sequenceComplete = true; 
 	    setTimeout(win, 1000);
-	} else {
+	} else if (!isCorrect()) {
+        sequenceComplete = true; 
 	    setTimeout(lose, 1000);
 	}
 }
@@ -508,6 +510,7 @@ function nextTrack() {
     clearUserInput();
     track = [];
     i = 0;
+    document.getElementById("timer").style.color = "white";
     setTimeout(playTrack, 500);
 }
 
@@ -515,7 +518,7 @@ function nextTrack() {
 function clearUserInput() {
     clearStaff();
     keysPressed = [];
-    confirming = false; 
+    sequenceComplete = false; 
 }
 
 //clears items from the staff
@@ -527,17 +530,6 @@ function clearStaff() {
     }
 
     disabled = false; 
-}
-
-//remove lives when user has lost
-function removeLife() {
-	var ulElem = document.getElementById("lives");
-	var i = 0;
-	
-	if (!isCorrect()) {
-		ulElem.removeChild(ulElem.childNodes[i]);
-		i++;
-	}
 }
 
 //easter egg: sheep runs across screen
@@ -663,9 +655,11 @@ function runTimer() {
             seconds = countdownLength;//set the time length of countdown
         }
 
+        
+
         multiplier = (countdownLength - leftover) - 1;
 
-        if(leftover > 0 && isCorrect()) {
+        if(leftover > 0 && isCorrect() && keysPressed.length == track.length) {
             seconds = 0;
         }
  
@@ -676,9 +670,24 @@ function runTimer() {
             setTimeout(runTimer, 1000); 
         }
 
-        if (seconds == 0 && !isCorrect()) {
+        if (seconds == 0 && (!isCorrect() || keysPressed.length < track.length)) {
             lose(); 
+        } else {            
+            //set the control to red when under 3 seconds are left
+            if (seconds <= 3 && seconds > 0) {
+                document.getElementById("timer").style.color = "red";
+            } else {            
+                document.getElementById("timer").style.color = "white";
+            }
         }
+
+        
+       //set the control to red when under 3 seconds are left
+       if (seconds <= 3 && seconds > 0) {
+            document.getElementById("timer").style.color = "red";
+       } else {            
+            document.getElementById("timer").style.color = "white";
+       }
         
     }
  }
@@ -746,8 +755,8 @@ function dismissEnterHighScores() {
 
 //submits new high score into the database
 function submitScore() {
-    if (validateName()) {
-        var name = document.getElementById("enterinitials").value;
+    var name = document.getElementById("enterinitials").value; 
+    if (validateName(name)) {
 
         //the best score retrieved from the game.html document itself, not from cookies
         //not sure if it will be sent to updatescore.php
@@ -767,8 +776,8 @@ function submitScore() {
 }
 
 //checks that high score name is only valid characters
-function validateName() {
-    return true; 
+function validateName(name) {
+    return (/[A-Za-z]/); 
 }
 
 //loads the high scores from the database
