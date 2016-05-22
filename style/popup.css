@@ -1,0 +1,276 @@
+@font-face {
+    font-family: Quicksand;
+	src: url("../style/Quicksand-Bold.otf");
+}
+
+#popup {
+	width: 100%;
+	font-family: Quicksand;
+	font-weight: bold;
+}
+
+.popup {
+	height: 57.2%;
+	width: 30%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+	position: relative;
+	z-index: 999;
+	border-radius: 12px;
+	margin: auto;
+}
+
+#iheading, #goheading, #ehsheading, #hsheading {
+    max-width: 100%;
+    font-size: 42px;
+    color: white; 
+    text-align: center;
+    padding-top: 4%;
+	margin: auto;
+}
+
+#gameover {
+	background-color: #FF6138;
+	background-image: url("../images/gameoverBG.png");
+}
+
+#scorecontent {
+	text-align: center;
+	color: #ff4a00;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#scoreheading {
+	font-size: 35px;
+	background-color: #efe7be;
+	width: 20%;
+	height: 5%;
+	margin: auto;
+	margin-top: 7%;
+}
+
+#score {
+	font-size: 46px;
+	background-color: #efe7be;
+	width: 25%;
+	height: 10%;
+	margin: auto;
+	margin-top: 6%;
+}
+
+#bestscore {
+	font-size: 20px;
+	background-color: #efe7be;
+	width: 38%;
+	height: 10%;
+	margin: auto;
+	margin-top: 6%;
+}
+
+#gameoverbuttons {
+	height: 25%;
+	margin-top: 3.7%;
+	padding: 0;
+}
+
+#retrybutton {
+    background-color: #FFFFFF;
+    color: #FF6138;
+    position: absolute;
+	margin-left: 16.5%;
+	margin-top: 3.8%;
+    width: 33%;
+    height: 17.1%;
+}
+
+#retrybutton:active {
+	color: #ffffff;
+	background-color: #f0e9b9;
+}
+
+#mainmenu {
+    background-color: #FFFFFF;
+    border-bottom-left-radius: 12px;
+	border: none;
+    outline: none;
+    width:  17%;
+    height: 82%;
+    background-image: url("../images/home.png");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+	margin-top: 2.7%;
+	margin-left: 0.2%;
+}
+
+#mainmenu:active {
+	background-color: #f0e9b9;
+	background-image: url("../images/homeactive.png");
+}
+
+#highscores {
+	background-color: #ff3b42;
+	background-image: url("../images/highScoresBG.png");
+}
+
+#scores {
+	text-align: center;
+	color: #ff3b42;
+	margin-top: 8.5%; 
+	font-size: 30px;
+    width:  50%;
+	height: 40%;
+    margin-left:  auto;
+    margin-right:  auto;
+    background-color:  #ffb6b9; 
+}
+
+#hsbutton {
+	width: 100%;
+	height: 20%;
+}
+
+#hsconfirmbutton {
+    background-color: #FFFFFF;
+    color: #ff3b42;
+	width: 33%;
+	height: 93%;
+	margin-top: 7.5%;
+	margin-left: 33%;
+}
+
+#hsconfirmbutton:active {
+	color: #ffffff;
+	background-color: #ffb6b9;
+}
+
+#enterhighscore {
+	background-color: #77b129;
+	background-image: url("../images/enterHighScoresBG.png");
+}
+        
+#position {
+    font-size: 42px;
+    color: white; 
+    text-align: center;
+	padding-top: 20px;
+	margin: 0;
+}
+
+#enterhighscorecontent {
+	text-align: left;
+	color: #77b129;
+	margin-top: 10px;
+	font-size: 30px;
+}
+
+#initialsheading {
+	background-color: #bcf66e;
+	width: 50%;
+	height: 10%;
+	margin: auto;
+	margin-top: 12%;
+	text-align: center;
+}
+
+#initials {
+	margin: auto;
+	text-align: center;
+	margin-top: 2.5%;
+}
+
+#enterinitials {
+	width: 40%;
+	color: #ffffff;
+	background-color: #77b129;
+	border-radius: 6px;
+	border: none;
+	outline: none;
+	margin: auto;
+	font-size: 66px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+#ehsbutton {
+	width: 180px;
+	margin: auto;
+	margin-top: 40px;
+	text-align: center;
+}
+
+#submithighscore {
+    background-color: #FFFFFF;
+    color: #77b129;
+}
+
+#submithighscore:active {
+	color: #ffffff;
+	background-color: #bcf66e;
+}
+
+#instructions {
+	background-color: #3287d8;
+	background-image: url("../images/instructionsBG.png");
+}
+
+#instructioncontent {
+	text-align: center;
+	color: #3287d8;
+	margin-top: 13%;
+	font-size: 35px;
+}
+
+#howto1 {
+	background-color: #aad5ff;
+	width: 63%;
+	height: 10%;
+	margin: auto;
+	margin-top: 5%;
+}
+
+#howto2 {
+	background-color: #aad5ff;
+	width: 44%;
+	height: 10%;
+	margin: auto;
+	margin-top: 0;
+}
+
+#howto3 {
+	background-color: #aad5ff;
+	width: 21%;
+	height: 10%;
+	margin: auto;
+	margin-top: 0;
+}
+
+#instructbutton {
+	margin-top: 7.8%;
+	height: 25%;
+}
+
+#ibutton {
+	margin-left: 33%;
+	margin-top: 5.2%;
+    background-color: #FFFFFF;
+    color: #3287d8;
+	width: 33%;
+	height: 70%;
+}
+
+#ibutton:active {
+	color: #ffffff;
+	background-color: #aad5ff;
+}
+
+.button {
+	font-family: Quicksand;
+	font-weight: bold;
+    border-radius: 6px;
+    outline: none;
+	border: none;
+    font-size: 29px;
+}

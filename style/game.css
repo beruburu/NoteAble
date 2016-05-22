@@ -2,13 +2,14 @@ html, body {
     height: 100%;
     width: 100%; 
     background-color: #454545;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 #container {
     height: 100%;
     width: 100%;
 }
+
 #topbar {
 	z-index: 4;
 	position: absolute;
@@ -16,6 +17,7 @@ html, body {
 	max-height: 10%;
 	
 }
+
 #menubutton {
     height: 80px;
     width: 80px;
