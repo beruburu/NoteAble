@@ -20,6 +20,27 @@ var timerFontSize = 40;
 //default size for menu buttons
 var menuButtonSize = 80;
 
+//default font size for popup headings
+var popupHeadingFontSize = 42;
+
+//default font sizes for game over content
+var scoreHeadingFontSize = 35;
+var scoreGOFontSize = 46;
+var bestScoreFontSize = 20;
+
+//default font size for instruction content
+var instructionFontSize = 35;
+
+//default font sizes for enter high score content
+var enterHighScoreFontSize = 30;
+var intialsFontSize = 66;
+
+//default font size for high score content
+var highScoreFontSize = 30;
+
+//default button font size
+var buttonFontSize = 29;
+
 //default coordinates of image map
 var coords = [[3, 252, 109, 252, 109, 494, 143, 494, 143, 662, 3, 662]
 , [112, 254, 183, 491]
@@ -263,6 +284,37 @@ function resizeMap() {
     document.getElementById("settingsbutton").style.height = (menuButtonSize * sizeRatio) + "px";
     document.getElementById("topbar").style.width = Math.round(img.clientWidth * 0.999) + "px";
     document.getElementById("lives").style.left = Math.round(img.clientWidth * 0.65) + "px";
+	
+	document.getElementById("popup").style.width = Math.round(maxWidth * sizeRatio) + "px";
+	
+	document.getElementById("gameover").style.width = Math.round(img.clientWidth * 0.55) + "px";
+	document.getElementById("gameover").style.height = Math.round(img.clientHeight * 0.585) + "px";
+	document.getElementById("goheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("goheading").style.width = Math.round(img.clientWidth * 0.65) + "px";
+	document.getElementById("scoreheading").style.fontSize = Math.round(scoreHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("score").style.fontSize = Math.round(scoreGOFontSize * sizeRatio) + "px";
+	document.getElementById("bestscore").style.fontSize = Math.round(bestScoreFontSize * sizeRatio) + "px";
+	document.getElementById("retrybutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
+	
+	document.getElementById("instructions").style.width = Math.round(img.clientWidth * 0.55) + "px";
+	document.getElementById("instructions").style.height = Math.round(img.clientHeight * 0.585) + "px";
+	document.getElementById("iheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("howto1").style.fontSize = Math.round(instructionFontSize * sizeRatio) + "px";
+	document.getElementById("howto2").style.fontSize = Math.round(instructionFontSize * sizeRatio) + "px";
+	document.getElementById("howto3").style.fontSize = Math.round(instructionFontSize * sizeRatio) + "px";
+	document.getElementById("ibutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
+	
+	document.getElementById("enterhighscore").style.width = Math.round(img.clientWidth * 0.55) + "px";
+	document.getElementById("enterhighscore").style.height = Math.round(img.clientHeight * 0.585) + "px";
+	document.getElementById("ehsheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("initialsheading").style.fontSize = Math.round(enterHighScoreFontSize * sizeRatio) + "px";
+	
+	document.getElementById("highscores").style.width = Math.round(img.clientWidth * 0.55) + "px";
+	document.getElementById("highscores").style.height = Math.round(img.clientHeight * 0.585) + "px";
+	document.getElementById("hsheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("scores").style.fontSize = Math.round(highScoreFontSize * sizeRatio) + "px";
+	document.getElementById("hsconfirmbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
+	
 }
 //fires when the key is pressed
 function playNote(x) {
@@ -599,7 +651,7 @@ function countdown(){
  //shows instructional popup
  function instructAppear() {
 	 pause();
-	 $("#instructions").animate({bottom: '950px'}, 1000);
+	 $("#instructions").animate({bottom: '100%'}, 1000);
  }
  
  //dismisses instructional popup
