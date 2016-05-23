@@ -1,0 +1,75 @@
+body {
+    width: 73.25%;
+    height: 100%;
+}
+
+@font-face {
+    font-family: Quicksand;
+	src: url("../style/Quicksand-Bold.otf");
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 0.2em;
+    padding-bottom: 0;
+    font-family: Quicksand;
+}
+p {
+    font-size: 1.5em;
+    margin-top: 0;
+    padding-top: 0;
+    font-family: Quicksand;
+}
+#page {
+    display: none;
+}
+#loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 73.25%;
+    height: 100%;
+    background-color: #454545;
+    background-image: url("../images/spinningcircle.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#loadingtitle {
+    z-index: 200;
+    padding-left: 42.5%;
+    padding-top: 31.75%;
+    font-family: Quicksand;
+    font-size: 160%;
+    color: #000;
+}
+
+#red {
+    color: #f00;
+}
+
+#orange {
+    color: #ff5d00;
+}
+
+#yellow {
+    color: #ffca00;    
+}
+
+#green {
+    color: #00ff21;
+}
+
+#blue {
+    color: #0094ff;
+}
+
+#indigo {
+    color: #4800ff;
+}
+
+#violet {
+    color: #b200ff;
+}
