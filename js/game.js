@@ -382,6 +382,11 @@ function endNote(x) {
             }
         }
 
+        if (keysPressed.length < track.length) {
+            confirmCurrentCorrect(currentcount);
+            currentcount++;
+        }
+
 }
 
 function easterEggMatch() {
@@ -498,6 +503,17 @@ function createTrack() {
     }
 }
 
+//the number of times the user has pressed a key
+var currentcount = 0;
+
+//before the user gets to complete a full length input
+//they lose a life if the input so far is incorrect
+function confirmCurrentCorrect(curr) {
+    if(keysPressed[curr] != track[curr]) {
+        lose();
+    } 
+}
+
 //compares user input with computer's track
 function isCorrect() {
 	var confirm = 0;
@@ -545,6 +561,7 @@ function win() {
         }
         winsPerLengthCount = 0; 
     }
+    getSessionScore();
 
     //document.getElementById("points").innerHTML = increaseScore();
     setTimeout(nextTrack, 1500);
