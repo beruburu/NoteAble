@@ -587,6 +587,7 @@ function lose() {
 
 //prepares for the next track
 function nextTrack() {
+    currentcount = 0;
     clearUserInput();
     track = [];
     i = 0;
