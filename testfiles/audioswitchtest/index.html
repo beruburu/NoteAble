@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    <script>
+        var track = new Audio();
+        track.loop = true;
+        function startSeq() {
+            track.loop = false;
+            track.src = "a.mp3";
+            track.play();
+            setTimeout(switchNote, 1400);
+        }
+
+        function switchNote() {
+            track.src = "aSharp.mp3";
+            track.play();
+            setTimeout(switchNote2, 1400);
+        }
+        
+        function switchNote2() {
+            track.src = "b.mp3";
+            track.play();
+            setTimeout(endTrack, 1400);
+        }
+
+        function endTrack() {
+            track.pause();
+        }
+    </script>
+    </head>
+    <body>
+        <button onclick="startSeq()">Start Sequence</button>
+    </body>
+</html>

@@ -67,6 +67,9 @@ var staffDelay = 1000;
 
 //***KEY VALUES***
 
+//audio for computer sequence
+var seqSound;  
+
 //enter sound values into array
 var keySounds = [];
 keySounds[0] = new Audio();
@@ -442,7 +445,10 @@ function playTrack() {
     disabled = true; 
     resetTimer();
 	createTrack();
-    i = 0;    
+    i = 0;
+    for (y = 1; y <= trackLength; y++) {
+        setTimeout(createTrack, y * 1800);
+    }    
 }
 
 //recursive function to create the random track one note at a time
@@ -462,20 +468,29 @@ function createTrack() {
 		    position = Math.floor((Math.random() * 11) + 0);
         
 		    track.push(position);
-            //use special sounds for track after easter egg
+
+            /*//use special sounds for track after easter egg
             if (useEESounds) {
                 eeSounds[position].play();
                 eeSounds[position].addEventListener("ended", createTrack); 
             } else {
 		        keySounds[position].play();
                 keySounds[position].addEventListener("ended", createTrack); 
-            }		
+            }*/	
+            /*var newAudio = document.createElement("AUDIO");
+            newAudio.src = keySounds[position].src;
+            //alert(newAudio.src);
+            newAudio.autoplay = true;
+            document.getElementById("audiocontainer").appendChild(newAudio);*/
+		    seqSound.src = keySounds[position].src;
+		    seqSound.play();
+
 		    displayCompNotes();
         } else {
-            for (x = 0; x < keySounds.length; x++) {
+            /*for (x = 0; x < keySounds.length; x++) {
                 keySounds[x].removeEventListener("ended", createTrack);
                 eeSounds[x].removeEventListener("ended", createTrack);
-            } 
+            } */
             setTimeout(clearStaff, staffDelay);
             setTimeout(runTimer, staffDelay);
             timerPaused = false; 
@@ -663,6 +678,12 @@ function countdown(){
 
      //unpause the game and play the first track when the countdown is complete
 	 setTimeout("pause();", 6000);
+
+	 seqSound = new Audio();
+	 seqSound.src = keySounds[0].src;
+	 seqSound.play();
+	 seqSound.pause(); 
+     
      setTimeout(playTrack, 6000)
  }
 

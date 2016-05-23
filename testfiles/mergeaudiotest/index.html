@@ -7,32 +7,60 @@
         <script>
             var interval;
             var test = new Audio();
-            test.src = "";
-            mergeAudio();
-            var loaded = false;
-            function mergeAudio() {
-                loaded = false;
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        test.src = "test.mp3"
-                        loaded = true;
-                    }
-                };
-                xmlhttp.open("GET", "mergeaudio.php", true);
-                xmlhttp.send();
+            var i = 0;
+            var loaded = false; 
+
+            function loadAudio() {
+                    test.src = "test.mp3"
+                    test.loop = true;
+                    test.volume = 0;
+                    test.play();
+                    setTimeout(playAudio, 2000);
+            }
+            function playAudio() {
+                i = 0;
+                test.currentTime = 0;
+                test.volume = 1;
+                addImage();
+                interval = setInterval(addImage, 1500);
             }
 
-            function playAudio() {
-                test.src = "a.mp3";
-                test.play();
+            function addImage() {
+                if (i == 3) {
+                    clearInterval(interval);
+                    test.volume = 0;
+                    setTimeout(playAudio, 5000);
+                } else {
+                    var imgName = "";
+                    switch (i) {
+                        case 0:
+                            imgName = "a.png";
+                            break;
+                        case 1:
+                            imgName = "aSharp.png";
+                            break;
+                        case 2:
+                            imgName = "b.png";
+                            break;
+                    }
+
+                    var newNote = document.createElement("IMG");
+                    newNote.src = imgName;
+
+                    document.getElementById("images").appendChild(newNote);
+
+                    i++;
+                }
+
+                
             }
 
 
         </script>
     </head>
     <body>
-        <button style="width: 200px; height: 200px" onclick="playAudio()">TEST</button>
+        <button style="width: 100px; height: 100px" onclick="loadAudio()">START</button>
         <span id="TEST"></span>
+        <div id="images"></div>
     </body>
 </html>

@@ -4,7 +4,8 @@
     file_put_contents('test.mp3',
     file_get_contents('a.mp3') .
     file_get_contents('aSharp.mp3').
-    file_get_contents('b.mp3'));
+    file_get_contents('b.mp3') . 
+    file_get_contents('silence.mp3'));
 
     //fclose($myfile);
 
