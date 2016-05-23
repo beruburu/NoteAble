@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>HOWLER.JS TEST</title>   
+        <script src="howler.js"></script>
+        <script src="howler.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script>
+            playSound();
+            function playSound() {
+                var sound = new Howl({
+                    urls: ['a.mp3'],
+                    onend: function () {
+                        var sound2 = new Howl({ urls: ['aSharp.mp3'] }).play();
+                    }
+                }).play();
+
+            }
+        </script>
+    </head>
+    <body>
+        <!--<button onclick="playSound()">Play</button>-->
+    </body>
+</html>

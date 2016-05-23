@@ -3,11 +3,16 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title></title>
+        <title>SWITCH AUDIO TEST</title>
     <script>
         var track = new Audio();
-        track.loop = true;
         function startSeq() {
+            track.src = "silence.mp3";
+            track.loop = true;
+            track.play();
+            setTimeout(startNote, 1400);
+        }
+        function startNote() {
             track.loop = false;
             track.src = "a.mp3";
             track.play();
@@ -27,7 +32,7 @@
         }
 
         function endTrack() {
-            track.pause();
+            startSeq();
         }
     </script>
     </head>
