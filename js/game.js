@@ -67,33 +67,6 @@ var staffDelay = 1000;
 
 //***KEY VALUES***
 
-//enter sound values into array
-var keySounds = [];
-keySounds[0] = new Audio();
-keySounds[0].src = "sounds/c.mp3";
-keySounds[1] = new Audio();
-keySounds[1].src = "sounds/cSharp.mp3";
-keySounds[2] = new Audio();
-keySounds[2].src = "sounds/d.mp3";
-keySounds[3] = new Audio();
-keySounds[3].src = "sounds/dSharp.mp3";
-keySounds[4] = new Audio();
-keySounds[4].src = "sounds/e.mp3";
-keySounds[5] = new Audio();
-keySounds[5].src = "sounds/f.mp3";
-keySounds[6] = new Audio();
-keySounds[6].src = "sounds/fSharp.mp3";
-keySounds[7] = new Audio();
-keySounds[7].src = "sounds/g.mp3";
-keySounds[8] = new Audio();
-keySounds[8].src = "sounds/gSharp.mp3";
-keySounds[9] = new Audio();
-keySounds[9].src = "sounds/a.mp3";
-keySounds[10] = new Audio();
-keySounds[10].src = "sounds/aSharp.mp3";
-keySounds[11] = new Audio();
-keySounds[11].src = "sounds/b.mp3";
-
 //names of all keys
 var keys = ["c", "cSharp", "d", "dSharp", "e", "f", "fSharp", "g", "gSharp", "a", "aSharp", "b"];
 
@@ -115,12 +88,6 @@ var winCount = 0;
 //the number of times the user has lost
 var lossCount = 0; 
 
-//sound plays when user wins
-var winSound = new Audio('sounds/win.wav');
-
-//sound plays when user loses
-var loseSound = new Audio('sounds/lose.wav');
-
 //**COMPUTER GENERATED TRACK**
 
 //the current position when playing through the track
@@ -136,34 +103,6 @@ var easterEggSeq = [4, 2, 0, 2, 4, 4, 4];
 
 //true if easter egg is currently running
 var easterEggRunning = false; 
-
-
-//enter easter egg sheep sound values into array
-var eeSounds = [];
-eeSounds[0] = new Audio();
-eeSounds[0].src = "sounds/sheep/c.wav";
-eeSounds[1] = new Audio();
-eeSounds[1].src = "sounds/sheep/cSharp.wav";
-eeSounds[2] = new Audio();
-eeSounds[2].src = "sounds/sheep/d.wav";
-eeSounds[3] = new Audio();
-eeSounds[3].src = "sounds/sheep/dSharp.wav";
-eeSounds[4] = new Audio();
-eeSounds[4].src = "sounds/sheep/e.wav";
-eeSounds[5] = new Audio();
-eeSounds[5].src = "sounds/sheep/f.wav";
-eeSounds[6] = new Audio();
-eeSounds[6].src = "sounds/sheep/fSharp.wav";
-eeSounds[7] = new Audio();
-eeSounds[7].src = "sounds/sheep/g.wav";
-eeSounds[8] = new Audio();
-eeSounds[8].src = "sounds/sheep/gSharp.wav";
-eeSounds[9] = new Audio();
-eeSounds[9].src = "sounds/sheep/a.wav";
-eeSounds[10] = new Audio();
-eeSounds[10].src = "sounds/sheep/aSharp.wav";
-eeSounds[11] = new Audio();
-eeSounds[11].src = "sounds/sheep/b.wav";
 
 //true for one sequence after easter egg
 var useEESounds = false; 
@@ -263,12 +202,8 @@ function resizeMap() {
     var img = document.getElementById("keyboard");
     var coords_Resized = coords.slice();    
     var sizeRatio = img.clientHeight / maxHeight;
-    for (x = 0; x < coords.length; x++) {
-        for (y = 0; y < coords[x].length; y++) {
-            coords_Resized[x][y] = Math.round(coords[x][y] * sizeRatio);
-        }
-        document.getElementById("map" + keys[x]).coords = coords_Resized[x].toString(); 
-    }
+   
+   imageMapResize();
 
     document.getElementById("staff").style.top = Math.round(staffTop * sizeRatio) + "px";
     document.getElementById("staff").style.height = Math.round(staffHeight * sizeRatio) + "px";
@@ -332,13 +267,17 @@ function playNote(x) {
     //check if key has been disabled
     if (!disabled) { 
         document.getElementById("key" + keys[x]).style.display = "inline";
-        if (useEESounds) {
-            eeSounds[x].currentTime = 0;
-            eeSounds[x].play();
+
+        var soundUrl; 
+        if (useEESounds) {           
+            soundUrl = "sounds/sheep/" + keys[x] + ".mp3";
         } else {
-            keySounds[x].currentTime = 0;
-            keySounds[x].play();
+            soundUrl = "sounds/" + keys[x] + ".mp3";
         }
+
+        var sound = new Howl({
+            urls: [soundUrl]
+        }).play();
 
         keysPressed.push(x);
 
@@ -380,11 +319,6 @@ function endNote(x) {
             if (easterEggMatch()) {
                 easterEgg();
             }
-        }
-
-        if (keysPressed.length < track.length) {
-            confirmCurrentCorrect(currentcount);
-            currentcount++;
         }
 
 }
@@ -478,20 +412,22 @@ function createTrack() {
 		    position = Math.floor((Math.random() * 11) + 0);
         
 		    track.push(position);
+		    var soundUrl;
             //use special sounds for track after easter egg
             if (useEESounds) {
-                eeSounds[position].play();
-                eeSounds[position].addEventListener("ended", createTrack); 
+                soundUrl = "sounds/sheep/" + keys[position] + ".mp3";
             } else {
-		        keySounds[position].play();
-                keySounds[position].addEventListener("ended", createTrack); 
-            }		
+                soundUrl = "sounds/" + keys[position] + ".mp3";
+            }
+            var sound = new Howl({
+                urls: [soundUrl],
+                onend: function() {
+                    createTrack();
+                }
+            }).play();
+                	
 		    displayCompNotes();
         } else {
-            for (x = 0; x < keySounds.length; x++) {
-                keySounds[x].removeEventListener("ended", createTrack);
-                eeSounds[x].removeEventListener("ended", createTrack);
-            } 
             setTimeout(clearStaff, staffDelay);
             setTimeout(runTimer, staffDelay);
             timerPaused = false; 
@@ -502,7 +438,7 @@ function createTrack() {
         resumeTrack = true;
     }
 }
-
+/*
 //the number of times the user has pressed a key
 var currentcount = 0;
 
@@ -512,7 +448,7 @@ function confirmCurrentCorrect(curr) {
     if(keysPressed[curr] != track[curr]) {
         lose();
     } 
-}
+}*/
 
 //compares user input with computer's track
 function isCorrect() {
@@ -534,8 +470,7 @@ function isCorrect() {
 //checks if the input was correct
 function confirmCorrect() {
     //return to regular sounds after one sequence
-    useEESounds = false; 
-
+    useEESounds = false;
 	if (isCorrect() && track.length == keysPressed.length) {
 	    sequenceComplete = true; 
 	    setTimeout(win, 1000);
@@ -547,8 +482,9 @@ function confirmCorrect() {
 
 //user wins
 function win() {
-	//winCount++;
-    winSound.play();
+    var sound = new Howl({
+        urls: ["sounds/win.mp3"]
+    }).play();
 
     document.getElementById("points").innerHTML = increaseScore();
     //increase track length after winsPerLength wins
@@ -571,7 +507,9 @@ function win() {
 
 //user loses
 function lose() {
-	loseSound.play();
+    var sound = new Howl({
+        urls: ["sounds/lose.mp3"]
+    }).play();
 	lossCount++;
 	document.getElementById("life" + lossCount).style.display = "none";
 	resetTimer();
