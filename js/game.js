@@ -287,6 +287,8 @@ function resizeMap() {
 	
 	document.getElementById("popup").style.width = Math.round(maxWidth * sizeRatio) + "px";
 	
+	document.getElementById("gameover").style.left = Math.round(img.clientWidth * 0.225) + "px";
+	document.getElementById("gameover").style.top = Math.round(img.clientHeight) + "px";
 	document.getElementById("gameover").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("gameover").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("goheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
@@ -296,6 +298,8 @@ function resizeMap() {
 	document.getElementById("bestscore").style.fontSize = Math.round(bestScoreFontSize * sizeRatio) + "px";
 	document.getElementById("retrybutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 	
+	document.getElementById("instructions").style.left = Math.round(img.clientWidth * 0.225) + "px";
+	document.getElementById("instructions").style.top = Math.round(img.clientHeight) + "px";
 	document.getElementById("instructions").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("instructions").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("iheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
@@ -304,11 +308,18 @@ function resizeMap() {
 	document.getElementById("howto3").style.fontSize = Math.round(instructionFontSize * sizeRatio) + "px";
 	document.getElementById("ibutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 	
+	document.getElementById("enterhighscore").style.left = Math.round(img.clientWidth * 0.225) + "px";
+	document.getElementById("enterhighscore").style.top = Math.round(img.clientHeight) + "px";
 	document.getElementById("enterhighscore").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("enterhighscore").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("ehsheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
 	document.getElementById("initialsheading").style.fontSize = Math.round(enterHighScoreFontSize * sizeRatio) + "px";
+	document.getElementById("enterinitials").style.width = Math.round(img.clientWidth * 0.22) + "px";
+	document.getElementById("enterinitials").style.height = Math.round(img.clientHeight * 0.125) + "px";
+	document.getElementById("ehsbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 	
+	document.getElementById("highscores").style.left = Math.round(img.clientWidth * 0.225) + "px";
+	document.getElementById("highscores").style.top = Math.round(img.clientHeight) + "px";
 	document.getElementById("highscores").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("highscores").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("hsheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
@@ -651,12 +662,12 @@ function countdown(){
  //shows instructional popup
  function instructAppear() {
 	 pause();
-	 $("#instructions").animate({bottom: '100%'}, 1000);
+	 $("#instructions").animate({bottom: '100%'}, 1000).delay(800);
  }
  
  //dismisses instructional popup
  function instructDismiss() {
-	 $("#instructions").animate({bottom: '-550px'}, 1000);
+	 $("#instructions").animate({bottom: '-8.5%'}, 1000);
 
      //start countdown
 	 setTimeout("countdown();", 1000);
@@ -773,7 +784,7 @@ function checkHighScore() {
                 document.getElementById("position").innerHTML = heading;
                 enterHighScores();
             } else {
-                $("#gameover").animate({bottom: '550px'});
+                $("#gameover").animate({bottom: '100%'});
             }
         }
     };
@@ -786,23 +797,23 @@ function checkHighScore() {
 //brings up the high scores popup
 function showHighScores() {
      getHighScores();
-	 $("#highscores").animate({bottom: '1750px'}, 1000);  
+	 $("#highscores").animate({bottom: '100%'}, 1000);  
 }
 
 //hides the high scores popup
 function dismissHighScores() {
-	 $("#highscores").animate({bottom: '-1350px'}, 1000);
-     $("#gameover").animate({bottom: '550px'});  
+	 $("#highscores").animate({bottom: '-8.5%'}, 1000);
+     $("#gameover").animate({bottom: '100%'});  
 }
 
 //brings up the enter high scores popup
 function enterHighScores() {
-	 $("#enterhighscore").animate({bottom: '1350px'}, 1000);    
+	 $("#enterhighscore").animate({bottom: '100%'}, 1000);    
 }
 
 //hides the enter high scores popup
 function dismissEnterHighScores() {
-	 $("#enterhighscore").animate({bottom: '-950px'}, 1000);
+	 $("#enterhighscore").animate({bottom: '-8.5%'}, 1000);
 }
 
 //submits new high score into the database
