@@ -202,12 +202,8 @@ function resizeMap() {
     var img = document.getElementById("keyboard");
     var coords_Resized = coords.slice();    
     var sizeRatio = img.clientHeight / maxHeight;
-    for (x = 0; x < coords.length; x++) {
-        for (y = 0; y < coords[x].length; y++) {
-            coords_Resized[x][y] = Math.round(coords[x][y] * sizeRatio);
-        }
-        document.getElementById("map" + keys[x]).coords = coords_Resized[x].toString(); 
-    }
+   
+   imageMapResize();
 
     document.getElementById("staff").style.top = Math.round(staffTop * sizeRatio) + "px";
     document.getElementById("staff").style.height = Math.round(staffHeight * sizeRatio) + "px";
