@@ -1,5 +1,5 @@
 body {
-    width: 73.25%;
+    width: 78%;
     height: 100%;
 }
 
@@ -8,39 +8,24 @@ body {
 	src: url("../style/Quicksand-Bold.otf");
 }
 
-h1 {
-    font-size: 2em;
-    margin-bottom: 0.2em;
-    padding-bottom: 0;
-    font-family: Quicksand;
-}
-p {
-    font-size: 1.5em;
-    margin-top: 0;
-    padding-top: 0;
-    font-family: Quicksand;
-}
-#page {
-    display: none;
-}
 #loading {
     display: block;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 100;
-    width: 73.25%;
+    z-index: 1000;
+    width: 78%;
     height: 100%;
-    background-color: #454545;
+    background-color: #2a2a2a;
     background-image: url("../images/spinningcircle.gif");
     background-repeat: no-repeat;
     background-position: center;
 }
 
 #loadingtitle {
-    z-index: 200;
-    padding-left: 42.5%;
-    padding-top: 31.75%;
+    z-index: 2000;
+    padding-left: 43%;
+    padding-top: 30.75%;
     font-family: Quicksand;
     font-size: 160%;
     color: #000;

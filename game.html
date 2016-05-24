@@ -9,6 +9,10 @@
         <link rel="stylesheet" type="text/css" href="style/game.css">
         <!--Style sheet for popups-->
         <link rel="stylesheet" type="text/css" href="style/popup.css">
+        <!--Style sheet for loading screen-->
+        <link rel="stylesheet" type="text/css" href="style/loading.css">
+        <!--Javascript for loading screen-->
+        <script src="js/loading.js" defer></script>
         <!--Javascript for high scores-->        
         <script src="js/highscores.js" defer></script>
         <!--Javascript for this page-->
@@ -53,6 +57,19 @@
             <button id="settingsbutton" style="visibility: hidden;"></button>
 		</div>
 		
+        <!--Loading screen-->
+        <div id="loading">
+            <div id="loadingtitle">
+                <span id="red">L</span>
+                <span id="orange">o</span>
+                <span id="yellow">a</span>
+                <span id="green">d</span>
+                <span id="blue">i</span>
+                <span id="indigo">n</span>
+                <span id="violet">g</span>
+            </div>
+        </div>
+
 		<!--Countdown to start game-->
 		<img src="images/countdown1.png" id="countdown">
 
