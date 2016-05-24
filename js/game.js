@@ -140,6 +140,21 @@ var stage = 0;
 //difficulty -- not yet implemented
 var difficulty = 0;
 
+//**USER VARIABLES**
+
+//Login.ID in the database
+var userID = 0;
+
+//the user's 3-letter name
+var userName = "";
+
+//0=piano, 1=harpsichord, 2=moog synth
+var instrument = 0;
+
+//0=standard theme, 1=unlockable theme
+var theme = 0;
+
+
 //**TIMER**/
 
 //the timer itself
@@ -272,7 +287,17 @@ function playNote(x) {
         if (useEESounds) {           
             soundUrl = "sounds/sheep/" + keys[x] + ".mp3";
         } else {
-            soundUrl = "sounds/" + keys[x] + ".mp3";
+            switch (instrument) {
+                case 0: //piano
+                    soundUrl = "sounds/" + keys[x] + ".mp3";
+                    break;
+                case 1: //harpsichord
+                    soundUrl = "sounds/harpsichord/" + keys[x] + ".mp3";
+                    break;
+                case 2: //moog synth
+                    soundUrl = "sounds/moog/" + keys[x] + ".mp3";
+                    break;                
+            }
         }
 
         var sound = new Howl({
@@ -417,7 +442,17 @@ function createTrack() {
             if (useEESounds) {
                 soundUrl = "sounds/sheep/" + keys[position] + ".mp3";
             } else {
-                soundUrl = "sounds/" + keys[position] + ".mp3";
+            switch (instrument) {
+                case 0: //piano
+                    soundUrl = "sounds/" + keys[position] + ".mp3";
+                    break;
+                case 1: //harpsichord
+                    soundUrl = "sounds/harpsichord/" + keys[position] + ".mp3";
+                    break;
+                case 2: //moog synth
+                    soundUrl = "sounds/moog/" + keys[position] + ".mp3";
+                    break;                
+            }
             }
             var sound = new Howl({
                 urls: [soundUrl],
@@ -525,7 +560,7 @@ function lose() {
 
 //prepares for the next track
 function nextTrack() {
-    currentcount = 0;
+    //currentcount = 0;
     clearUserInput();
     track = [];
     i = 0;
@@ -689,7 +724,8 @@ function runTimer() {
             setTimeout(runTimer, 1000); 
         }
 
-        if (seconds == 0 && (!isCorrect() || keysPressed.length < track.length)) {
+        if (seconds == 0 && (!isCorrect() || keysPressed.length < track.length)) {            
+            useEESounds = false;
             lose(); 
         } else {            
             //set the control to red when under 3 seconds are left
@@ -838,4 +874,25 @@ function getSessionScore() {
         }
     };
     http.send();
+}
+
+//checks if a user is logged in and retrieves their login information
+//currently not called
+function getLogin() {    
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var result = xmlhttp.responseText;
+            var values = result.split("{");
+            if (values[0] > 0) { //first value equals 0 if there is no user logged on
+                userID = values[0];
+                userName = values[1];
+                instrument = values[2];
+                sound = values[3];
+            }
+        }
+    };
+
+    xmlhttp.open("GET", "../php/getlogin.php", true);
+    xmlhttp.send();
 }
