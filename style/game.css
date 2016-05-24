@@ -111,12 +111,23 @@ html, body {
     position:  absolute;
     left:  0;
     padding-left: 5%;
-    padding-top:  2%;
     
 }
 
 .shapes, .letters {
+    margin-top:  2%;
     height: 70%;
+}
+
+
+
+.notes {
+    height:  100%;
+    margin-left:  2%;
+}
+
+.notes:first-child {
+    margin-left:  5%;
 }
 
 .lifeimg {
