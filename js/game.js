@@ -298,7 +298,7 @@ function resizeMap() {
 	document.getElementById("rheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
 	document.getElementById("registeremail").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
 	document.getElementById("registerpassword").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
-	document.getElementById("registerconfirmpass").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
+	document.getElementById("registernickname").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
 	document.getElementById("rbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 }
 //fires when the key is pressed
@@ -682,7 +682,7 @@ function countdown(){
  
  //dismisses instructional popup
  function instructDismiss() {
-	 $("#instructions").animate({bottom: '-8.5%'}, 1000);
+	 $("#instructions").animate({bottom: '-55.5%'}, 1000);
 
      //start countdown
 	 setTimeout("countdown();", 1000);

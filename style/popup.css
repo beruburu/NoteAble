@@ -379,7 +379,7 @@
 	background-color: #ffa2d8;
 	margin: auto;
 	margin-top: 1.5%;
-	width: 30%;
+	width: 25%;
 }
 
 #enterregisterpassword {
@@ -395,15 +395,15 @@
 	text-align: center;
 }
 
-#registerconfirmpass {
+#registernickname {
 	color: #ff18a0;
 	background-color: #ffa2d8;
 	margin: auto;
 	margin-top: 2%;
-	width: 45%;
+	width: 25%;
 }
 
-#enterregisterconfirmpass {
+#enterregisternickname {
 	width: 65%;
 	color: #ffffff;
 	background-color: #ff18a0;
