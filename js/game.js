@@ -404,6 +404,9 @@ function displayUserNotes() {
             newNote.className = "letters";
             break;
         case 2: //staff
+            newNote.src = "./images/staff/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+            newNote.className = "notes";
+            break;
     }
     if (staff.childNodes.length >= keysMax) {
         staff.removeChild(staff.firstChild);
@@ -428,7 +431,10 @@ function displayCompNotes() {
             newNote.src = "./images/letters/" + selKey + ".png";
             newNote.className = "letters";
             break;
-        case 2: //staff
+        case 2: //staff        
+            newNote.src = "./images/staff/" + selKey + ".png";
+            newNote.className = "notes";
+            break;
     }
 
 
