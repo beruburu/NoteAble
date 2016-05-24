@@ -38,6 +38,12 @@ var intialsFontSize = 66;
 //default font size for high score content
 var highScoreFontSize = 30;
 
+//default font size for login content
+var loginFontSize = 30;
+
+//default font size for register content
+var registerFontSize = 20;
+
 //default button font size
 var buttonFontSize = 29;
 
@@ -276,6 +282,24 @@ function resizeMap() {
 	document.getElementById("scores").style.fontSize = Math.round(highScoreFontSize * sizeRatio) + "px";
 	document.getElementById("hsconfirmbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 	
+	document.getElementById("login").style.left = Math.round(img.clientWidth * 0.225) + "px";
+	document.getElementById("login").style.top = Math.round(img.clientHeight) + "px";
+	document.getElementById("login").style.width = Math.round(img.clientWidth * 0.55) + "px";
+	document.getElementById("login").style.height = Math.round(img.clientHeight * 0.585) + "px";
+	document.getElementById("lheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("loginemail").style.fontSize = Math.round(loginFontSize * sizeRatio) + "px";
+	document.getElementById("loginpassword").style.fontSize = Math.round(loginFontSize * sizeRatio) + "px";
+	document.getElementById("lbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
+	
+	document.getElementById("register").style.left = Math.round(img.clientWidth * 0.225) + "px";
+	document.getElementById("register").style.top = Math.round(img.clientHeight) + "px";
+	document.getElementById("register").style.width = Math.round(img.clientWidth * 0.55) + "px";
+	document.getElementById("register").style.height = Math.round(img.clientHeight * 0.585) + "px";
+	document.getElementById("rheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("registeremail").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
+	document.getElementById("registerpassword").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
+	document.getElementById("registerconfirmpass").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
+	document.getElementById("rbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 }
 //fires when the key is pressed
 function playNote(x) {
