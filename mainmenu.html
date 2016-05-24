@@ -9,7 +9,7 @@
         <!--Main menu style sheet-->
         <link rel="stylesheet" type="text/css" href="style/mainmenu.css">
         <!--Style sheet for high scores popup-->
-        <link rel="stylesheet" type="text/css" href="style/highscorespopup.css">
+        <link rel="stylesheet" type="text/css" href="style/popup.css">
         <!--Javascript for this page-->
         <script src="js/mainmenu.js" defer></script>
         <!--JQuery link-->
@@ -68,43 +68,76 @@
                     </div>
                 </div>  
           </div>
+	  </div>
 
+		<!--Main menu popups-->
+		<div id="popup">
           
         <!--Global high scores popup-->
-        <div id="highscores">
+        <div id="highscores" class="popup">
             <div id="hsheading">High Scores</div>
-                    <table id="scores">
-                        <tr>
-                            <td>1.</td>
-                            <td id="hsname1"></td>
-                            <td id="hsscore1"></td>
-                        </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td id="hsname2"></td>
-                            <td id="hsscore2"></td>
-                        </tr>
-                        <tr>
-                            <td>3.</td>
-                            <td id="hsname3"></td>
-                            <td id="hsscore3"></td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td id="hsname4"></td>
-                            <td id="hsscore4"></td>
-                        </tr> 
-                        <tr>
-                            <td>5.</td>
-                            <td id="hsname5"></td>
-                            <td id="hsscore5"></td>
-                        </tr> 
-                    </table>
+            	<table id="scores">
+                    <tr>
+                        <td>1.</td>
+                        <td id="hsname1"></td>
+                        <td id="hsscore1"></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td id="hsname2"></td>
+                        <td id="hsscore2"></td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td id="hsname3"></td>
+                        <td id="hsscore3"></td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td id="hsname4"></td>
+                        <td id="hsscore4"></td>
+                    </tr> 
+                    <tr>
+                        <td>5.</td>
+                        <td id="hsname5"></td>
+                        <td id="hsscore5"></td>
+                    </tr> 
+                </table>
 			<div id="hsbutton">
-            	<button id="hsconfirmbutton" onclick="dismissHighScores()">Okay!</button>
+            	<button id="hsconfirmbutton" class="button" onclick="dismissHighScores()">Okay!</button>
 			</div>     
 		</div>
-
+		
+		<!--Login popup-->
+		<div id="login" class="popup">
+            <div id="lheading">Login</div>
+			<div id="logincontent">
+				<div id="loginemail">Email:</div>
+				<input type="text" name="loginemail" id="enterloginemail"></input>
+				<div id="loginpassword">Password:</div>
+				<input type="password" name="loginpassword" id="enterloginpassword"></input>
+			</div>
+			<div id="loginbutton">
+            	<button class="button" id="lbutton">Submit</button>
+			</div>     
+		</div>
+		
+		<!--Register popup-->
+		<div id="register" class="popup">
+            <div id="rheading">Register</div>
+			<div id="registercontent">
+				<div id="registeremail">Email:</div>
+				<input type="text" name="registeremail" id="enterregisteremail"></input>
+				<div id="registerpassword">Password:</div>
+				<input type="password" name="registerpassword" id="enterregisterpassword"></input>
+				<div id="registernickname">Nickname:</div>
+				<input type="text" name="registernickname" id="enterregisternickname"></input>
+			</div>
+			<div id="registerbutton">
+            	<button class="button" id="rbutton">Submit</button>
+			</div>     
+		</div>
+		
       </div>
     </body>
 </html>
