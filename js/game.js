@@ -4,6 +4,7 @@
 var maxHeight = 670;
 var maxWidth = 1027;
 
+
 //default location and size of musical staff
 var staffTop = 81;
 var staffHeight = 143;
