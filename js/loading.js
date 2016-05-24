@@ -1,6 +1,6 @@
 //Using a JSFiddle loading page code
 function onReady(callback) {
-    var intervalID = window.setInterval(checkReady, 2000);
+    var intervalID = window.setInterval(checkReady, 1000);
 
     function checkReady() {
         if (document.getElementsByTagName('body')[0] !== undefined) {
@@ -15,6 +15,6 @@ function show(id, value) {
 }
 
 onReady(function () {
-    show('page', true);
+    show('container', true);
     show('loading', false);
 });
