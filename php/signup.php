@@ -58,7 +58,7 @@
 
         } else {
             //account with this email already exists
-            echo "INVALID{"
+            echo "INVALID{";
         }
 
 

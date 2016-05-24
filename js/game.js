@@ -919,4 +919,6 @@ function getLogin() {
 
     xmlhttp.open("GET", "../php/getlogin.php", true);
     xmlhttp.send();
+
+
 }
