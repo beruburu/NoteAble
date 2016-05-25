@@ -100,6 +100,8 @@ function loadGame(stage, difficulty) {
     if (difficulty == 0) {
         haltAnimation = true; 
         location.href = "game.html?s=" + stage + "&d=" + difficulty;             
+    } else if (stage == 3) {
+        location.href = "game.html?s=3"; 
     }
 }
 

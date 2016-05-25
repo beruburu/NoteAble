@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="style/popup.css">
         <!--Javascript for this page-->
         <script src="js/mainmenu.js" defer></script>
+        <script src="js/game.js" defer></script>
         <!--Javascript for login & signup popups-->
         <script src="js/loginsignup.js"></script>
         <!--JQuery link-->
@@ -19,7 +20,7 @@
         <meta charset="utf-8" />
         <title>Main Menu</title>
     </head>
-    <body>
+    <body onload="getUnlockables()">
 
       <!--The container for all elements-->
       <div id="fullscreen">
@@ -33,6 +34,7 @@
 
           <!--Container of main elements-->
           <div id="maincontainer">
+          <button id="freemodebutton" onclick="loadGame(3, 0)">Free Mode</button>
               <button id="highscorebutton" onclick="showHighScores()">High Scores</button>
                 <div id="levelcontainer">
                     <!--Novice (Shapes) Stage-->
