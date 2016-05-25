@@ -77,6 +77,16 @@ var staffDelay = 1000;
 //names of all keys
 var keys = ["c", "cSharp", "d", "dSharp", "e", "f", "fSharp", "g", "gSharp", "a", "aSharp", "b"];
 
+//scales for note generation
+
+//Level One Scales: C Major, A Melodic Minor
+var CMajor = [0, 2, 4, 5, 7, 9, 11];
+var AMinor = [0, 2, 4, 5, 6, 7, 8, 9, 11];
+
+//Level Two Scales: C# Major, A# Melodic Minor
+var CSharpMajor = [0, 1, 3, 5, 6, 8, 10];
+var ASharpMinor = [0, 1, 3, 5, 6, 7, 8, 9, 10];
+
 
 //***USER INPUT***
 
@@ -102,6 +112,9 @@ var i = 0;
 
 //array of notes for the random track
 var track = [];
+
+//randomly selected scale (0=Major, 1=Minor)
+var scale = 0; 
 
 //**EASTER EGG
 
@@ -144,7 +157,7 @@ var winsPerLengthCount = 0;
 //0=Shapes, 1=Letters, 2=Staff
 var stage = 0;
 
-//difficulty -- not yet implemented
+//0=Level 1, 1=Level 2
 var difficulty = 0;
 
 //**USER VARIABLES**
@@ -182,10 +195,15 @@ var countdownTimer = null;
 //image number for countdown graphic
 var countdownImageNumber = 1;
 
+//the best score retrieved from the game.html document itself, not from cookies
+//not sure if it will be sent to updatescore.php
+var bestscore = 0;
+
 //**PAGE LOADING SEQUENCE**
 loadPage();
-instructAppear();
+//instructAppear();
 
+//sets up the page
 //sets up the page
 function loadPage() {
     //add event listeners for dynamic image map 
@@ -203,13 +221,32 @@ function loadPage() {
 
     switch (stage) {
         case 0:
-            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_shapes.png";
+			if (difficulty == 1) {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
+			} else {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_shapes.png";
+			}
+			instructAppear();
             break;
         case 1:
-            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
+            if (difficulty == 1) {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
+			} else {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
+			}
+			instructAppear();
             break;
         case 2:
-            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl1.png";
+            if (difficulty == 1) {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl2.png";
+			} else {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl1.png";
+			}
+			instructAppear();
+            break;
+        case 3:
+            document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
+            freeMode();
     }
 }
 
@@ -388,6 +425,9 @@ function displayUserNotes() {
             newNote.src = "./images/staff/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
             newNote.className = "notes";
             break;
+        case 3: 
+            newNote.src = "./images/letters/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+            newNote.className = "letters";
     }
     if (staff.childNodes.length >= keysMax) {
         staff.removeChild(staff.firstChild);
@@ -428,8 +468,37 @@ function playTrack() {
     //alert("PLAY TRACK");
     disabled = true; 
     resetTimer();
-	createTrack();
+    
+    //randomly select major or minor scale
+    scale = Math.round(Math.random());
+	
+    createTrack();
+
     i = 0;    
+}
+
+//generates a random note based on the level and scale
+function generateNote() {
+
+    var note = 0;
+    var position = 0; 
+    if (scale > 0) { //use minor scale
+        position = Math.floor((Math.random() * 9));
+        if (difficulty == 0) { //level 1
+            note = AMinor[position];
+        } else { //level 2
+            note = ASharpMinor[position];
+        }
+    } else { //use major scale
+        position = Math.floor((Math.random() * 7));
+        if (difficulty == 0) { //level 1
+            note = CMajor[position];
+        } else { //level 2
+            note = CSharpMajor[position];
+        }
+    }
+
+    return note; 
 }
 
 //recursive function to create the random track one note at a time
@@ -446,7 +515,9 @@ function createTrack() {
         }
 
 	    if (i < trackLength) {
-		    position = Math.floor((Math.random() * 11) + 0);
+		    position = generateNote(scale);
+
+
         
 		    track.push(position);
 		    var soundUrl;
@@ -812,6 +883,7 @@ function dismissHighScores() {
 
 //brings up the enter high scores popup
 function enterHighScores() {
+     document.getElementById("enterhighscoreresponse").innerHTML = "";
 	 $("#enterhighscore").animate({bottom: '120%'}, 1000);    
 }
 
@@ -827,7 +899,7 @@ function submitScore() {
 
         //the best score retrieved from the game.html document itself, not from cookies
         //not sure if it will be sent to updatescore.php
-        var bestscore = document.getElementById("bestscore").innerHTML; 
+        bestscore = document.getElementById("bestscore").innerHTML; 
 
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
@@ -839,12 +911,14 @@ function submitScore() {
 
         xmlhttp.open("GET", "../php/updatescore.php?Name=" + name + "&Score=" + runningScore, true);
         xmlhttp.send();
+    } else {
+        document.getElementById("enterhighscoreresponse").innerHTML = "Invalid name; only letters allowed.";
     }
 }
 
 //checks that high score name is only valid characters
 function validateName(name) {
-    return (/[A-Za-z]/); 
+    return /[A-Za-z]{3}/.test(name); 
 }
 
 //loads the high scores from the database
@@ -909,4 +983,27 @@ function getLogin() {
     xmlhttp.send();
 
 
+}
+
+function freeMode() {
+    document.getElementById("lives").innerHTML = "";
+    document.getElementById("wins").style.marginTop= '12px';
+    document.getElementById("wins").innerHTML = 'Free Mode';
+    document.getElementById("timer").innerHTML = "";
+}
+
+function getUnlockables() {
+        var button = document.getElementById("freemodebutton");
+        button.innerHTML = "Locked";
+        button.style.color = "silver";
+        //"bestscore" is a temp var, it should be the user's cumulative points
+        if (bestscore == 0) {
+            //var button = document.getElementById("freemodebutton");
+            button.innerHTML = "Free Mode";
+            button.style.color = "#00ffff";
+            button.addEventListener("click", function() {
+                loadGame(3, 0)
+                }, true);
+        }
+    
 }
