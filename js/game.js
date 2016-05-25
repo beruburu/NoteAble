@@ -77,6 +77,16 @@ var staffDelay = 1000;
 //names of all keys
 var keys = ["c", "cSharp", "d", "dSharp", "e", "f", "fSharp", "g", "gSharp", "a", "aSharp", "b"];
 
+//scales for note generation
+
+//Level One Scales: C Major, A Melodic Minor
+var CMajor = [0, 2, 4, 5, 7, 9, 11];
+var AMinor = [0, 2, 4, 5, 6, 7, 8, 9, 11];
+
+//Level Two Scales: C# Major, A# Melodic Minor
+var CSharpMajor = [0, 1, 3, 5, 6, 8, 10];
+var ASharpMinor = [0, 1, 3, 5, 6, 7, 8, 9, 10];
+
 
 //***USER INPUT***
 
@@ -102,6 +112,9 @@ var i = 0;
 
 //array of notes for the random track
 var track = [];
+
+//randomly selected scale (0=Major, 1=Minor)
+var scale = 0; 
 
 //**EASTER EGG
 
@@ -144,7 +157,7 @@ var winsPerLengthCount = 0;
 //0=Shapes, 1=Letters, 2=Staff
 var stage = 0;
 
-//difficulty -- not yet implemented
+//0=Level 1, 1=Level 2
 var difficulty = 0;
 
 //**USER VARIABLES**
@@ -484,8 +497,37 @@ function playTrack() {
     //alert("PLAY TRACK");
     disabled = true; 
     resetTimer();
-	createTrack();
+    
+    //randomly select major or minor scale
+    scale = Math.round(Math.random());
+	
+    createTrack();
+
     i = 0;    
+}
+
+//generates a random note based on the level and scale
+function generateNote() {
+
+    var note = 0;
+    var position = 0; 
+    if (scale > 0) { //use minor scale
+        position = Math.floor((Math.random() * 9));
+        if (difficulty == 0) { //level 1
+            note = AMinor[position];
+        } else { //level 2
+            note = ASharpMinor[position];
+        }
+    } else { //use major scale
+        position = Math.floor((Math.random() * 7));
+        if (difficulty == 0) { //level 1
+            note = CMajor[position];
+        } else { //level 2
+            note = CSharpMajor[position];
+        }
+    }
+
+    return note; 
 }
 
 //recursive function to create the random track one note at a time
@@ -502,7 +544,9 @@ function createTrack() {
         }
 
 	    if (i < trackLength) {
-		    position = Math.floor((Math.random() * 11) + 0);
+		    position = generateNote(scale);
+
+
         
 		    track.push(position);
 		    var soundUrl;
