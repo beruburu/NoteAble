@@ -31,7 +31,7 @@
     font-size: 29px;
 }
 
-#iheading, #goheading, #ehsheading, #hsheading, #lheading, #rheading {
+#iheading, #goheading, #ehsheading, #hsheading, #lheading, #rheading, #sheading {
     max-width: 100%;
     font-size: 42px;
     color: white; 
@@ -278,13 +278,12 @@
 
 #logincontent {
 	text-align: center;
-	color: #3287d8;
+	color: #ff18a0;
 	margin-top: 7%;
 	font-size: 30px;
 }
 
 #loginemail {
-	color: #ff18a0;
 	background-color: #ffa2d8;
 	margin: auto;
 	width: 19%;
@@ -304,7 +303,6 @@
 }
 
 #loginpassword {
-	color: #ff18a0;
 	background-color: #ffa2d8;
 	margin: auto;
 	margin-top: 5%;
@@ -349,13 +347,12 @@
 
 #registercontent {
 	text-align: center;
-	color: #3287d8;
+	color: #ff18a0;
 	margin-top: 5%;
 	font-size: 20px;
 }
 
 #registeremail {
-	color: #ff18a0;
 	background-color: #ffa2d8;
 	margin: auto;
 	width: 19%;
@@ -375,7 +372,6 @@
 }
 
 #registerpassword {
-	color: #ff18a0;
 	background-color: #ffa2d8;
 	margin: auto;
 	margin-top: 1.5%;
@@ -396,7 +392,6 @@
 }
 
 #registernickname {
-	color: #ff18a0;
 	background-color: #ffa2d8;
 	margin: auto;
 	margin-top: 2%;
@@ -435,6 +430,81 @@
 	background-color: #ffa2d8
 }
 
+#settings {
+	background-color: #92278f;
+	background-image: url("../images/settingsBG.png");
+}
+
+#settingscontent {
+	text-align: center;
+	color: #92278f;
+	margin-top: 5%;
+	font-size: 30px;
+}
+
+.settingsheading {
+	clear: both;
+}
+
+#sbutton {
+	height: 25%;
+}
+
+#sbutton1 {
+    background-color: #FFFFFF;
+    color: #92278f;
+	margin-left: 10%;
+	width: 33%;
+	height: 70%;
+	float: left;
+}
+
+#sbutton2 {
+    background-color: #FFFFFF;
+    color: #92278f;
+	margin-left: 10%;
+	width: 33%;
+	height: 70%;
+	float: left;
+}
+
+#sbutton1:active {
+	color: #ffffff;
+	background-color: #ed82ea
+}
+
+#sbutton2:active {
+	color: #ffffff;
+	background-color: #ed82ea
+}
+
+/*Radio button styling based on example by Mitch McCline: http://codepen.io/mitchmc/pen/pebIx*/
+input[type="radio"] + ul li {
+	display: inline;
+}
+
+input[type="radio"] {
+    display:none;
+}
+
+input[type="radio"] + label {
+	float: left;
+}
+
+input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    border-radius:  50%;
+}
+
+input[type="radio"] + label span {
+     background-color:#ffffff;
+}
+
+input[type="radio"]:checked + label span{
+     background-color:#92278f;
+}
 #registerresponse, #loginresponse {
 	color: #ffffff;
     text-align: center;

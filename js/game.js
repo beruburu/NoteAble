@@ -283,6 +283,9 @@ function resizeMap() {
 	document.getElementById("scores").style.fontSize = Math.round(highScoreFontSize * sizeRatio) + "px";
 	document.getElementById("hsconfirmbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 	
+	/*Commented out because it no longer applies to the game page, but I need the code anyway
+	for making the main menu responsive
+	
 	document.getElementById("login").style.left = Math.round(img.clientWidth * 0.225) + "px";
 	document.getElementById("login").style.top = Math.round(img.clientHeight) + "px";
 	document.getElementById("login").style.width = Math.round(img.clientWidth * 0.55) + "px";
@@ -300,7 +303,15 @@ function resizeMap() {
 	document.getElementById("registeremail").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
 	document.getElementById("registerpassword").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
 	document.getElementById("registernickname").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
-	document.getElementById("rbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
+	document.getElementById("rbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";*/
+	
+	document.getElementById("settings").style.left = Math.round(img.clientWidth * 0.225) + "px";
+	document.getElementById("settings").style.top = Math.round(img.clientHeight) + "px";
+	document.getElementById("settings").style.width = Math.round(img.clientWidth * 0.55) + "px";
+	document.getElementById("settings").style.height = Math.round(img.clientHeight * 0.585) + "px";
+	document.getElementById("sheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("sbutton1").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
+	document.getElementById("sbutton2").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 }
 //fires when the key is pressed
 function playNote(x) {

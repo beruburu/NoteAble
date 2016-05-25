@@ -203,33 +203,50 @@
 			</div>
 		</div>
 
-		<!--Login popup-->
-		<div id="login" class="popup">
-            <div id="lheading">Login</div>
-			<div id="logincontent">
-				<div id="loginemail">Email:</div>
-				<input type="text" name="loginemail" id="enterloginemail"></input>
-				<div id="loginpassword">Password:</div>
-				<input type="password" name="loginpassword" id="enterloginpassword"></input>
+		<!--Settings popup-->
+		<div id="settings" class="popup">
+            <div id="sheading">Settings</div>
+			<div id="settingscontent">
+				<p class="settingsheading">Keyboard Style</p>
+				<ul>
+					<li>
+						<input type="radio" name="keyboardstyle" id="style1" checked="checked">
+						<label for="style1"><span></span>Default</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+					<li>
+						<input type="radio" name="keyboardstyle" id="style2">
+						<label for="style2"><span></span>Classic</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+					<li>
+						<input type="radio" name="keyboardstyle" id="style3">
+						<label for="style3"><span></span>Retro</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+				</ul>
+				<p class="settingsheading">Keyboard Sounds</p>
+				<ul>
+					<li>
+						<input type="radio" name="keyboardsound" id="sound1" checked="checked">
+						<label for="sound1"><span></span>Default</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+					<li>
+						<input type="radio" name="keyboardsound" id="sound2">
+						<label for="sound2"><span></span>Harpsichord</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+					<li>
+						<input type="radio" name="keyboardsound" id="sound3">
+						<label for="sound3"><span></span>Synth</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+				</ul>
 			</div>
-			<div id="loginbutton">
-            	<button class="button" id="lbutton">Submit</button>
-			</div>     
-		</div>
-		
-		<!--Register popup-->
-		<div id="register" class="popup">
-            <div id="rheading">Register</div>
-			<div id="registercontent">
-				<div id="registeremail">Email:</div>
-				<input type="text" name="registeremail" id="enterregisteremail"></input>
-				<div id="registerpassword">Password:</div>
-				<input type="password" name="registerpassword" id="enterregisterpassword"></input>
-				<div id="registernickname">Nickname:</div>
-				<input type="text" name="registernickname" id="enterregisternickname"></input>
-			</div>
-			<div id="registerbutton">
-            	<button class="button" id="rbutton" onclick="register()">Submit</button>
+			<div id="sbutton">
+            	<button class="button" id="sbutton1">Apply</button>
+				<button class="button" id="sbutton2">Cancel</button>
 			</div>     
 		</div>
 		
