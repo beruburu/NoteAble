@@ -969,12 +969,13 @@ function getUnlockables() {
         var button = document.getElementById("freemodebutton");
         button.innerHTML = "Locked";
         button.style.color = "silver";
+        //"bestscore" is a temp var, it should be the user's cumulative points
         if (bestscore == 0) {
             //var button = document.getElementById("freemodebutton");
             button.innerHTML = "Free Mode";
             button.style.color = "#00ffff";
             button.addEventListener("click", function() {
-                loadGame(3, 0);
+                loadGame(3, 0)
                 }, true);
         }
     
