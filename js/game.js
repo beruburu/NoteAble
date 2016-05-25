@@ -842,6 +842,7 @@ function dismissHighScores() {
 
 //brings up the enter high scores popup
 function enterHighScores() {
+     document.getElementById("enterhighscoreresponse").innerHTML = "";
 	 $("#enterhighscore").animate({bottom: '100%'}, 1000);    
 }
 
@@ -869,12 +870,14 @@ function submitScore() {
 
         xmlhttp.open("GET", "../php/updatescore.php?Name=" + name + "&Score=" + runningScore, true);
         xmlhttp.send();
+    } else {
+        document.getElementById("enterhighscoreresponse").innerHTML = "Invalid name; only letters allowed.";
     }
 }
 
 //checks that high score name is only valid characters
 function validateName(name) {
-    return (/[A-Za-z]/); 
+    return /[A-Za-z]{3}/.test(name); 
 }
 
 //loads the high scores from the database
