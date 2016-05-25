@@ -96,11 +96,9 @@ $(document).ready(function () {
 
 //loads the game for the appropriate button click
 function loadGame(stage, difficulty) {
-    //only allow novice & intermediate stages, difficulty level 1, for now
-    if (difficulty == 0) {
         haltAnimation = true; 
         location.href = "game.html?s=" + stage + "&d=" + difficulty;             
-    } else if (stage == 3) {
+	if (stage == 3) {
         location.href = "game.html?s=3"; 
     }
 }

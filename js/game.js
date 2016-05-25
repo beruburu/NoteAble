@@ -207,16 +207,28 @@ function loadPage() {
 
     switch (stage) {
         case 0:
-            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_shapes.png";
-            instructAppear();
+			if (difficulty == 1) {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
+			} else {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_shapes.png";
+			}
+			instructAppear();
             break;
         case 1:
-            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
-            instructAppear();
+            if (difficulty == 1) {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
+			} else {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
+			}
+			instructAppear();
             break;
         case 2:
-            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl1.png";
-            instructAppear();
+            if (difficulty == 1) {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl2.png";
+			} else {
+				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl1.png";
+			}
+			instructAppear();
             break;
         case 3:
             document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
