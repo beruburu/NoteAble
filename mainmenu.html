@@ -12,6 +12,8 @@
         <link rel="stylesheet" type="text/css" href="style/popup.css">
         <!--Javascript for this page-->
         <script src="js/mainmenu.js" defer></script>
+        <!--Javascript for login & signup popups-->
+        <script src="js/loginsignup.js"></script>
         <!--JQuery link-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>   
         <meta charset="utf-8" />
@@ -113,12 +115,13 @@
             <div id="lheading">Login</div>
 			<div id="logincontent">
 				<div id="loginemail">Email:</div>
-				<input type="text" name="loginemail" id="enterloginemail"></input>
+				<input type="text" name="loginemail" id="enterloginemail" maxlength="30"></input>
 				<div id="loginpassword">Password:</div>
-				<input type="password" name="loginpassword" id="enterloginpassword"></input>
+				<input type="password" name="loginpassword" id="enterloginpassword" maxlength="15"></input>
 			</div>
 			<div id="loginbutton">
-            	<button class="button" id="lbutton">Submit</button>
+                <div id="loginresponse">&nbsp;</div>
+            	<button class="button" id="lbutton" onclick="login()">Submit</button>
 			</div>     
 		</div>
 		
@@ -127,14 +130,15 @@
             <div id="rheading">Register</div>
 			<div id="registercontent">
 				<div id="registeremail">Email:</div>
-				<input type="text" name="registeremail" id="enterregisteremail"></input>
+				<input type="text" name="registeremail" id="enterregisteremail" maxlength="30"></input>
 				<div id="registerpassword">Password:</div>
-				<input type="password" name="registerpassword" id="enterregisterpassword"></input>
+				<input type="password" name="registerpassword" id="enterregisterpassword" maxlength="15"></input>
 				<div id="registernickname">Nickname:</div>
-				<input type="text" name="registernickname" id="enterregisternickname"></input>
+				<input type="text" name="registernickname" id="enterregisternickname" maxlength="3"></input>
 			</div>
 			<div id="registerbutton">
-            	<button class="button" id="rbutton">Submit</button>
+                <div id="registerresponse">&nbsp;</div>
+            	<button class="button" id="rbutton" onclick="register()">Submit</button>
 			</div>     
 		</div>
 		

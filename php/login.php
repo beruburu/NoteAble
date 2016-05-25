@@ -14,8 +14,8 @@
         }
         
         //select login information
-        $sql = "SELECT ID, Name, Unlock1, Unlock2, Unlock3"
-        $sql .= ", Theme, Sound, BestScore, TotalScore"
+        $sql = "SELECT ID, Name, Unlock1, Unlock2, Unlock3";
+        $sql .= ", Theme, Sound, BestScore, TotalScore";
         $sql .= " FROM Login";
         $sql .= " WHERE Email='". $_GET['Email'] . "'";
         $sql .= " AND Password='". $_GET['Password'] . "'";
@@ -56,6 +56,6 @@
         $_SESSION['BestScore'] = $bestscore;
         $_SESSION['TotalScore'] = $totalscore;
 
-
-        echo $id . "{" . $name . "{" . $unlock1 . "{" . $unlock2 . "{" . $unlock3 . "{";
+        //return unlock2 (free play mode) for main menu
+        echo $id . "{" . $unlock2 . "{";
 ?>

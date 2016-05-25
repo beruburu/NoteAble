@@ -15,7 +15,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-	position: absolute;
+	/*position: absolute;*/
 	z-index: 999;
 	border-radius: 12px;
 	margin: auto;
@@ -414,6 +414,7 @@
 	margin: auto;
 	font-size: 2vw;
 	text-align: center;
+    text-transform: uppercase;
 }
 
 #registerbutton {
@@ -432,4 +433,9 @@
 #rbutton:active {
 	color: #ffffff;
 	background-color: #ffa2d8
+}
+
+#registerresponse, #loginresponse {
+	color: #ffffff;
+    text-align: center;
 }

@@ -1,4 +1,6 @@
 <?php
+        session_start();
+
         $servername = "mysql9.000webhost.com";
         $username = "a1777619_ntbl";
         $password = "n0t3worthy";
@@ -51,7 +53,8 @@
                     }
                 }
 
-                echo $id . "{";
+                echo $id . "{";                
+                $_SESSION['ID'] = $id;
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
