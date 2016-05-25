@@ -209,7 +209,7 @@ function loadPage() {
             document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
             break;
         case 2:
-            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff.png";
+            document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl1.png";
     }
 }
 
