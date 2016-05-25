@@ -245,7 +245,7 @@ function resizeMap() {
 	document.getElementById("popup").style.width = Math.round(maxWidth * sizeRatio) + "px";
 	
 	document.getElementById("gameover").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("gameover").style.top = Math.round(img.clientHeight) + "px";
+	document.getElementById("gameover").style.top = Math.round(img.clientHeight * 1.2) + "px";
 	document.getElementById("gameover").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("gameover").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("goheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
@@ -256,7 +256,7 @@ function resizeMap() {
 	document.getElementById("retrybutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 	
 	document.getElementById("instructions").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("instructions").style.top = Math.round(img.clientHeight) + "px";
+	document.getElementById("instructions").style.top = Math.round(img.clientHeight * 1.2) + "px";
 	document.getElementById("instructions").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("instructions").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("iheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
@@ -266,7 +266,7 @@ function resizeMap() {
 	document.getElementById("ibutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 	
 	document.getElementById("enterhighscore").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("enterhighscore").style.top = Math.round(img.clientHeight) + "px";
+	document.getElementById("enterhighscore").style.top = Math.round(img.clientHeight * 1.2) + "px";
 	document.getElementById("enterhighscore").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("enterhighscore").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("ehsheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
@@ -276,42 +276,12 @@ function resizeMap() {
 	document.getElementById("ehsbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 	
 	document.getElementById("highscores").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("highscores").style.top = Math.round(img.clientHeight) + "px";
+	document.getElementById("highscores").style.top = Math.round(img.clientHeight * 1.2) + "px";
 	document.getElementById("highscores").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("highscores").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("hsheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
 	document.getElementById("scores").style.fontSize = Math.round(highScoreFontSize * sizeRatio) + "px";
 	document.getElementById("hsconfirmbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
-	
-	/*Commented out because it no longer applies to the game page, but I need the code anyway
-	for making the main menu responsive
-	
-	document.getElementById("login").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("login").style.top = Math.round(img.clientHeight) + "px";
-	document.getElementById("login").style.width = Math.round(img.clientWidth * 0.55) + "px";
-	document.getElementById("login").style.height = Math.round(img.clientHeight * 0.585) + "px";
-	document.getElementById("lheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
-	document.getElementById("loginemail").style.fontSize = Math.round(loginFontSize * sizeRatio) + "px";
-	document.getElementById("loginpassword").style.fontSize = Math.round(loginFontSize * sizeRatio) + "px";
-	document.getElementById("lbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
-	
-	document.getElementById("register").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("register").style.top = Math.round(img.clientHeight) + "px";
-	document.getElementById("register").style.width = Math.round(img.clientWidth * 0.55) + "px";
-	document.getElementById("register").style.height = Math.round(img.clientHeight * 0.585) + "px";
-	document.getElementById("rheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
-	document.getElementById("registeremail").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
-	document.getElementById("registerpassword").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
-	document.getElementById("registernickname").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
-	document.getElementById("rbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";*/
-	
-	document.getElementById("settings").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("settings").style.top = Math.round(img.clientHeight) + "px";
-	document.getElementById("settings").style.width = Math.round(img.clientWidth * 0.55) + "px";
-	document.getElementById("settings").style.height = Math.round(img.clientHeight * 0.585) + "px";
-	document.getElementById("sheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
-	document.getElementById("sbutton1").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
-	document.getElementById("sbutton2").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 }
 //fires when the key is pressed
 function playNote(x) {
@@ -695,7 +665,7 @@ function countdown(){
  //shows instructional popup
  function instructAppear() {
 	 pause();
-	 $("#instructions").animate({bottom: '100%'}, 1000).delay(800);
+	 $("#instructions").animate({bottom: '120%'}, 1000);
  }
  
  //dismisses instructional popup
@@ -818,7 +788,7 @@ function checkHighScore() {
                 document.getElementById("position").innerHTML = heading;
                 enterHighScores();
             } else {
-                $("#gameover").animate({bottom: '100%'});
+                $("#gameover").animate({bottom: '120%'}, 1000);
             }
         }
     };
@@ -831,23 +801,23 @@ function checkHighScore() {
 //brings up the high scores popup
 function showHighScores() {
      getHighScores();
-	 $("#highscores").animate({bottom: '100%'}, 1000);  
+	 $("#highscores").animate({bottom: '120%'}, 1000);  
 }
 
 //hides the high scores popup
 function dismissHighScores() {
-	 $("#highscores").animate({bottom: '-8.5%'}, 1000);
-     $("#gameover").animate({bottom: '100%'});  
+	 $("#highscores").animate({bottom: '-55.5%'}, 1000);
+     $("#gameover").animate({bottom: '120%'});  
 }
 
 //brings up the enter high scores popup
 function enterHighScores() {
-	 $("#enterhighscore").animate({bottom: '100%'}, 1000);    
+	 $("#enterhighscore").animate({bottom: '120%'}, 1000);    
 }
 
 //hides the enter high scores popup
 function dismissEnterHighScores() {
-	 $("#enterhighscore").animate({bottom: '-8.5%'}, 1000);
+	 $("#enterhighscore").animate({bottom: '-55.5%'}, 1000);
 }
 
 //submits new high score into the database
