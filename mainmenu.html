@@ -9,7 +9,7 @@
         <!--Main menu style sheet-->
         <link rel="stylesheet" type="text/css" href="style/mainmenu.css">
         <!--Style sheet for high scores popup-->
-        <link rel="stylesheet" type="text/css" href="style/popup.css">
+        <link rel="stylesheet" type="text/css" href="style/popupsmainmenu.css">
         <!--Javascript for this page-->
         <script src="js/mainmenu.js" defer></script>
         <!--Javascript for login & signup popups-->
@@ -23,7 +23,9 @@
 
       <!--The container for all elements-->
       <div id="fullscreen">
-
+		  
+		  <img src="images/transparent.png" id="transparent">
+		  
           <!--Container for the top bar-->
           <div id="menubar">
               <div id="title">Select a Stage</div>
@@ -78,14 +80,14 @@
         <!--Global high scores popup-->
         <div id="highscores" class="popup">
             <div id="hsheading">High Scores</div>
-            	<table id="scores">
-                    <tr>
-                        <td>1.</td>
+           		<table id="scores">
+                	<tr>
+                    	<td>1.</td>
                         <td id="hsname1"></td>
                         <td id="hsscore1"></td>
                     </tr>
                     <tr>
-                        <td>2.</td>
+                       	<td>2.</td>
                         <td id="hsname2"></td>
                         <td id="hsscore2"></td>
                     </tr>
@@ -95,7 +97,7 @@
                         <td id="hsscore3"></td>
                     </tr>
                     <tr>
-                        <td>4.</td>
+                      	<td>4.</td>
                         <td id="hsname4"></td>
                         <td id="hsscore4"></td>
                     </tr> 
@@ -106,8 +108,8 @@
                     </tr> 
                 </table>
 			<div id="hsbutton">
-            	<button id="hsconfirmbutton" class="button" onclick="dismissHighScores()">Okay!</button>
-			</div>     
+            	<button class="button" id="hsconfirmbutton" onclick="dismissHighScores()">Okay!</button>
+			</div>
 		</div>
 		
 		<!--Login popup-->
@@ -143,7 +145,7 @@
 		</div>
 		
 		<!--Settings popup-->
-		<div id="settings" class="popup">
+		<!--<div id="settings" class="popup">
             <div id="sheading">Settings</div>
 			<div id="settingscontent">
 				<p class="settingsheading">Keyboard Style</p>
@@ -187,8 +189,8 @@
             	<button class="button" id="sbutton1">Apply</button>
 				<button class="button" id="sbutton2">Cancel</button>
 			</div>     
-		</div>
+		</div>-->
 		
-      </div>
+      	</div>
     </body>
 </html>
