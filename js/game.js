@@ -195,9 +195,13 @@ var countdownTimer = null;
 //image number for countdown graphic
 var countdownImageNumber = 1;
 
+//the best score retrieved from the game.html document itself, not from cookies
+//not sure if it will be sent to updatescore.php
+var bestscore = 0;
+
 //**PAGE LOADING SEQUENCE**
 loadPage();
-instructAppear();
+//instructAppear();
 
 //sets up the page
 function loadPage() {
@@ -217,14 +221,21 @@ function loadPage() {
     switch (stage) {
         case 0:
             document.getElementById("keyboard").src = "images/NoteAble_Keyboard_shapes.png";
+            instructAppear();
             break;
         case 1:
             document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
+            instructAppear();
             break;
         case 2:
             document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl1.png";
+            instructAppear();
+            break;
+        case 3:
+            document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
+            freeMode();
+        }
     }
-}
 
 
 //fires when the window is resized
@@ -431,6 +442,9 @@ function displayUserNotes() {
             newNote.src = "./images/staff/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
             newNote.className = "notes";
             break;
+        case 3: 
+            newNote.src = "./images/letters/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+            newNote.className = "letters";
     }
     if (staff.childNodes.length >= keysMax) {
         staff.removeChild(staff.firstChild);
@@ -902,7 +916,7 @@ function submitScore() {
 
         //the best score retrieved from the game.html document itself, not from cookies
         //not sure if it will be sent to updatescore.php
-        var bestscore = document.getElementById("bestscore").innerHTML; 
+        bestscore = document.getElementById("bestscore").innerHTML; 
 
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
@@ -986,4 +1000,27 @@ function getLogin() {
     xmlhttp.send();
 
 
+}
+
+function freeMode() {
+    document.getElementById("lives").innerHTML = "";
+    document.getElementById("wins").style.marginTop= '12px';
+    document.getElementById("wins").innerHTML = 'Free Mode';
+    document.getElementById("timer").innerHTML = "";
+}
+
+function getUnlockables() {
+        var button = document.getElementById("freemodebutton");
+        button.innerHTML = "Locked";
+        button.style.color = "silver";
+        //"bestscore" is a temp var, it should be the user's cumulative points
+        if (bestscore == 0) {
+            //var button = document.getElementById("freemodebutton");
+            button.innerHTML = "Free Mode";
+            button.style.color = "#00ffff";
+            button.addEventListener("click", function() {
+                loadGame(3, 0)
+                }, true);
+        }
+    
 }

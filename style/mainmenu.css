@@ -25,6 +25,20 @@ body {
     border-bottom-left-radius: 20px;
 }
 
+#freemodebutton {
+    height: 10%;
+    width: 10%;
+    background-color: #ED008C;
+    outline: none;
+    font-family: Quicksand;
+    font-size: 130%;
+    color: silver;
+    border-radius: 7px;
+    position: absolute;
+    bottom: 15%;
+    left: 1%;
+}
+
 #backbutton {
     height: 100%;
     width: 7.75%;
