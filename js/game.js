@@ -204,6 +204,7 @@ loadPage();
 //instructAppear();
 
 //sets up the page
+//sets up the page
 function loadPage() {
     //add event listeners for dynamic image map 
     window.addEventListener('resize', resizeWindow);
@@ -246,8 +247,8 @@ function loadPage() {
         case 3:
             document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
             freeMode();
-        }
     }
+}
 
 
 //fires when the window is resized

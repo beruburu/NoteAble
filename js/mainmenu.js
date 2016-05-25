@@ -93,7 +93,6 @@ $(document).ready(function () {
     });
 });
 
-
 //loads the game for the appropriate button click
 function loadGame(stage, difficulty) {
         haltAnimation = true; 
