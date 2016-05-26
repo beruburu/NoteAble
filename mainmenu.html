@@ -10,8 +10,12 @@
         <link rel="stylesheet" type="text/css" href="style/mainmenu.css">
         <!--Style sheet for high scores popup-->
         <link rel="stylesheet" type="text/css" href="style/popupsmainmenu.css">
+		<!--Style sheet for slide settings menu-->
+		<link rel="stylesheet" type="text/css" href="style/settingsslideout.css">
         <!--Javascript for this page-->
         <script src="js/mainmenu.js" defer></script>
+        <!--Javascript for slide out menu-->
+        <script src="js/settingsslideout.js" defer></script>
         <!--JQuery link-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>   
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
@@ -31,7 +35,47 @@
               <div id="title">Select a Stage</div>
               <div id="loggedin"></div> 
               <button id="backbutton" onclick="goBack()"></button>   
-              <button id="settingsbutton"></button> 
+              <button id="settingsbutton" class="slideout-menu-toggle"></button>
+                  <div class="slideout-menu">
+  	                <h3>Settings<a href="#" class="slideout-menu-toggle">×</a></h3>
+					<p class="settingsheading">Keyboard Style</p>
+						<ul>
+							<li>
+								<input type="radio" name="keyboardstyle" id="style1" checked="checked">
+								<label for="style1"><span></span>Default</label>
+								<div class="check"><div class="inside"></div>
+							</li>
+							<li>
+								<input type="radio" name="keyboardstyle" id="style2">
+								<label for="style2"><span></span>Classic</label>
+								<div class="check"><div class="inside"></div>
+							</li>
+							<li>
+								<input type="radio" name="keyboardstyle" id="style3">
+								<label for="style3"><span></span>Retro</label>
+								<div class="check"><div class="inside"></div>
+							</li>
+						</ul>
+						<p id="sheading2"class="settingsheading">Keyboard Sounds</p>
+						<ul>
+							<li>
+								<input type="radio" name="keyboardsound" id="sound1" checked="checked">
+								<label for="sound1"><span></span>Default</label>
+								<div class="check"><div class="inside"></div>
+							</li>
+							<li>
+								<input type="radio" name="keyboardsound" id="sound2">
+								<label for="sound2"><span></span>Harpsichord</label>
+								<div class="check"><div class="inside"></div>
+							</li>
+							<li>
+								<input type="radio" name="keyboardsound" id="sound3">
+								<label for="sound3"><span></span>Synth</label>
+								<div class="check"><div class="inside"></div>
+							</li>
+						</ul>
+						<button id="sbutton">Apply</button>
+                  </div>
           </div>
 
           <!--Container of main elements-->
