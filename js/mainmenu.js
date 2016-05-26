@@ -1,7 +1,3 @@
-//default height and width of screen
-var maxHeight = 670;
-var maxWidth = 1027;
-
 //true if a stage control has been expanded
 var expanded = false;
 
@@ -24,51 +20,6 @@ var instrument = 0;
 
 //0=standard theme, 1=unlockable theme
 var theme = 0; 
-
-
-/*resizeMap();
-function resizeMap() {
-    var img = document.getElementById("transparent");   
-    var sizeRatio = img.clientHeight / maxHeight;
-   
-   imageMapResize();
-	document.getElementById("popup").style.width = Math.round(maxWidth * sizeRatio) + "px";
-	
-	document.getElementById("highscores").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("highscores").style.top = Math.round(img.clientHeight * 1.2) + "px";
-	document.getElementById("highscores").style.width = Math.round(img.clientWidth * 0.55) + "px";
-	document.getElementById("highscores").style.height = Math.round(img.clientHeight * 0.585) + "px";
-	document.getElementById("hsheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
-	document.getElementById("scores").style.fontSize = Math.round(highScoreFontSize * sizeRatio) + "px";
-	document.getElementById("hsconfirmbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
-	
-	document.getElementById("login").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("login").style.top = Math.round(img.clientHeight * 1.2) + "px";
-	document.getElementById("login").style.width = Math.round(img.clientWidth * 0.55) + "px";
-	document.getElementById("login").style.height = Math.round(img.clientHeight * 0.585) + "px";
-	document.getElementById("lheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
-	document.getElementById("loginemail").style.fontSize = Math.round(loginFontSize * sizeRatio) + "px";
-	document.getElementById("loginpassword").style.fontSize = Math.round(loginFontSize * sizeRatio) + "px";
-	document.getElementById("lbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
-	
-	document.getElementById("register").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("register").style.top = Math.round(img.clientHeight * 1.2) + "px";
-	document.getElementById("register").style.width = Math.round(img.clientWidth * 0.55) + "px";
-	document.getElementById("register").style.height = Math.round(img.clientHeight * 0.585) + "px";
-	document.getElementById("rheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
-	document.getElementById("registeremail").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
-	document.getElementById("registerpassword").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
-	document.getElementById("registernickname").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
-	document.getElementById("rbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
-	
-	document.getElementById("settings").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("settings").style.top = Math.round(img.clientHeight * 1.2) + "px";
-	document.getElementById("settings").style.width = Math.round(img.clientWidth * 0.55) + "px";
-	document.getElementById("settings").style.height = Math.round(img.clientHeight * 0.585) + "px";
-	document.getElementById("sheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
-	document.getElementById("sbutton1").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
-	document.getElementById("sbutton2").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
-}*/
 
 //Expands novice stage to reveal two levels when clicked
 $(document).ready(function () {
@@ -176,12 +127,32 @@ function loadGame(stage, difficulty) {
 //shows the high scores popup
 function showHighScores() {
      getHighScores();
-	 $("#highscores").animate({bottom: '120%'}, 1000);  
+	 $("#highscores").animate({bottom: '20%'}, 500);  
 }
 
 //hides the high scores popup
 function dismissHighScores() {
-	 $("#highscores").animate({bottom: '-85.5%'}, 1000);
+	 $("#highscores").animate({bottom: '-85.5%'}, 500);
+}
+
+//shows the login popup
+function showLogin() {
+	 $("#login").animate({bottom: '20%'}, 500);  
+}
+
+//hides the login popup
+function dismissLogin() {
+	 $("#login").animate({bottom: '-85.5%'}, 500);
+}
+
+//shows the register popup
+function showRegister() {
+	 $("#register").animate({bottom: '20%'}, 500);  
+}
+
+//hides the register popup
+function dismissRegister() {
+	 $("#register").animate({bottom: '-85.5%'}, 500);
 }
 
 //loads the high scores from the database

@@ -194,6 +194,7 @@ body {
     width: 10%;
     background-color: #ED008C;
     outline: none;
+	border: none;
     font-family: Quicksand;
     font-size:2vw;
     color: silver;
@@ -226,7 +227,45 @@ body {
     margin-left:1.5%;
 }
 
-#highscorebutton:active {
+#logbutton {
+    height: 10%;
+    width: 10%;
+    background-color: #ED008C;
+    outline: none;
+	border: none;
+    font-family: Quicksand;
+    font-size:2vw;
+    color: silver;
+    border-radius: 7px;
+    position: absolute;
+    bottom: 15%;
+	left: 73.5%;
+    clear:both;
+    min-width:10px;
+    margin:auto;
+    margin-left:1.5%;
+}
+
+#regbutton {
+    height: 10%;
+    width: 10%;
+    background-color: #ED008C;
+    outline: none;
+	border: none;
+    font-family: Quicksand;
+    font-size:2vw;
+    color: silver;
+    border-radius: 7px;
+    position: absolute;
+    bottom: 2.2%;
+	left: 73.5%;
+    clear:both;
+    min-width:10px;
+    margin:auto;
+    margin-left:1.5%;
+}
+
+#freemode:active, #highscorebutton:active, #logbutton:active, #regbutton:active {
 	color: #ED008C;
 	background-color: #ffffff;
 }
