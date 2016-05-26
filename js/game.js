@@ -200,6 +200,8 @@ var countdownImageNumber = 1;
 var bestscore = 0;
 
 //**PAGE LOADING SEQUENCE**
+
+getLogin(); 
 loadPage();
 //instructAppear();
 
@@ -282,7 +284,7 @@ function resizeMap() {
 	document.getElementById("popup").style.width = Math.round(maxWidth * sizeRatio) + "px";
 	
 	document.getElementById("gameover").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("gameover").style.top = Math.round(img.clientHeight) + "px";
+	document.getElementById("gameover").style.top = Math.round(img.clientHeight * 1.2) + "px";
 	document.getElementById("gameover").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("gameover").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("goheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
@@ -293,7 +295,7 @@ function resizeMap() {
 	document.getElementById("retrybutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 	
 	document.getElementById("instructions").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("instructions").style.top = Math.round(img.clientHeight) + "px";
+	document.getElementById("instructions").style.top = Math.round(img.clientHeight * 1.2) + "px";
 	document.getElementById("instructions").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("instructions").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("iheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
@@ -303,7 +305,7 @@ function resizeMap() {
 	document.getElementById("ibutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 	
 	document.getElementById("enterhighscore").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("enterhighscore").style.top = Math.round(img.clientHeight) + "px";
+	document.getElementById("enterhighscore").style.top = Math.round(img.clientHeight * 1.2) + "px";
 	document.getElementById("enterhighscore").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("enterhighscore").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("ehsheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
@@ -313,42 +315,12 @@ function resizeMap() {
 	document.getElementById("ehsbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 	
 	document.getElementById("highscores").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("highscores").style.top = Math.round(img.clientHeight) + "px";
+	document.getElementById("highscores").style.top = Math.round(img.clientHeight * 1.2) + "px";
 	document.getElementById("highscores").style.width = Math.round(img.clientWidth * 0.55) + "px";
 	document.getElementById("highscores").style.height = Math.round(img.clientHeight * 0.585) + "px";
 	document.getElementById("hsheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
 	document.getElementById("scores").style.fontSize = Math.round(highScoreFontSize * sizeRatio) + "px";
 	document.getElementById("hsconfirmbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
-	
-	/*Commented out because it no longer applies to the game page, but I need the code anyway
-	for making the main menu responsive
-	
-	document.getElementById("login").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("login").style.top = Math.round(img.clientHeight) + "px";
-	document.getElementById("login").style.width = Math.round(img.clientWidth * 0.55) + "px";
-	document.getElementById("login").style.height = Math.round(img.clientHeight * 0.585) + "px";
-	document.getElementById("lheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
-	document.getElementById("loginemail").style.fontSize = Math.round(loginFontSize * sizeRatio) + "px";
-	document.getElementById("loginpassword").style.fontSize = Math.round(loginFontSize * sizeRatio) + "px";
-	document.getElementById("lbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
-	
-	document.getElementById("register").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("register").style.top = Math.round(img.clientHeight) + "px";
-	document.getElementById("register").style.width = Math.round(img.clientWidth * 0.55) + "px";
-	document.getElementById("register").style.height = Math.round(img.clientHeight * 0.585) + "px";
-	document.getElementById("rheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
-	document.getElementById("registeremail").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
-	document.getElementById("registerpassword").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
-	document.getElementById("registernickname").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
-	document.getElementById("rbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";*/
-	
-	document.getElementById("settings").style.left = Math.round(img.clientWidth * 0.225) + "px";
-	document.getElementById("settings").style.top = Math.round(img.clientHeight) + "px";
-	document.getElementById("settings").style.width = Math.round(img.clientWidth * 0.55) + "px";
-	document.getElementById("settings").style.height = Math.round(img.clientHeight * 0.585) + "px";
-	document.getElementById("sheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
-	document.getElementById("sbutton1").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
-	document.getElementById("sbutton2").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
 }
 //fires when the key is pressed
 function playNote(x) {
@@ -495,7 +467,6 @@ function displayCompNotes() {
 
 //starts creation of computer's track
 function playTrack() {
-    //alert("PLAY TRACK");
     disabled = true; 
     resetTimer();
     
@@ -543,10 +514,9 @@ function createTrack() {
             var lastKey = keys[track[track.length - 1]];
             document.getElementById("key" + lastKey).style.display = "none";
         }
-
+        
 	    if (i < trackLength) {
 		    position = generateNote(scale);
-
 
         
 		    track.push(position);
@@ -555,17 +525,16 @@ function createTrack() {
             if (useEESounds) {
                 soundUrl = "sounds/sheep/" + keys[position] + ".mp3";
             } else {
-            switch (instrument) {
-                case 0: //piano
-                    soundUrl = "sounds/" + keys[position] + ".mp3";
-                    break;
-                case 1: //harpsichord
-                    soundUrl = "sounds/harpsichord/" + keys[position] + ".mp3";
-                    break;
-                case 2: //moog synth
-                    soundUrl = "sounds/moog/" + keys[position] + ".mp3";
-                    break;                
-            }
+                switch(instrument) {
+                    case 0: //piano
+                        soundUrl = "sounds/" + keys[position] + ".mp3";
+                        break;
+                    case 1: //harpsichord
+                        soundUrl = "sounds/harpsichord/" + keys[position] + ".mp3";
+                        break;
+                    case 2: //moog synth
+                        soundUrl = "sounds/moog/" + keys[position] + ".mp3";              
+                }
             }
             var sound = new Howl({
                 urls: [soundUrl],
@@ -645,7 +614,7 @@ function win() {
         }
         winsPerLengthCount = 0; 
     }
-    getSessionScore();
+    //getSessionScore();
 
     //document.getElementById("points").innerHTML = increaseScore();
     setTimeout(nextTrack, 1500);
@@ -666,7 +635,7 @@ function lose() {
     if (lossCount < 3) {
         setTimeout(nextTrack, 1500);
     } else {
-        gameOver();
+        setupGameOver();
     }
 
 }
@@ -720,13 +689,28 @@ function easterEgg() {
     }
  };
 
- //shows game over screen
- function gameOver() {
+ //prepare for game over screen
+ function setupGameOver() {
         pause(); 
 		document.getElementById("score").innerHTML = runningScore;
+        
+        //update the user's high score values if they are logged in
+        if (userID > 0 && runningScore > 0) {
+		    updateUserValues();   
+        } else {
+            //go straight to game over
+            gameOver();      
+        }
 
-        //check if user has won
-		checkHighScore();  
+ }
+ 
+ //shows game over screen
+ function gameOver() {
+    //get the user's best score for the game over menu
+    getSessionScore();
+
+    //check if user has won
+    checkHighScore();   
  }
 
  //pauses and unpauses the game
@@ -765,8 +749,15 @@ function countdown(){
  
  //shows instructional popup
  function instructAppear() {
+     document.getElementById("iheading").innerHTML = "Instructions";
+     document.getElementById("howto1").innerHTML = "Play back the notes";
+     document.getElementById("howto2").innerHTML = "shown on the";
+     document.getElementById("howto3").innerHTML = "score.";
+
+
+     document.getElementById("ibutton").addEventListener("click", instructDismiss);
 	 pause();
-	 $("#instructions").animate({bottom: '100%'}, 1000).delay(800);
+	 $("#instructions").animate({bottom: '120%'}, 1000);
  }
  
  //dismisses instructional popup
@@ -889,7 +880,7 @@ function checkHighScore() {
                 document.getElementById("position").innerHTML = heading;
                 enterHighScores();
             } else {
-                $("#gameover").animate({bottom: '100%'});
+                $("#gameover").animate({bottom: '120%'}, 1000);
             }
         }
     };
@@ -902,24 +893,28 @@ function checkHighScore() {
 //brings up the high scores popup
 function showHighScores() {
      getHighScores();
-	 $("#highscores").animate({bottom: '100%'}, 1000);  
+	 $("#highscores").animate({bottom: '120%'}, 1000);  
 }
 
 //hides the high scores popup
 function dismissHighScores() {
-	 $("#highscores").animate({bottom: '-8.5%'}, 1000);
-     $("#gameover").animate({bottom: '100%'});  
+	 $("#highscores").animate({bottom: '-55.5%'}, 1000);
+     $("#gameover").animate({bottom: '120%'});  
 }
 
 //brings up the enter high scores popup
 function enterHighScores() {
+    //fill in name if user is logged in
+    if (userID > 0) {
+        document.getElementById("enterinitials").value = userName;
+    }
      document.getElementById("enterhighscoreresponse").innerHTML = "";
-	 $("#enterhighscore").animate({bottom: '100%'}, 1000);    
+	 $("#enterhighscore").animate({bottom: '120%'}, 1000);    
 }
 
 //hides the enter high scores popup
 function dismissEnterHighScores() {
-	 $("#enterhighscore").animate({bottom: '-8.5%'}, 1000);
+	 $("#enterhighscore").animate({bottom: '-55.5%'}, 1000);
 }
 
 //submits new high score into the database
@@ -960,7 +955,7 @@ function getHighScores() {
             var scores = result.split("{");
             for (x = 0; x < 5; x++) {
                 var scoreValues = scores[x].split("}");
-                document.getElementById("hsname" + (x + 1)).innerHTML = scoreValues[0];
+                document.getElementById("hsname" + (x + 1)).innerHTML = scoreValues[0].toUpperCase();
                 document.getElementById("hsscore" + (x + 1)).innerHTML = scoreValues[1];
             }
         }
@@ -982,9 +977,9 @@ function getSessionScore() {
     var http = new XMLHttpRequest();
     var modurl = myurl+"?score="+runningScore;
     http.open("GET", modurl, true);
-    http.onreadystatechange = function() {
+    http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
-            if(runningScore > 0) {
+            if (runningScore > 0) {
                 document.getElementById("bestscore").innerHTML = http.responseText;
             }
         }
@@ -993,27 +988,27 @@ function getSessionScore() {
 }
 
 //checks if a user is logged in and retrieves their login information
-//currently not called
-function getLogin() {    
+function getLogin() {   
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var result = xmlhttp.responseText;
             var values = result.split("{");
             if (values[0] > 0) { //first value equals 0 if there is no user logged on
-                userID = values[0];
+                userID = parseInt(values[0]);
                 userName = values[1];
-                instrument = values[2];
-                sound = values[3];
+                instrument = parseInt(values[2]);
+                sound = parseInt(values[3]);
             }
         }
     };
 
-    xmlhttp.open("GET", "../php/getlogin.php", true);
-    xmlhttp.send();
-
-
+    xmlhttp.open("GET", "./php/getlogin.php", true);
+    xmlhttp.send();    
 }
+
+
+
 
 function freeMode() {
     document.getElementById("lives").innerHTML = "";
@@ -1022,18 +1017,55 @@ function freeMode() {
     document.getElementById("timer").innerHTML = "";
 }
 
-function getUnlockables() {
-        var button = document.getElementById("freemodebutton");
-        button.innerHTML = "Locked";
-        button.style.color = "silver";
-        //"bestscore" is a temp var, it should be the user's cumulative points
-        if (bestscore == 0) {
-            //var button = document.getElementById("freemodebutton");
-            button.innerHTML = "Free Mode";
-            button.style.color = "#00ffff";
-            button.addEventListener("click", function() {
-                loadGame(3, 0)
-                }, true);
+
+
+//updates the user's highest score and cumulative scores
+//checks if anything new has been unlocked 
+function updateUserValues() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+            var result = xmlhttp.responseText.split("{");
+            var unlocked = parseInt(result[0]);
+
+            if (unlocked > 0) {
+                var unlockedName = "";
+                switch (unlocked) {
+                    case 1:
+                        unlockedName = "Free Mode";
+                        break;
+                    case 2:
+                        unlockedName = "Sound Options";
+                        break;
+                    case 3:
+                        unlockedName = "Theme Options";
+                        break;
+                }
+
+
+                
+                document.getElementById("iheading").innerHTML = "Unlocked!";
+                document.getElementById("howto1").innerHTML = "You've unlocked";
+                document.getElementById("howto2").innerHTML = unlockedName + "!";
+                document.getElementById("howto3").innerHTML = "";
+
+
+                document.getElementById("ibutton").removeEventListener("click", instructDismiss);
+                document.getElementById("ibutton").addEventListener("click", unlockDismiss);
+	            $("#instructions").animate({bottom: '120%'}, 1000);
+            } else {
+                gameOver(); 
+            }
         }
-    
+    };
+
+    xmlhttp.open("GET", "./php/updateuservalues.php?Score=" + runningScore, true);
+    xmlhttp.send();
+}
+
+//dismisses the unlocked popup
+function unlockDismiss() {
+	 $("#instructions").animate({bottom: '-55.5%'}, 1000);
+     gameOver(); 
 }

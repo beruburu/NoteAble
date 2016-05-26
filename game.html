@@ -8,7 +8,7 @@
         <!--Style sheet for this page-->
         <link rel="stylesheet" type="text/css" href="style/game.css">
         <!--Style sheet for popups-->
-        <link rel="stylesheet" type="text/css" href="style/popup.css">
+        <link rel="stylesheet" type="text/css" href="style/popupsgame.css">
         <!--Style sheet for loading screen-->
         <link rel="stylesheet" type="text/css" href="style/loading.css">
         <!--Javascript for loading screen-->
@@ -135,7 +135,7 @@
                 <div id="bestscore1">Personal Best</div>
 			</div>
 			<div id="gameoverbuttons">
-				<button id="mainmenu"></button>
+				<button id="mainmenu" onclick="location.href='mainmenu.html'"></button>
             	<button class="button" id="retrybutton" onclick="location.reload();">Retry</button>
 			</div>     
 		</div>
@@ -149,7 +149,7 @@
 				<div id="howto3">score.</div>
 			</div>
 			<div id="instructbutton">
-            	<button class="button" id="ibutton" onclick="instructDismiss();">Okay!</button>
+            	<button class="button" id="ibutton">Okay!</button>
 			</div>     
 		</div>
         
@@ -202,53 +202,6 @@
 			<div id="hsbutton">
             	<button class="button" id="hsconfirmbutton" onclick="dismissHighScores()">Okay!</button>
 			</div>
-		</div>
-
-		<!--Settings popup-->
-		<div id="settings" class="popup">
-            <div id="sheading">Settings</div>
-			<div id="settingscontent">
-				<p class="settingsheading">Keyboard Style</p>
-				<ul>
-					<li>
-						<input type="radio" name="keyboardstyle" id="style1" checked="checked">
-						<label for="style1"><span></span>Default</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-					<li>
-						<input type="radio" name="keyboardstyle" id="style2">
-						<label for="style2"><span></span>Classic</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-					<li>
-						<input type="radio" name="keyboardstyle" id="style3">
-						<label for="style3"><span></span>Retro</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-				</ul>
-				<p class="settingsheading">Keyboard Sounds</p>
-				<ul>
-					<li>
-						<input type="radio" name="keyboardsound" id="sound1" checked="checked">
-						<label for="sound1"><span></span>Default</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-					<li>
-						<input type="radio" name="keyboardsound" id="sound2">
-						<label for="sound2"><span></span>Harpsichord</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-					<li>
-						<input type="radio" name="keyboardsound" id="sound3">
-						<label for="sound3"><span></span>Synth</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-				</ul>
-			</div>
-			<div id="sbutton">
-            	<button class="button" id="sbutton1">Apply</button>
-				<button class="button" id="sbutton2">Cancel</button>
-			</div>     
 		</div>
 		
 	</div>

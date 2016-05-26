@@ -50,6 +50,8 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
+    outline: none;
+	border: none;
 }
 
 #title {
@@ -194,6 +196,13 @@ body {
     color: #FFFFFF;
     border-radius: 7px;
     cursor: pointer;
+    outline: none;
+	border: none;
+}
+
+#highscorebutton:active {
+	color: #ED008C;
+	background-color: #ffffff;
 }
 
 #novicecontent {

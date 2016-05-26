@@ -55,7 +55,10 @@
         $_SESSION['Sound'] = $sound;
         $_SESSION['BestScore'] = $bestscore;
         $_SESSION['TotalScore'] = $totalscore;
+        $_SESSION['Unlock1'] = $unlock1;
+        $_SESSION['Unlock2'] = $unlock2;
+        $_SESSION['Unlock3'] = $unlock3;
 
-        //return unlock2 (free play mode) for main menu
-        echo $id . "{" . $unlock2 . "{";
+        //return unlock1 (free play mode) for main menu
+        echo $id . "{" . $unlock1 . "{";
 ?>
