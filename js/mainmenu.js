@@ -205,8 +205,21 @@ function goBack() {
     location.href = "index.html";    
 }
 
+//apply the user's name 
+function applyUser() {
+    var logged = document.getElementById("loggedin");
+    logged.innerHTML = "<div> Hi, " + userName + "</div>"; 
+}
+
+
 //checks if the free mode button should be available
 function getUnlockables() {
+        userName = "player"; //temp value
+        if(userName !="") {
+            applyUser();
+        }
+        
+
         var button = document.getElementById("freemodebutton");
         button.innerHTML = "Locked";
         button.style.color = "silver";
