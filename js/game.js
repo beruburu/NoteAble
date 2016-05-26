@@ -201,11 +201,9 @@ var bestscore = 0;
 
 //**PAGE LOADING SEQUENCE**
 
+//don't load the page until login is complete
 getLogin(); 
-loadPage();
-//instructAppear();
 
-//sets up the page
 //sets up the page
 function loadPage() {
     //add event listeners for dynamic image map 
@@ -214,9 +212,6 @@ function loadPage() {
 
     //read stage and difficulty from query string
     var url = window.location.href;
-	if (url.includes("t=")) {
-        theme = parseInt(url.charAt(url.indexOf("t=") + 2));
-    }
     if (url.includes("s=")) {
         stage = parseInt(url.charAt(url.indexOf("s=") + 2));
     }
@@ -1068,9 +1063,12 @@ function getLogin() {
             if (values[0] > 0) { //first value equals 0 if there is no user logged on
                 userID = parseInt(values[0]);
                 userName = values[1];
-                instrument = parseInt(values[2]);
-                sound = parseInt(values[3]);
+                theme = parseInt(values[2]);
+                instrument = parseInt(values[3]);
+
             }
+
+            loadPage();
         }
     };
 
