@@ -27,13 +27,11 @@ var theme = 0;
 
 
 /*resizeMap();
-
 function resizeMap() {
     var img = document.getElementById("transparent");   
     var sizeRatio = img.clientHeight / maxHeight;
    
    imageMapResize();
-
 	document.getElementById("popup").style.width = Math.round(maxWidth * sizeRatio) + "px";
 	
 	document.getElementById("highscores").style.left = Math.round(img.clientWidth * 0.225) + "px";
@@ -163,8 +161,13 @@ $(document).ready(function () {
 
 //loads the game for the appropriate button click
 function loadGame(stage, difficulty) {
+	if (document.getElementById('style2').checked) {
+		theme = 1;
+	} else if (document.getElementById('style3').checked) {
+		theme = 2;
+	}
         haltAnimation = true; 
-        location.href = "game.html?s=" + stage + "&d=" + difficulty;             
+        location.href = "game.html?t=" + theme + "s=" + stage + "&d=" + difficulty;             
 	if (stage == 3) {
         location.href = "game.html?s=3"; 
     }
@@ -190,7 +193,7 @@ function getHighScores() {
             var scores = result.split("{");
             for (x = 0; x < 5; x++) {
                 var scoreValues = scores[x].split("}");
-                document.getElementById("hsname" + (x + 1)).innerHTML = scoreValues[0];
+                document.getElementById("hsname" + (x + 1)).innerHTML = scoreValues[0].toUpperCase();
                 document.getElementById("hsscore" + (x + 1)).innerHTML = scoreValues[1];
             }
         }
@@ -211,47 +214,120 @@ function applyUser() {
     logged.innerHTML = "<div> Hi, " + userName + "</div>"; 
 }
 
-
 //checks if the free mode button should be available
 function getUnlockables() {
+
         userName = "player"; //temp value
-        if(userName !="") {
+        if(userName != "") {
             applyUser();
         }
-        
-
-        var button = document.getElementById("freemodebutton");
-        button.innerHTML = "Locked";
-        button.style.color = "silver";
 
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var result = xmlhttp.responseText;
-            var values = result.split("{");
-            if (values[0] > 0) { //first value equals 0 if there is no user logged on
-                userID = parseInt(values[0]);
-                userName = values[1];
-                instrument = parseInt(values[2]);
-                sound = parseInt(values[3]);
-                unlock1 = parseInt(values[4]);
-                unlock2 = parseInt(values[5]);
-                unlock3 = parseInt(values[6]);
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var result = xmlhttp.responseText;
+                var values = result.split("{");
+                if (values[0] > 0) { //first value equals 0 if there is no user logged on
+                    userID = parseInt(values[0]);
+                    userName = values[1];
+                    instrument = parseInt(values[2]);
+                    sound = parseInt(values[3]);
+                    unlock1 = parseInt(values[4]);
+                    unlock2 = parseInt(values[5]);
+                    unlock3 = parseInt(values[6]);
 
-                
-                if (unlock1 > 0) {
-                button.innerHTML = "Free Mode";
-                button.style.color = "#00ffff";
-                button.addEventListener("click", function() {
-                    loadGame(3, 0)
-                    }, true);
                 }
+                
+                setUnlockables(); 
             }
-        }
         };
 
         xmlhttp.open("GET", "./php/getlogin.php", true);
         xmlhttp.send();    
 
     
+}
+
+//sets whether the free mode should be available or not
+function setUnlockables() {
+    var button = document.getElementById("freemodebutton");
+    button.innerHTML = "Locked";
+    button.style.color = "silver";
+
+    if (unlock1 > 0) {
+        button.innerHTML = "Free Mode";
+        button.style.color = "#00ffff";
+        button.addEventListener("click", function () {
+            loadGame(3, 0)
+        }, true);
+    }
+}
+
+function register() {
+
+    var email = document.getElementById("enterregisteremail").value;
+    var password = document.getElementById("enterregisterpassword").value;
+    var name = document.getElementById("enterregisternickname").value;
+
+
+    if (email != "" && password != "" && validateEmail(email)) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var result = xmlhttp.responseText
+                var values = result.split("{");
+                if (values[0] == "INVALID") {
+                    document.getElementById("registerresponse").innerHTML = "Email already exists.";
+                } else {
+                    document.getElementById("registerresponse").innerHTML = "Registration complete.";
+                }
+            }
+        };
+
+        xmlhttp.open("GET", "php/signup.php?Email=" + email + "&Password=" + password + "&Name=" + name, true);
+        xmlhttp.send();
+    } else {
+        document.getElementById("registerresponse").innerHTML = "Invalid email or name.";        
+    }
+}
+
+function login() {
+    var email = document.getElementById("enterloginemail").value;
+    var password = document.getElementById("enterloginpassword").value;
+
+    if (email != "" && password != "" && validateEmail(email)) {
+        
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var result = xmlhttp.responseText;
+                var values = result.split("{");
+                if (parseInt(values[0]) == 0) {
+                    document.getElementById("loginresponse").innerHTML = "Invalid login.";
+                } else {
+                    document.getElementById("loginresponse").innerHTML = "Login successful.";
+                    unlock1 = parseInt(values[1]);
+
+                    setUnlockables();
+                }
+            }
+        };
+        
+        xmlhttp.open("GET", "php/login.php?Email=" + email + "&Password=" + password, true);
+        xmlhttp.send();
+    } else {
+        document.getElementById("loginresponse").innerHTML = "Invalid login.";
+    } 
+    
+}
+
+//checks the email is only valid characters
+function validateEmail(email) {
+    return !(/[^a-zA-Z0-9@.]/.test(email));
+}
+
+
+//checks that high score name is only valid characters
+function validateName(name) {
+    return /[A-Za-z]{3}/.test(name); 
 }
