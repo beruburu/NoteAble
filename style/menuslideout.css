@@ -22,6 +22,7 @@
     font-family: Quicksand;
 	font-weight: 400;
 	border-bottom: 4px solid #92278F;
+    text-align:  center;
 }
 .slideout-menu .slideout-menu-toggle {
 	position: absolute;
@@ -81,4 +82,12 @@
 
 #novicecolor {
     background-color: #f00;
+}
+
+
+#menuhome {
+    width: 20%;
+    position:  absolute;
+    left:  4%;
+    top:  4%; 
 }

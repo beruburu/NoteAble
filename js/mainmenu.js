@@ -211,16 +211,16 @@ function goBack() {
 //apply the user's name 
 function applyUser() {
     var logged = document.getElementById("loggedin");
-    logged.innerHTML = "<div> Hi, " + userName + "</div>"; 
+    if (userName == "") {
+        logged.innerHTML = ""; 
+    } else {
+        logged.innerHTML = "<div> Hi, " + userName.toUpperCase() + "</div>"; 
+    }
 }
 
 //checks if the free mode button should be available
 function getUnlockables() {
 
-        userName = "player"; //temp value
-        if(userName != "") {
-            applyUser();
-        }
 
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
@@ -304,7 +304,8 @@ function setUnlockables() {
         document.getElementById("stylelabel2").style.color = "silver";
         document.getElementById("stylelabel3").style.color = "silver";
     }
-
+    
+    applyUser();
 
 }
 
