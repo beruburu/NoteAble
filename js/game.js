@@ -214,6 +214,9 @@ function loadPage() {
 
     //read stage and difficulty from query string
     var url = window.location.href;
+	if (url.includes("t=")) {
+        theme = parseInt(url.charAt(url.indexOf("t=") + 2));
+    }
     if (url.includes("s=")) {
         stage = parseInt(url.charAt(url.indexOf("s=") + 2));
     }
@@ -221,35 +224,103 @@ function loadPage() {
         difficulty = parseInt(url.charAt(url.indexOf("d=") + 2));
     }
 
-    switch (stage) {
-        case 0:
-			if (difficulty == 1) {
+	if (theme == 0) {
+		switch (stage) {
+			case 0:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard_shapes.png";
+				}
+				instructAppear();
+				break;
+			case 1:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
+				}
+				instructAppear();
+				break;
+			case 2:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl2.png";
+				} else {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl1.png";
+				}
+				instructAppear();
+				break;
+			case 3:
 				document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
-			} else {
-				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_shapes.png";
-			}
-			instructAppear();
-            break;
-        case 1:
-            if (difficulty == 1) {
-				document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
-			} else {
-				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
-			}
-			instructAppear();
-            break;
-        case 2:
-            if (difficulty == 1) {
-				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl2.png";
-			} else {
-				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl1.png";
-			}
-			instructAppear();
-            break;
-        case 3:
-            document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
-            freeMode();
-    }
+				freeMode();
+		}
+	} else if (theme == 1) {
+		document.getElementById('life1').src = "images/classic/lives.png";
+		document.getElementById('life2').src = "images/classic/lives.png";
+		document.getElementById('life3').src = "images/classic/lives.png";
+		switch (stage) {
+			case 0:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard_shapes.png";
+				}
+				instructAppear();
+				break;
+			case 1:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard_letters.png";
+				}
+				instructAppear();
+				break;
+			case 2:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard_staff_lvl2.png";
+				} else {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard_staff_lvl1.png";
+				}
+				instructAppear();
+				break;
+			case 3:
+				document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard.png";
+				freeMode();
+		}
+	} else if (theme == 2) {
+		document.getElementById('life1').src = "images/retro/lives.png";
+		document.getElementById('life2').src = "images/retro/lives.png";
+		document.getElementById('life3').src = "images/retro/lives.png";
+		switch (stage) {
+			case 0:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard_shapes.png";
+				}
+				instructAppear();
+				break;
+			case 1:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard_letters.png";
+				}
+				instructAppear();
+				break;
+			case 2:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard_staff_lvl2.png";
+				} else {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard_staff_lvl1.png";
+				}
+				instructAppear();
+				break;
+			case 3:
+				document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard.png";
+				freeMode();
+		}
+	} 
 }
 
 
@@ -635,7 +706,7 @@ function lose() {
     if (lossCount < 3) {
         setTimeout(nextTrack, 1500);
     } else {
-        gameOver();
+        setupGameOver();
     }
 
 }
@@ -689,22 +760,28 @@ function easterEgg() {
     }
  };
 
- //shows game over screen
- function gameOver() {
+ //prepare for game over screen
+ function setupGameOver() {
         pause(); 
 		document.getElementById("score").innerHTML = runningScore;
         
-        //get the user's best score for the game over menu
-        getSessionScore();
-
-        //check if user has won
-		checkHighScore();
-
         //update the user's high score values if they are logged in
         if (userID > 0 && runningScore > 0) {
-		    updateUserValues();            
+		    updateUserValues();   
+        } else {
+            //go straight to game over
+            gameOver();      
         }
 
+ }
+ 
+ //shows game over screen
+ function gameOver() {
+    //get the user's best score for the game over menu
+    getSessionScore();
+
+    //check if user has won
+    checkHighScore();   
  }
 
  //pauses and unpauses the game
@@ -743,6 +820,13 @@ function countdown(){
  
  //shows instructional popup
  function instructAppear() {
+     document.getElementById("iheading").innerHTML = "Instructions";
+     document.getElementById("howto1").innerHTML = "Play back the notes";
+     document.getElementById("howto2").innerHTML = "shown on the";
+     document.getElementById("howto3").innerHTML = "score.";
+
+
+     document.getElementById("ibutton").addEventListener("click", instructDismiss);
 	 pause();
 	 $("#instructions").animate({bottom: '120%'}, 1000);
  }
@@ -1030,13 +1114,29 @@ function updateUserValues() {
                         break;
                 }
 
-                //test -- later switch to popup
-                alert("You've unlocked " + unlockedName + "!");
 
+                
+                document.getElementById("iheading").innerHTML = "Unlocked!";
+                document.getElementById("howto1").innerHTML = "You've unlocked";
+                document.getElementById("howto2").innerHTML = unlockedName + "!";
+                document.getElementById("howto3").innerHTML = "";
+
+
+                document.getElementById("ibutton").removeEventListener("click", instructDismiss);
+                document.getElementById("ibutton").addEventListener("click", unlockDismiss);
+	            $("#instructions").animate({bottom: '120%'}, 1000);
+            } else {
+                gameOver(); 
             }
         }
     };
 
     xmlhttp.open("GET", "./php/updateuservalues.php?Score=" + runningScore, true);
     xmlhttp.send();
+}
+
+//dismisses the unlocked popup
+function unlockDismiss() {
+	 $("#instructions").animate({bottom: '-55.5%'}, 1000);
+     gameOver(); 
 }
