@@ -1,4 +1,10 @@
 <?php
+        
+        session_start();
+
+        //update session variables
+        $_SESSION['Theme'] = $_GET['Theme'];
+        $_SESSION['Sound'] = $_GET['Sound'];
 
         $servername = "mysql9.000webhost.com";
         $username = "a1777619_ntbl";
@@ -12,14 +18,20 @@
         }
 
 
-        $sql = "INSERT INTO HighScores(Name, Score)VALUES(";
-        $sql .= "'" . $_GET['Name'] . "','" . $_GET['Score'] . "')";
+
+
+        //update session values into the database
+        $sql = "UPDATE Login SET Theme=" . $_SESSION['Theme'];
+        $sql .= ", Sound=" . $_SESSION['Sound'];
+        $sql .= " WHERE ID=" . $_SESSION['ID'] . ";";
+        
 
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo "Success";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
+
 
         $conn->close();
 ?>

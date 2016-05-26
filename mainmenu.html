@@ -42,39 +42,33 @@
 						<ul>
 							<li>
 								<input type="radio" name="keyboardstyle" id="style1" checked="checked">
-								<label for="style1"><span></span>Default</label>
-								<div class="check"><div class="inside"></div>
+								<label for="style1" id="stylelabel1"><span></span>Default</label>
 							</li>
 							<li>
 								<input type="radio" name="keyboardstyle" id="style2">
-								<label for="style2"><span></span>Classic</label>
-								<div class="check"><div class="inside"></div>
+								<label for="style2" id="stylelabel2"><span></span>Classic</label>
 							</li>
 							<li>
 								<input type="radio" name="keyboardstyle" id="style3">
-								<label for="style3"><span></span>Retro</label>
-								<div class="check"><div class="inside"></div>
+								<label for="style3" id="stylelabel3"><span></span>Retro</label>
 							</li>
 						</ul>
 						<p id="sheading2"class="settingsheading">Keyboard Sounds</p>
 						<ul>
 							<li>
 								<input type="radio" name="keyboardsound" id="sound1" checked="checked">
-								<label for="sound1"><span></span>Default</label>
-								<div class="check"><div class="inside"></div>
+								<label for="sound1" id="soundlabel1"><span></span>Default</label>
 							</li>
 							<li>
 								<input type="radio" name="keyboardsound" id="sound2">
-								<label for="sound2"><span></span>Harpsichord</label>
-								<div class="check"><div class="inside"></div>
+								<label for="sound2" id="soundlabel2"><span></span>Harpsichord</label>
 							</li>
 							<li>
 								<input type="radio" name="keyboardsound" id="sound3">
-								<label for="sound3"><span></span>Synth</label>
-								<div class="check"><div class="inside"></div>
+								<label for="sound3" id="soundlabel3"><span></span>Synth</label>
 							</li>
 						</ul>
-						<button id="sbutton">Apply</button>
+						<button id="sbutton" onclick="updateSettings()">Apply</button>
                   </div>
           </div>
 

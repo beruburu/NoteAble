@@ -167,7 +167,7 @@ function loadGame(stage, difficulty) {
 		theme = 2;
 	}
         haltAnimation = true; 
-        location.href = "game.html?t=" + theme + "s=" + stage + "&d=" + difficulty;             
+        location.href = "game.html?s=" + stage + "&d=" + difficulty;             
 	if (stage == 3) {
         location.href = "game.html?s=3"; 
     }
@@ -262,21 +262,25 @@ function setUnlockables() {
         }, true);
     }
 
-
     //keyboard sounds
     if (unlock2 > 0) {
         document.getElementById("sound1").disabled = false;
         document.getElementById("sound2").disabled = false;
         document.getElementById("sound3").disabled = false;
         document.getElementById("sound" + (instrument + 1)).checked = true; 
-        document.getElementById("sound1").style.color = "white";
-        document.getElementById("sound2").style.color = "white";
-        document.getElementById("sound3").style.color = "white";
+
+        document.getElementById("soundlabel1").style.color = "white";
+        document.getElementById("soundlabel2").style.color = "white";
+        document.getElementById("soundlabel3").style.color = "white";
     } else {
         document.getElementById("sound1").checked = true;
         document.getElementById("sound1").disabled = true;
         document.getElementById("sound2").disabled = true;
         document.getElementById("sound3").disabled = true;
+
+        document.getElementById("soundlabel1").style.color = "silver";
+        document.getElementById("soundlabel2").style.color = "silver";
+        document.getElementById("soundlabel3").style.color = "silver";
     }
     
     //keyboard style
@@ -285,11 +289,20 @@ function setUnlockables() {
         document.getElementById("style2").disabled = false;
         document.getElementById("style3").disabled = false;
         document.getElementById("style" + (theme + 1)).checked = true; 
+
+        
+        document.getElementById("stylelabel1").style.color = "white";
+        document.getElementById("stylelabel2").style.color = "white";
+        document.getElementById("stylelabel3").style.color = "white";
     } else {
         document.getElementById("style1").checked = true;
         document.getElementById("style1").disabled = true;
         document.getElementById("style2").disabled = true;
         document.getElementById("style3").disabled = true;
+
+        document.getElementById("stylelabel1").style.color = "silver";
+        document.getElementById("stylelabel2").style.color = "silver";
+        document.getElementById("stylelabel3").style.color = "silver";
     }
 
 
@@ -338,9 +351,8 @@ function login() {
                     document.getElementById("loginresponse").innerHTML = "Invalid login.";
                 } else {
                     document.getElementById("loginresponse").innerHTML = "Login successful.";
-                    unlock1 = parseInt(values[1]);
 
-                    setUnlockables();
+                    getUnlockables();
                 }
             }
         };
@@ -362,4 +374,40 @@ function validateEmail(email) {
 //checks that high score name is only valid characters
 function validateName(name) {
     return /[A-Za-z]{3}/.test(name); 
+}
+
+//updates the user's selected settings
+function updateSettings() {
+    //set theme and instrument based on radio buttons
+    for (x = 1; x <= 3; x++) {
+        if (document.getElementById("style" + x).checked) {
+            theme = x - 1;
+        }
+        if (document.getElementById("sound" + x).checked) {
+            instrument = x - 1;
+        }
+    }
+
+    //update database
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            // hide settings menu
+            var slideoutMenu = $('.slideout-menu');
+            var slideoutMenuWidth = $('.slideout-menu').width();
+            slideoutMenu.toggleClass("open");
+            if (slideoutMenu.hasClass("open")) {
+                slideoutMenu.animate({
+                    right: "0px"
+                });
+            } else {
+                slideoutMenu.animate({
+                    right: -slideoutMenuWidth
+                }, 250);
+            }
+        }
+    };
+
+    xmlhttp.open("GET", "php/updatesettings.php?Theme=" + theme + "&Sound=" + instrument, true);
+    xmlhttp.send();
 }
