@@ -484,23 +484,55 @@ function displayUserNotes() {
     var staff = document.getElementById("staff");
 
     var newNote = document.createElement("IMG");
-
+	
+	var url = window.location.href;
+	if (url.includes("t=")) {
+        theme = parseInt(url.charAt(url.indexOf("t=") + 2));
+    }
+	
     switch (stage) {
         case 0: //shapes
-            newNote.src = "./images/shapes/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
-            newNote.className = "shapes";
-            break;
-        case 1: //shapes
-            newNote.src = "./images/letters/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
-            newNote.className = "letters";
-            break;
+			if (theme == 2) {
+				newNote.src = "./images/shapes/retro/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+				newNote.className = "shapes";
+			} else {
+				newNote.src = "./images/shapes/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+				newNote.className = "shapes";
+            }
+			break;
+        case 1: //letters
+			if (theme == 1) {
+				newNote.src = "./images/letters/classic/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+				newNote.className = "letters";
+			} else if ( theme == 2) {
+				newNote.src = "./images/letters/retro/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+				newNote.className = "letters";
+			} else {
+				newNote.src = "./images/letters/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+				newNote.className = "letters";
+            }
+			break;
         case 2: //staff
-            newNote.src = "./images/staff/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
-            newNote.className = "notes";
-            break;
+			if (theme == 2) {
+				newNote.src = "./images/staff/retro/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+				newNote.className = "notes";
+			} else {
+				newNote.src = "./images/staff/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+				newNote.className = "notes";
+            }
+			break;
         case 3: 
-            newNote.src = "./images/letters/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
-            newNote.className = "letters";
+            if (theme == 1) {
+				newNote.src = "./images/letters/classic/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+				newNote.className = "letters";
+			} else if ( theme == 2) {
+				newNote.src = "./images/letters/retro/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+				newNote.className = "letters";
+			} else {
+				newNote.src = "./images/letters/" + keys[keysPressed[keysPressed.length - 1]] + ".png";
+				newNote.className = "letters";
+            }
+			break;
     }
     if (staff.childNodes.length >= keysMax) {
         staff.removeChild(staff.firstChild);
@@ -516,25 +548,61 @@ function displayCompNotes() {
     var newNote = document.createElement("IMG");
 
     
+    var url = window.location.href;
+	if (url.includes("t=")) {
+        theme = parseInt(url.charAt(url.indexOf("t=") + 2));
+    }
+	
     switch (stage) {
         case 0: //shapes
-            newNote.src = "./images/shapes/" + selKey + ".png";
-            newNote.className = "shapes";
-            break;
-        case 1: //shapes
-            newNote.src = "./images/letters/" + selKey + ".png";
-            newNote.className = "letters";
-            break;
-        case 2: //staff        
-            newNote.src = "./images/staff/" + selKey + ".png";
-            newNote.className = "notes";
-            break;
+			if (theme == 2) {
+				newNote.src = "./images/shapes/retro/" + selKey + ".png";
+				newNote.className = "shapes";
+			} else {
+				newNote.src = "./images/shapes/" + selKey + ".png";
+				newNote.className = "shapes";
+            }
+			break;
+        case 1: //letters
+			if (theme == 1) {
+				newNote.src = "./images/letters/classic/" + selKey + ".png";
+				newNote.className = "letters";
+			} else if ( theme == 2) {
+				newNote.src = "./images/letters/retro/" + selKey + ".png";
+				newNote.className = "letters";
+			} else {
+				newNote.src = "./images/letters/" + selKey + ".png";
+				newNote.className = "letters";
+            }
+			break;
+        case 2: //staff
+			if (theme == 2) {
+				newNote.src = "./images/staff/retro/" + selKey + ".png";
+				newNote.className = "notes";
+			} else {
+				newNote.src = "./images/staff/" + selKey + ".png";
+				newNote.className = "notes";
+            }
+			break;
+        case 3: 
+            if (theme == 1) {
+				newNote.src = "./images/letters/classic/" + selKey + ".png";
+				newNote.className = "letters";
+			} else if ( theme == 2) {
+				newNote.src = "./images/letters/retro/" + selKey + ".png";
+				newNote.className = "letters";
+			} else {
+				newNote.src = "./images/letters/" + selKey + ".png";
+				newNote.className = "letters";
+            }
+			break;
     }
 
 
     document.getElementById("key" + selKey).style.display = "inline";
     staff.appendChild(newNote);
 }
+
 
 //starts creation of computer's track
 function playTrack() {
