@@ -127,12 +127,32 @@ function loadGame(stage, difficulty) {
 //shows the high scores popup
 function showHighScores() {
      getHighScores();
-	 $("#highscores").animate({bottom: '20%'}, 1000);  
+	 $("#highscores").animate({bottom: '20%'}, 500);  
 }
 
 //hides the high scores popup
 function dismissHighScores() {
-	 $("#highscores").animate({bottom: '-85.5%'}, 1000);
+	 $("#highscores").animate({bottom: '-85.5%'}, 500);
+}
+
+//shows the login popup
+function showLogin() {
+	 $("#login").animate({bottom: '20%'}, 500);  
+}
+
+//hides the login popup
+function dismissLogin() {
+	 $("#login").animate({bottom: '-85.5%'}, 500);
+}
+
+//shows the register popup
+function showRegister() {
+	 $("#register").animate({bottom: '20%'}, 500);  
+}
+
+//hides the register popup
+function dismissRegister() {
+	 $("#register").animate({bottom: '-85.5%'}, 500);
 }
 
 //loads the high scores from the database
