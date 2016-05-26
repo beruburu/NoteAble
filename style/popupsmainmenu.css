@@ -12,14 +12,15 @@
 
 .popup {
 	height: 57.2%;
-	width: 50%;
+	width: 40%;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-	/*position: absolute;*/
+	position: absolute;
 	z-index: 999;
 	border-radius: 12px;
 	margin: auto;
+	left: 30%;
 }
 
 .button {
@@ -31,13 +32,17 @@
     font-size: 2.2vw;
 }
 
-#hsheading, #lheading, #rheading, #sheading {
+#hsheading, #lheading, #rheading {
     max-width: 100%;
     font-size: 3vw;
     color: white; 
     text-align: center;
     padding-top: 4%;
 	margin: auto;
+}
+
+#hsheading {
+	padding-bottom: 6%;
 }
 
 #highscores {
@@ -48,31 +53,35 @@
 #scores {
 	text-align: center;
 	color: #ff3b42;
-	font-size: 2.1vw;
+	font-size: 2.4vw;
     width:  50%;
+	height: 40%;
     margin-left:  auto;
     margin-right:  auto;
     background-color:  #ffb6b9; 
+	margin-top: 3%;
 }
 
 #hsbutton {
 	width: 100%;
 	height: 20%;
+	margin: auto;
 }
 
 #hsconfirmbutton {
     background-color: #FFFFFF;
     color: #ff3b42;
-	width: 33%;
+	width: 40%;
 	height: 93%;
-	margin-top: 7.5%;
-	margin-left: 33%;
+	margin-top: 6%;
+	margin-left: 30%;
 }
 
 #hsconfirmbutton:active {
 	color: #ffffff;
 	background-color: #ffb6b9;
 }
+
 
 #login {
 	background-color: #ff18a0;
@@ -82,7 +91,7 @@
 #logincontent {
 	text-align: center;
 	color: #ff18a0;
-	margin-top: 7%;
+	margin-top: 5%;
 	font-size: 2.1vw;
 }
 
@@ -90,6 +99,7 @@
 	background-color: #ffa2d8;
 	margin: auto;
 	width: 19%;
+	
 }
 
 #enterloginemail {
@@ -108,7 +118,7 @@
 #loginpassword {
 	background-color: #ffa2d8;
 	margin: auto;
-	margin-top: 5%;
+	margin-top: 3%;
 	width: 30%;
 }
 
@@ -130,12 +140,12 @@
 }
 
 #lbutton {
-	margin-left: 33%;
-	margin-top: 3.5%;
+	margin-left: 30%;
+	margin-top: 5%;
     background-color: #FFFFFF;
     color: #ff18a0;
-	width: 33%;
-	height: 70%;
+	width: 40%;
+	height: 75%;
 }
 
 #lbutton:active {
@@ -220,12 +230,12 @@
 }
 
 #rbutton {
-	margin-left: 33%;
-	margin-top: 7%;
+	margin-left: 30%;
+	margin-top: 3%;
     background-color: #FFFFFF;
     color: #ff18a0;
-	width: 33%;
-	height: 70%;
+	width: 40%;
+	height: 75%;
 }
 
 #rbutton:active {

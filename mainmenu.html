@@ -75,7 +75,7 @@
           <!--Container of main elements-->
           <div id="maincontainer">
           <button id="freemodebutton"></button>
-              <button id="highscorebutton" onclick="showHighScores()">High Scores</button>
+              <button id="highscorebutton" onclick="showHighScores();">High Scores</button>
                 <div id="levelcontainer">
                     <!--Novice (Shapes) Stage-->
                     <div id="novice">
@@ -120,6 +120,7 @@
         <!--Global high scores popup-->
         <div id="highscores" class="popup">
             <div id="hsheading">High Scores</div>
+			<div id="hscontent">
            		<table id="scores">
                 	<tr>
                     	<td>1.</td>
@@ -147,6 +148,7 @@
                         <td id="hsscore5"></td>
                     </tr> 
                 </table>
+			</div>
 			<div id="hsbutton">
             	<button class="button" id="hsconfirmbutton" onclick="dismissHighScores()">Okay!</button>
 			</div>
@@ -183,54 +185,6 @@
             	<button class="button" id="rbutton" onclick="register()">Submit</button>
 			</div>     
 		</div>
-		
-		<!--Settings popup-->
-            <!--
-		<div id="settings" class="popup">
-            <div id="sheading">Settings</div>
-			<div id="settingscontent">
-				<p class="settingsheading">Keyboard Style</p>
-				<ul>
-					<li>
-						<input type="radio" name="keyboardstyle" id="style1" checked="checked">
-						<label for="style1"><span></span>Default</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-					<li>
-						<input type="radio" name="keyboardstyle" id="style2">
-						<label for="style2"><span></span>Classic</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-					<li>
-						<input type="radio" name="keyboardstyle" id="style3">
-						<label for="style3"><span></span>Retro</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-				</ul>
-				<p class="settingsheading">Keyboard Sounds</p>
-				<ul>
-					<li>
-						<input type="radio" name="keyboardsound" id="sound1" checked="checked">
-						<label for="sound1"><span></span>Default</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-					<li>
-						<input type="radio" name="keyboardsound" id="sound2">
-						<label for="sound2"><span></span>Harpsichord</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-					<li>
-						<input type="radio" name="keyboardsound" id="sound3">
-						<label for="sound3"><span></span>Synth</label>
-						<div class="check"><div class="inside"></div>
-					</li>
-				</ul>
-			</div>
-			<div id="sbutton">
-            	<button class="button" id="sbutton1">Apply</button>
-				<button class="button" id="sbutton2">Cancel</button>
-			</div>     
-		</div>-->
 		
       	</div>
     </body>

@@ -202,7 +202,7 @@ var bestscore = 0;
 //**PAGE LOADING SEQUENCE**
 
 //don't load the page until login is complete
-getLogin(); 
+getLogin();
 
 //sets up the page
 function loadPage() {
