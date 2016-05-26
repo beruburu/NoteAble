@@ -5,26 +5,24 @@
         <!--Basic style sheet-->
         <link rel="stylesheet" type="text/css" href="style/style.css">
         <!--Style sheet for this page-->
-		<link rel="stylesheet" type="text/css" href="style/landing.css">
+        <link rel="stylesheet" type="text/css" href="style/fullscreen.css">
         <script src="js/game.js" defer></script>
         <script src="js/fullscreen.js" defer></script>
         <meta charset="utf-8" />
         <title>NoteAble</title>
     </head>
-	
+    
     <body id="body">
-<!--     <button onclick="fullScreen(body)">full screen</button>  --> 
-    <div id="container">
+        <div id="container">
             <!--Landing page image-->
             <div id="background">
-                <img class="roundpiano" src="images/landingbg.png">
+                <img class="roundpiano" src="images/landingbg2.gif">
+                <div id="buttoncontainer">
+                <input type="button" id="button" class="button"  onclick="activate(body)" value="Start" />
+                </div>
             </div>
-            <div id="title">NoteAble</div>
-            <!--Button linking to main menu-->
-                <input type="button" class="button" onclick="activate(body)" value="Start"/>
         </div>
-		<iframe src="index.html" width="100%" height="100%" allowfullscreen style="display:none;" id="iframe"> 
+        <iframe src="index.html" width="100%" height="100%" allowfullscreen style="display:none;" id="iframe"> 
         </iframe>
-        
     </body>
 </html>
