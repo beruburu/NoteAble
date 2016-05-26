@@ -7,6 +7,7 @@
 	width: 73.25%;;
 	font-family: Quicksand;
 	font-weight: bold;
+	margin: auto;
 }
 
 .popup {
@@ -230,52 +231,4 @@
 #rbutton:active {
 	color: #ffffff;
 	background-color: #ffa2d8
-}
-
-#settings {
-	background-color: #92278f;
-	background-image: url("../images/settingsBG.png");
-}
-
-#settingscontent {
-	text-align: center;
-	color: #92278f;
-	margin-top: 5%;
-	font-size: 30px;
-}
-
-.settingsheading {
-	clear: both;
-}
-
-#sbutton {
-	height: 25%;
-}
-
-#sbutton1 {
-    background-color: #FFFFFF;
-    color: #92278f;
-	margin-left: 10%;
-	width: 33%;
-	height: 70%;
-	float: left;
-}
-
-#sbutton2 {
-    background-color: #FFFFFF;
-    color: #92278f;
-	margin-left: 10%;
-	width: 33%;
-	height: 70%;
-	float: left;
-}
-
-#sbutton1:active {
-	color: #ffffff;
-	background-color: #ed82ea
-}
-
-#sbutton2:active {
-	color: #ffffff;
-	background-color: #ed82ea
 }
