@@ -279,35 +279,3 @@
 	color: #ffffff;
 	background-color: #ed82ea
 }
-
-/*Radio button styling based on example by Mitch McCline: http://codepen.io/mitchmc/pen/pebIx*/
-input[type="radio"] + ul li {
-	display: inline;
-}
-
-input[type="radio"] {
-    display:none;
-}
-
-input[type="radio"] + label {
-	float: left;
-}
-
-input[type="radio"] + label span {
-    display:inline-block;
-    width:19px;
-    height:19px;
-    border-radius:  50%;
-}
-
-input[type="radio"] + label span {
-     background-color:#ffffff;
-}
-
-input[type="radio"]:checked + label span{
-     background-color:#92278f;
-}
-#registerresponse, #loginresponse, #enterhighscoreresponse {
-	color: #ffffff;
-    text-align: center;
-}
