@@ -9,19 +9,25 @@
         <!--Main menu style sheet-->
         <link rel="stylesheet" type="text/css" href="style/mainmenu.css">
         <!--Style sheet for high scores popup-->
-        <link rel="stylesheet" type="text/css" href="style/popup.css">
+        <link rel="stylesheet" type="text/css" href="style/popupsmainmenu.css">
         <!--Javascript for this page-->
         <script src="js/mainmenu.js" defer></script>
+        <script src="js/game.js" defer></script>
+        <!--Javascript for login & signup popups-->
+        <script src="js/loginsignup.js"></script>
         <!--JQuery link-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>   
         <meta charset="utf-8" />
         <title>Main Menu</title>
     </head>
-    <body>
+    <!-- Body loads the unlockables, for now -->
+    <body onload="getUnlockables()">
 
       <!--The container for all elements-->
       <div id="fullscreen">
-
+		  
+		  <img src="images/transparent.png" id="transparent">
+		  
           <!--Container for the top bar-->
           <div id="menubar">
               <div id="title">Select a Stage</div>
@@ -31,6 +37,7 @@
 
           <!--Container of main elements-->
           <div id="maincontainer">
+          <button id="freemodebutton"></button>
               <button id="highscorebutton" onclick="showHighScores()">High Scores</button>
                 <div id="levelcontainer">
                     <!--Novice (Shapes) Stage-->
@@ -76,14 +83,14 @@
         <!--Global high scores popup-->
         <div id="highscores" class="popup">
             <div id="hsheading">High Scores</div>
-            	<table id="scores">
-                    <tr>
-                        <td>1.</td>
+           		<table id="scores">
+                	<tr>
+                    	<td>1.</td>
                         <td id="hsname1"></td>
                         <td id="hsscore1"></td>
                     </tr>
                     <tr>
-                        <td>2.</td>
+                       	<td>2.</td>
                         <td id="hsname2"></td>
                         <td id="hsscore2"></td>
                     </tr>
@@ -93,7 +100,7 @@
                         <td id="hsscore3"></td>
                     </tr>
                     <tr>
-                        <td>4.</td>
+                      	<td>4.</td>
                         <td id="hsname4"></td>
                         <td id="hsscore4"></td>
                     </tr> 
@@ -104,8 +111,8 @@
                     </tr> 
                 </table>
 			<div id="hsbutton">
-            	<button id="hsconfirmbutton" class="button" onclick="dismissHighScores()">Okay!</button>
-			</div>     
+            	<button class="button" id="hsconfirmbutton" onclick="dismissHighScores()">Okay!</button>
+			</div>
 		</div>
 		
 		<!--Login popup-->
@@ -113,12 +120,13 @@
             <div id="lheading">Login</div>
 			<div id="logincontent">
 				<div id="loginemail">Email:</div>
-				<input type="text" name="loginemail" id="enterloginemail"></input>
+				<input type="text" name="loginemail" id="enterloginemail" maxlength="30"></input>
 				<div id="loginpassword">Password:</div>
-				<input type="password" name="loginpassword" id="enterloginpassword"></input>
+				<input type="password" name="loginpassword" id="enterloginpassword" maxlength="15"></input>
 			</div>
 			<div id="loginbutton">
-            	<button class="button" id="lbutton">Submit</button>
+                <div id="loginresponse">&nbsp;</div>
+            	<button class="button" id="lbutton" onclick="login()">Submit</button>
 			</div>     
 		</div>
 		
@@ -127,17 +135,65 @@
             <div id="rheading">Register</div>
 			<div id="registercontent">
 				<div id="registeremail">Email:</div>
-				<input type="text" name="registeremail" id="enterregisteremail"></input>
+				<input type="text" name="registeremail" id="enterregisteremail" maxlength="30"></input>
 				<div id="registerpassword">Password:</div>
-				<input type="password" name="registerpassword" id="enterregisterpassword"></input>
+				<input type="password" name="registerpassword" id="enterregisterpassword" maxlength="15"></input>
 				<div id="registernickname">Nickname:</div>
-				<input type="text" name="registernickname" id="enterregisternickname"></input>
+				<input type="text" name="registernickname" id="enterregisternickname" maxlength="3"></input>
 			</div>
 			<div id="registerbutton">
-            	<button class="button" id="rbutton">Submit</button>
+                <div id="registerresponse">&nbsp;</div>
+            	<button class="button" id="rbutton" onclick="register()">Submit</button>
 			</div>     
 		</div>
 		
-      </div>
+		<!--Settings popup-->
+		<!--<div id="settings" class="popup">
+            <div id="sheading">Settings</div>
+			<div id="settingscontent">
+				<p class="settingsheading">Keyboard Style</p>
+				<ul>
+					<li>
+						<input type="radio" name="keyboardstyle" id="style1" checked="checked">
+						<label for="style1"><span></span>Default</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+					<li>
+						<input type="radio" name="keyboardstyle" id="style2">
+						<label for="style2"><span></span>Classic</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+					<li>
+						<input type="radio" name="keyboardstyle" id="style3">
+						<label for="style3"><span></span>Retro</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+				</ul>
+				<p class="settingsheading">Keyboard Sounds</p>
+				<ul>
+					<li>
+						<input type="radio" name="keyboardsound" id="sound1" checked="checked">
+						<label for="sound1"><span></span>Default</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+					<li>
+						<input type="radio" name="keyboardsound" id="sound2">
+						<label for="sound2"><span></span>Harpsichord</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+					<li>
+						<input type="radio" name="keyboardsound" id="sound3">
+						<label for="sound3"><span></span>Synth</label>
+						<div class="check"><div class="inside"></div>
+					</li>
+				</ul>
+			</div>
+			<div id="sbutton">
+            	<button class="button" id="sbutton1">Apply</button>
+				<button class="button" id="sbutton2">Cancel</button>
+			</div>     
+		</div>-->
+		
+      	</div>
     </body>
 </html>

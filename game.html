@@ -8,7 +8,7 @@
         <!--Style sheet for this page-->
         <link rel="stylesheet" type="text/css" href="style/game.css">
         <!--Style sheet for popups-->
-        <link rel="stylesheet" type="text/css" href="style/popup.css">
+        <link rel="stylesheet" type="text/css" href="style/popupsgame.css">
         <!--Style sheet for loading screen-->
         <link rel="stylesheet" type="text/css" href="style/loading.css">
         <!--Javascript for loading screen-->
@@ -24,8 +24,6 @@
         <script src="js/howler/howler.min.js"></script>
         <!--JQuery reference-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-        <!--Javascript for login/signup -- WILL BE MOVED TO MAINMENU-->
-        <script src="js/loginsignup.js" defer></script>
         <meta charset="utf-8" />
         <title>NoteAble</title>
     </head>
@@ -137,7 +135,7 @@
                 <div id="bestscore1">Personal Best</div>
 			</div>
 			<div id="gameoverbuttons">
-				<button id="mainmenu"></button>
+				<button id="mainmenu" onclick="location.href='mainmenu.html'"></button>
             	<button class="button" id="retrybutton" onclick="location.reload();">Retry</button>
 			</div>     
 		</div>
@@ -164,6 +162,7 @@
 			    <div id="initials">
 				    <input type="text" name="initials" id="enterinitials" maxlength="3"></input>
 				</div>
+                <div id="enterhighscoreresponse">Invalid name; only letters allowed.</div>
 			</div>
 			<div id="ehsbutton">
                 <button class="button" id="submithighscore" onclick="submitScore()">Submit</button>
@@ -203,36 +202,6 @@
 			<div id="hsbutton">
             	<button class="button" id="hsconfirmbutton" onclick="dismissHighScores()">Okay!</button>
 			</div>
-		</div>
-
-		<!--Login popup-->
-		<div id="login" class="popup">
-            <div id="lheading">Login</div>
-			<div id="logincontent">
-				<div id="loginemail">Email:</div>
-				<input type="text" name="loginemail" id="enterloginemail"></input>
-				<div id="loginpassword">Password:</div>
-				<input type="password" name="loginpassword" id="enterloginpassword"></input>
-			</div>
-			<div id="loginbutton">
-            	<button class="button" id="lbutton">Submit</button>
-			</div>     
-		</div>
-		
-		<!--Register popup-->
-		<div id="register" class="popup">
-            <div id="rheading">Register</div>
-			<div id="registercontent">
-				<div id="registeremail">Email:</div>
-				<input type="text" name="registeremail" id="enterregisteremail"></input>
-				<div id="registerpassword">Password:</div>
-				<input type="password" name="registerpassword" id="enterregisterpassword"></input>
-				<div id="registernickname">Nickname:</div>
-				<input type="text" name="registernickname" id="enterregisternickname"></input>
-			</div>
-			<div id="registerbutton">
-            	<button class="button" id="rbutton" onclick="register()">Submit</button>
-			</div>     
 		</div>
 		
 	</div>

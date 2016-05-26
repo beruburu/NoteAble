@@ -1,8 +1,76 @@
+//default height and width of screen
+var maxHeight = 670;
+var maxWidth = 1027;
+
 //true if a stage control has been expanded
 var expanded = false;
 
 //true if a button has been clicked
 var haltAnimation = false; 
+
+//0 = not yet unlocked; 1 = unlocked;
+var unlock1 = 0;
+var unlock2 = 0;
+var unlock3 = 0;
+
+//Login.ID in the database
+var userID = 0;
+
+//the user's 3-letter name
+var userName = "";
+
+//0=piano, 1=harpsichord, 2=moog synth
+var instrument = 0;
+
+//0=standard theme, 1=unlockable theme
+var theme = 0; 
+
+
+/*resizeMap();
+
+function resizeMap() {
+    var img = document.getElementById("transparent");   
+    var sizeRatio = img.clientHeight / maxHeight;
+   
+   imageMapResize();
+
+	document.getElementById("popup").style.width = Math.round(maxWidth * sizeRatio) + "px";
+	
+	document.getElementById("highscores").style.left = Math.round(img.clientWidth * 0.225) + "px";
+	document.getElementById("highscores").style.top = Math.round(img.clientHeight * 1.2) + "px";
+	document.getElementById("highscores").style.width = Math.round(img.clientWidth * 0.55) + "px";
+	document.getElementById("highscores").style.height = Math.round(img.clientHeight * 0.585) + "px";
+	document.getElementById("hsheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("scores").style.fontSize = Math.round(highScoreFontSize * sizeRatio) + "px";
+	document.getElementById("hsconfirmbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
+	
+	document.getElementById("login").style.left = Math.round(img.clientWidth * 0.225) + "px";
+	document.getElementById("login").style.top = Math.round(img.clientHeight * 1.2) + "px";
+	document.getElementById("login").style.width = Math.round(img.clientWidth * 0.55) + "px";
+	document.getElementById("login").style.height = Math.round(img.clientHeight * 0.585) + "px";
+	document.getElementById("lheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("loginemail").style.fontSize = Math.round(loginFontSize * sizeRatio) + "px";
+	document.getElementById("loginpassword").style.fontSize = Math.round(loginFontSize * sizeRatio) + "px";
+	document.getElementById("lbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
+	
+	document.getElementById("register").style.left = Math.round(img.clientWidth * 0.225) + "px";
+	document.getElementById("register").style.top = Math.round(img.clientHeight * 1.2) + "px";
+	document.getElementById("register").style.width = Math.round(img.clientWidth * 0.55) + "px";
+	document.getElementById("register").style.height = Math.round(img.clientHeight * 0.585) + "px";
+	document.getElementById("rheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("registeremail").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
+	document.getElementById("registerpassword").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
+	document.getElementById("registernickname").style.fontSize = Math.round(registerFontSize * sizeRatio) + "px";
+	document.getElementById("rbutton").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
+	
+	document.getElementById("settings").style.left = Math.round(img.clientWidth * 0.225) + "px";
+	document.getElementById("settings").style.top = Math.round(img.clientHeight * 1.2) + "px";
+	document.getElementById("settings").style.width = Math.round(img.clientWidth * 0.55) + "px";
+	document.getElementById("settings").style.height = Math.round(img.clientHeight * 0.585) + "px";
+	document.getElementById("sheading").style.fontSize = Math.round(popupHeadingFontSize * sizeRatio) + "px";
+	document.getElementById("sbutton1").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
+	document.getElementById("sbutton2").style.fontSize = Math.round(buttonFontSize * sizeRatio) + "px";
+}*/
 
 //Expands novice stage to reveal two levels when clicked
 $(document).ready(function () {
@@ -93,25 +161,24 @@ $(document).ready(function () {
     });
 });
 
-
 //loads the game for the appropriate button click
 function loadGame(stage, difficulty) {
-    //only allow novice & intermediate stages, difficulty level 1, for now
-    if (difficulty == 0) {
         haltAnimation = true; 
         location.href = "game.html?s=" + stage + "&d=" + difficulty;             
+	if (stage == 3) {
+        location.href = "game.html?s=3"; 
     }
 }
 
 //shows the high scores popup
 function showHighScores() {
      getHighScores();
-	 $("#highscores").animate({bottom: '550px'}, 1000);  
+	 $("#highscores").animate({bottom: '120%'}, 1000);  
 }
 
 //hides the high scores popup
 function dismissHighScores() {
-	 $("#highscores").animate({bottom: '-250px'}, 1000);
+	 $("#highscores").animate({bottom: '-85.5%'}, 1000);
 }
 
 //loads the high scores from the database
@@ -136,4 +203,42 @@ function getHighScores() {
 //goes back to the landing page
 function goBack() {
     location.href = "index.html";    
+}
+
+//checks if the free mode button should be available
+function getUnlockables() {
+        var button = document.getElementById("freemodebutton");
+        button.innerHTML = "Locked";
+        button.style.color = "silver";
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var result = xmlhttp.responseText;
+            var values = result.split("{");
+            if (values[0] > 0) { //first value equals 0 if there is no user logged on
+                userID = parseInt(values[0]);
+                userName = values[1];
+                instrument = parseInt(values[2]);
+                sound = parseInt(values[3]);
+                unlock1 = parseInt(values[4]);
+                unlock2 = parseInt(values[5]);
+                unlock3 = parseInt(values[6]);
+
+                
+                if (unlock1 > 0) {
+                button.innerHTML = "Free Mode";
+                button.style.color = "#00ffff";
+                button.addEventListener("click", function() {
+                    loadGame(3, 0)
+                    }, true);
+                }
+            }
+        }
+        };
+
+        xmlhttp.open("GET", "./php/getlogin.php", true);
+        xmlhttp.send();    
+
+    
 }

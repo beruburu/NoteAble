@@ -1,0 +1,313 @@
+@font-face {
+    font-family: Quicksand;
+	src: url("../style/Quicksand-Bold.otf");
+}
+
+#popup {
+	width: 73.25%;;
+	font-family: Quicksand;
+	font-weight: bold;
+}
+
+.popup {
+	height: 57.2%;
+	width: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+	/*position: absolute;*/
+	z-index: 999;
+	border-radius: 12px;
+	margin: auto;
+}
+
+.button {
+	font-family: Quicksand;
+	font-weight: bold;
+    border-radius: 6px;
+    outline: none;
+	border: none;
+    font-size: 2.2vw;
+}
+
+#hsheading, #lheading, #rheading, #sheading {
+    max-width: 100%;
+    font-size: 3vw;
+    color: white; 
+    text-align: center;
+    padding-top: 4%;
+	margin: auto;
+}
+
+#highscores {
+	background-color: #ff3b42;
+	background-image: url("../images/highScoresBG.png");
+}
+
+#scores {
+	text-align: center;
+	color: #ff3b42;
+	font-size: 2.1vw;
+    width:  50%;
+    margin-left:  auto;
+    margin-right:  auto;
+    background-color:  #ffb6b9; 
+}
+
+#hsbutton {
+	width: 100%;
+	height: 20%;
+}
+
+#hsconfirmbutton {
+    background-color: #FFFFFF;
+    color: #ff3b42;
+	width: 33%;
+	height: 93%;
+	margin-top: 7.5%;
+	margin-left: 33%;
+}
+
+#hsconfirmbutton:active {
+	color: #ffffff;
+	background-color: #ffb6b9;
+}
+
+#login {
+	background-color: #ff18a0;
+	background-image: url("../images/loginBG.png");
+}
+
+#logincontent {
+	text-align: center;
+	color: #ff18a0;
+	margin-top: 7%;
+	font-size: 2.1vw;
+}
+
+#loginemail {
+	background-color: #ffa2d8;
+	margin: auto;
+	width: 19%;
+}
+
+#enterloginemail {
+	width: 65%;
+	color: #ffffff;
+	background-color: #ff18a0;
+	border-radius: 6px;
+	border: none;
+	outline: none;
+	position: relative;
+	margin: auto;
+	font-size: 3vw;
+	text-align: center;
+}
+
+#loginpassword {
+	background-color: #ffa2d8;
+	margin: auto;
+	margin-top: 5%;
+	width: 30%;
+}
+
+#enterloginpassword {
+	width: 65%;
+	color: #ffffff;
+	background-color: #ff18a0;
+	border-radius: 6px;
+	border: none;
+	outline: none;
+	position: relative;
+	margin: auto;
+	font-size: 3vw;
+	text-align: center;
+}
+
+#loginbutton {
+	height: 25%;
+}
+
+#lbutton {
+	margin-left: 33%;
+	margin-top: 3.5%;
+    background-color: #FFFFFF;
+    color: #ff18a0;
+	width: 33%;
+	height: 70%;
+}
+
+#lbutton:active {
+	color: #ffffff;
+	background-color: #ffa2d8
+}
+
+#register {
+	background-color: #ff18a0;
+	background-image: url("../images/loginBG.png");
+}
+
+#registercontent {
+	text-align: center;
+	color: #ff18a0;
+	margin-top: 5%;
+	font-size: 1.6vw;
+}
+
+#registeremail {
+	background-color: #ffa2d8;
+	margin: auto;
+	width: 19%;
+}
+
+#enterregisteremail {
+	width: 65%;
+	color: #ffffff;
+	background-color: #ff18a0;
+	border-radius: 6px;
+	border: none;
+	outline: none;
+	position: relative;
+	margin: auto;
+	font-size: 2vw;
+	text-align: center;
+}
+
+#registerpassword {
+	background-color: #ffa2d8;
+	margin: auto;
+	margin-top: 1.5%;
+	width: 25%;
+}
+
+#enterregisterpassword {
+	width: 65%;
+	color: #ffffff;
+	background-color: #ff18a0;
+	border-radius: 6px;
+	border: none;
+	outline: none;
+	position: relative;
+	margin: auto;
+	font-size: 2vw;
+	text-align: center;
+}
+
+#registernickname {
+	background-color: #ffa2d8;
+	margin: auto;
+	margin-top: 2%;
+	width: 25%;
+}
+
+#enterregisternickname {
+	width: 65%;
+	color: #ffffff;
+	background-color: #ff18a0;
+	border-radius: 6px;
+	border: none;
+	outline: none;
+	position: relative;
+	margin: auto;
+	font-size: 2vw;
+	text-align: center;
+    text-transform: uppercase;
+}
+
+#registerbutton {
+	height: 25%;
+}
+
+#rbutton {
+	margin-left: 33%;
+	margin-top: 7%;
+    background-color: #FFFFFF;
+    color: #ff18a0;
+	width: 33%;
+	height: 70%;
+}
+
+#rbutton:active {
+	color: #ffffff;
+	background-color: #ffa2d8
+}
+
+#settings {
+	background-color: #92278f;
+	background-image: url("../images/settingsBG.png");
+}
+
+#settingscontent {
+	text-align: center;
+	color: #92278f;
+	margin-top: 5%;
+	font-size: 30px;
+}
+
+.settingsheading {
+	clear: both;
+}
+
+#sbutton {
+	height: 25%;
+}
+
+#sbutton1 {
+    background-color: #FFFFFF;
+    color: #92278f;
+	margin-left: 10%;
+	width: 33%;
+	height: 70%;
+	float: left;
+}
+
+#sbutton2 {
+    background-color: #FFFFFF;
+    color: #92278f;
+	margin-left: 10%;
+	width: 33%;
+	height: 70%;
+	float: left;
+}
+
+#sbutton1:active {
+	color: #ffffff;
+	background-color: #ed82ea
+}
+
+#sbutton2:active {
+	color: #ffffff;
+	background-color: #ed82ea
+}
+
+/*Radio button styling based on example by Mitch McCline: http://codepen.io/mitchmc/pen/pebIx*/
+input[type="radio"] + ul li {
+	display: inline;
+}
+
+input[type="radio"] {
+    display:none;
+}
+
+input[type="radio"] + label {
+	float: left;
+}
+
+input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    border-radius:  50%;
+}
+
+input[type="radio"] + label span {
+     background-color:#ffffff;
+}
+
+input[type="radio"]:checked + label span{
+     background-color:#92278f;
+}
+#registerresponse, #loginresponse, #enterhighscoreresponse {
+	color: #ffffff;
+    text-align: center;
+}

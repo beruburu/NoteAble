@@ -19,7 +19,6 @@
 	z-index: 999;
 	border-radius: 12px;
 	margin: auto;
-	top: 99%;
 }
 
 .button {
@@ -31,7 +30,7 @@
     font-size: 29px;
 }
 
-#iheading, #goheading, #ehsheading, #hsheading, #lheading, #rheading {
+#iheading, #goheading, #ehsheading, #hsheading, #lheading, #rheading, #sheading {
     max-width: 100%;
     font-size: 42px;
     color: white; 
@@ -269,167 +268,4 @@
 #ibutton:active {
 	color: #ffffff;
 	background-color: #aad5ff;
-}
-
-#login {
-	background-color: #ff18a0;
-	background-image: url("../images/loginBG.png");
-}
-
-#logincontent {
-	text-align: center;
-	color: #3287d8;
-	margin-top: 7%;
-	font-size: 30px;
-}
-
-#loginemail {
-	color: #ff18a0;
-	background-color: #ffa2d8;
-	margin: auto;
-	width: 19%;
-}
-
-#enterloginemail {
-	width: 65%;
-	color: #ffffff;
-	background-color: #ff18a0;
-	border-radius: 6px;
-	border: none;
-	outline: none;
-	position: relative;
-	margin: auto;
-	font-size: 3vw;
-	text-align: center;
-}
-
-#loginpassword {
-	color: #ff18a0;
-	background-color: #ffa2d8;
-	margin: auto;
-	margin-top: 5%;
-	width: 30%;
-}
-
-#enterloginpassword {
-	width: 65%;
-	color: #ffffff;
-	background-color: #ff18a0;
-	border-radius: 6px;
-	border: none;
-	outline: none;
-	position: relative;
-	margin: auto;
-	font-size: 3vw;
-	text-align: center;
-}
-
-#loginbutton {
-	height: 25%;
-}
-
-#lbutton {
-	margin-left: 33%;
-	margin-top: 3.5%;
-    background-color: #FFFFFF;
-    color: #ff18a0;
-	width: 33%;
-	height: 70%;
-}
-
-#lbutton:active {
-	color: #ffffff;
-	background-color: #ffa2d8
-}
-
-#register {
-	background-color: #ff18a0;
-	background-image: url("../images/loginBG.png");
-}
-
-#registercontent {
-	text-align: center;
-	color: #3287d8;
-	margin-top: 5%;
-	font-size: 20px;
-}
-
-#registeremail {
-	color: #ff18a0;
-	background-color: #ffa2d8;
-	margin: auto;
-	width: 19%;
-}
-
-#enterregisteremail {
-	width: 65%;
-	color: #ffffff;
-	background-color: #ff18a0;
-	border-radius: 6px;
-	border: none;
-	outline: none;
-	position: relative;
-	margin: auto;
-	font-size: 2vw;
-	text-align: center;
-}
-
-#registerpassword {
-	color: #ff18a0;
-	background-color: #ffa2d8;
-	margin: auto;
-	margin-top: 1.5%;
-	width: 25%;
-}
-
-#enterregisterpassword {
-	width: 65%;
-	color: #ffffff;
-	background-color: #ff18a0;
-	border-radius: 6px;
-	border: none;
-	outline: none;
-	position: relative;
-	margin: auto;
-	font-size: 2vw;
-	text-align: center;
-}
-
-#registernickname {
-	color: #ff18a0;
-	background-color: #ffa2d8;
-	margin: auto;
-	margin-top: 2%;
-	width: 25%;
-}
-
-#enterregisternickname {
-	width: 65%;
-	color: #ffffff;
-	background-color: #ff18a0;
-	border-radius: 6px;
-	border: none;
-	outline: none;
-	position: relative;
-	margin: auto;
-	font-size: 2vw;
-	text-align: center;
-}
-
-#registerbutton {
-	height: 25%;
-}
-
-#rbutton {
-	margin-left: 33%;
-	margin-top: 7%;
-    background-color: #FFFFFF;
-    color: #ff18a0;
-	width: 33%;
-	height: 70%;
-}
-
-#rbutton:active {
-	color: #ffffff;
-	background-color: #ffa2d8
 }
