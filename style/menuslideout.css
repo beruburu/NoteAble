@@ -1,0 +1,84 @@
+@font-face {
+    font-family: Quicksand;
+	src: url("../style/Quicksand-Bold.otf");
+}
+
+.slideout-menu {
+	position: fixed;
+	top: 0;
+	left: -20%;
+	width: 20%;
+	height: 100%;
+	background: #ED008C;
+	z-index: 100;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.slideout-menu h3 {
+	position: relative;
+	padding: 12px 35%;
+	color: #fff;
+	font-size: 150%;
+    font-family: Quicksand;
+	font-weight: 400;
+	border-bottom: 4px solid #92278F;
+}
+.slideout-menu .slideout-menu-toggle {
+	position: absolute;
+	top: 17%;
+	right: 5%;
+	display: inline-block;
+	padding: 6px 9px 5px;
+	font-family: Quicksand;
+	font-weight: bold;
+	line-height: 1;
+	background: #92278F;
+	color: #fff;
+	text-decoration: none;
+	vertical-align: top;
+    border-radius: 5px;
+}
+
+.slideout-menu .slideout-menu-toggle:hover {
+	color: #000;
+}
+
+.slideout-menu ul {
+	list-style: none;
+	font-weight: 300;
+    text-decoration: none;
+    color: #fff;
+}
+
+.slideout-menu ul li {
+    font-family: Quicksand;
+	position: relative;
+	display: block;
+	padding: 4%;
+	color: #fff;
+	text-decoration: none;
+    cursor: default;
+    font-size: 1.75vw;
+}
+
+.slideout-menu ul li a {
+    font-family: Quicksand;
+	position: relative;
+	display: block;
+	color: #000;
+	text-decoration: none;
+    font-size: 1.5vw;
+    padding: 6%;  
+    background-color: #fff;
+    border-radius: 5px;  
+}
+
+.slideout-menu ul li a:hover {
+	background: #000;
+	color: #fff;
+    border-radius: 5px;
+}
+
+#novicecolor {
+    background-color: #f00;
+}
