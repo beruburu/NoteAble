@@ -214,6 +214,9 @@ function loadPage() {
 
     //read stage and difficulty from query string
     var url = window.location.href;
+	if (url.includes("t=")) {
+        theme = parseInt(url.charAt(url.indexOf("t=") + 2));
+    }
     if (url.includes("s=")) {
         stage = parseInt(url.charAt(url.indexOf("s=") + 2));
     }
@@ -221,35 +224,97 @@ function loadPage() {
         difficulty = parseInt(url.charAt(url.indexOf("d=") + 2));
     }
 
-    switch (stage) {
-        case 0:
-			if (difficulty == 1) {
+	if (theme == 0) {
+		switch (stage) {
+			case 0:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard_shapes.png";
+				}
+				instructAppear();
+				break;
+			case 1:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
+				}
+				instructAppear();
+				break;
+			case 2:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl2.png";
+				} else {
+					document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl1.png";
+				}
+				instructAppear();
+				break;
+			case 3:
 				document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
-			} else {
-				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_shapes.png";
-			}
-			instructAppear();
-            break;
-        case 1:
-            if (difficulty == 1) {
-				document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
-			} else {
-				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_letters.png";
-			}
-			instructAppear();
-            break;
-        case 2:
-            if (difficulty == 1) {
-				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl2.png";
-			} else {
-				document.getElementById("keyboard").src = "images/NoteAble_Keyboard_staff_lvl1.png";
-			}
-			instructAppear();
-            break;
-        case 3:
-            document.getElementById("keyboard").src = "images/NoteAble_Keyboard.png";
-            freeMode();
-    }
+				freeMode();
+		}
+	} else if (theme == 1) {
+		switch (stage) {
+			case 0:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard_shapes.png";
+				}
+				instructAppear();
+				break;
+			case 1:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard_letters.png";
+				}
+				instructAppear();
+				break;
+			case 2:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard_staff_lvl2.png";
+				} else {
+					document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard_staff_lvl1.png";
+				}
+				instructAppear();
+				break;
+			case 3:
+				document.getElementById("keyboard").src = "images/classic/NoteAble_Keyboard.png";
+				freeMode();
+		}
+	} else if (theme == 2) {
+		switch (stage) {
+			case 0:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard_shapes.png";
+				}
+				instructAppear();
+				break;
+			case 1:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard.png";
+				} else {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard_letters.png";
+				}
+				instructAppear();
+				break;
+			case 2:
+				if (difficulty == 1) {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard_staff_lvl2.png";
+				} else {
+					document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard_staff_lvl1.png";
+				}
+				instructAppear();
+				break;
+			case 3:
+				document.getElementById("keyboard").src = "images/retro/NoteAble_Keyboard.png";
+				freeMode();
+		}
+	} 
 }
 
 

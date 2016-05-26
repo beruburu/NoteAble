@@ -163,8 +163,13 @@ $(document).ready(function () {
 
 //loads the game for the appropriate button click
 function loadGame(stage, difficulty) {
+	if (document.getElementById('style2').checked) {
+		theme = 1;
+	} else if (document.getElementById('style3').checked) {
+		theme = 2;
+	}
         haltAnimation = true; 
-        location.href = "game.html?s=" + stage + "&d=" + difficulty;             
+        location.href = "game.html?t=" + theme + "s=" + stage + "&d=" + difficulty;             
 	if (stage == 3) {
         location.href = "game.html?s=3"; 
     }
