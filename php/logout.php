@@ -10,4 +10,6 @@ session_start();
         $_SESSION['Unlock1'] = 0;
         $_SESSION['Unlock2'] = 0;
         $_SESSION['Unlock3'] = 0;
+
+        echo "COMPLETE";
 ?>

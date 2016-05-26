@@ -137,7 +137,21 @@ function dismissHighScores() {
 
 //shows the login popup
 function showLogin() {
-	 $("#login").animate({bottom: '20%'}, 500);  
+    if (userID == 0) {
+        document.getElementById("loginresponse").innerHTML = "";
+        $("#login").animate({ bottom: '20%' }, 500);
+    } else {
+        //logout user
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                getUnlockables();
+            }
+        };
+
+        xmlhttp.open("GET", "./php/logout.php", true);
+        xmlhttp.send();
+    }
 }
 
 //hides the login popup
@@ -147,6 +161,7 @@ function dismissLogin() {
 
 //shows the register popup
 function showRegister() {
+    document.getElementById("registerresponse").innerHTML = "";
 	 $("#register").animate({bottom: '20%'}, 500);  
 }
 
@@ -186,6 +201,14 @@ function applyUser() {
         logged.innerHTML = ""; 
     } else {
         logged.innerHTML = "<div> Hi, " + userName.toUpperCase() + "</div>"; 
+    }
+
+    if (userID > 0) {
+        document.getElementById("logbutton").innerHTML = "Logout";
+        document.getElementById("regbutton").style.display = "none";
+    } else {
+        document.getElementById("logbutton").innerHTML = "Login";
+        document.getElementById("regbutton").style.display = "inline";
     }
 }
 
@@ -296,7 +319,8 @@ function register() {
                 if (values[0] == "INVALID") {
                     document.getElementById("registerresponse").innerHTML = "Email already exists.";
                 } else {
-                    document.getElementById("registerresponse").innerHTML = "Registration complete.";
+                    dismissRegister();
+                    //document.getElementById("registerresponse").innerHTML = "Registration complete.";
                 }
             }
         };
@@ -322,9 +346,10 @@ function login() {
                 if (parseInt(values[0]) == 0) {
                     document.getElementById("loginresponse").innerHTML = "Invalid login.";
                 } else {
-                    document.getElementById("loginresponse").innerHTML = "Login successful.";
-
+                    //document.getElementById("loginresponse").innerHTML = "Login successful.";
+                    dismissLogin();
                     getUnlockables();
+
                 }
             }
         };
