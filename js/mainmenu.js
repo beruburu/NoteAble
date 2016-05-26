@@ -229,10 +229,17 @@ function getUnlockables() {
                     unlock1 = parseInt(values[4]);
                     unlock2 = parseInt(values[5]);
                     unlock3 = parseInt(values[6]);
-
+                } else {
+                    userID = 0;
+                    userName = "";
+                    theme = 0;
+                    instrument = 0;
+                    unlock1 = 0;
+                    unlock2 = 0;
+                    unlock3 = 0; 
                 }
-                
-                setUnlockables(); 
+
+                setUnlockables();
             }
         };
 
