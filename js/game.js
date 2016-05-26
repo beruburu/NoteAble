@@ -255,6 +255,9 @@ function loadPage() {
 				freeMode();
 		}
 	} else if (theme == 1) {
+		document.getElementById('life1').src = "images/classic/lives.png";
+		document.getElementById('life2').src = "images/classic/lives.png";
+		document.getElementById('life3').src = "images/classic/lives.png";
 		switch (stage) {
 			case 0:
 				if (difficulty == 1) {
@@ -285,6 +288,9 @@ function loadPage() {
 				freeMode();
 		}
 	} else if (theme == 2) {
+		document.getElementById('life1').src = "images/retro/lives.png";
+		document.getElementById('life2').src = "images/retro/lives.png";
+		document.getElementById('life3').src = "images/retro/lives.png";
 		switch (stage) {
 			case 0:
 				if (difficulty == 1) {
