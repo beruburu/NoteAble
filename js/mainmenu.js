@@ -248,12 +248,12 @@ function getUnlockables() {
     
 }
 
-//sets whether the free mode should be available or not
+//sets whether the unlockables should be available or not
 function setUnlockables() {
+    //free mode
     var button = document.getElementById("freemodebutton");
     button.innerHTML = "Locked";
     button.style.color = "silver";
-
     if (unlock1 > 0) {
         button.innerHTML = "Free Mode";
         button.style.color = "#00ffff";
@@ -261,6 +261,32 @@ function setUnlockables() {
             loadGame(3, 0)
         }, true);
     }
+
+
+    //keyboard sounds
+    if (unlock2 > 0) {
+        document.getElementById("sound1").disabled = false;
+        document.getElementById("sound2").disabled = false;
+        document.getElementById("sound3").disabled = false;
+       // document.getElementById("sound" + )
+    } else {
+        document.getElementById("sound1").disabled = true;
+        document.getElementById("sound2").disabled = true;
+        document.getElementById("sound3").disabled = true;
+    }
+    
+    //keyboard sound
+    if (unlock3 > 0) {
+        document.getElementById("style1").disabled = false;
+        document.getElementById("style2").disabled = false;
+        document.getElementById("style3").disabled = false;
+    } else {
+        document.getElementById("style1").disabled = true;
+        document.getElementById("style2").disabled = true;
+        document.getElementById("style3").disabled = true;
+    }
+
+
 }
 
 function register() {
