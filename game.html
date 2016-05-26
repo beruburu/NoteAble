@@ -11,6 +11,11 @@
         <link rel="stylesheet" type="text/css" href="style/popupsgame.css">
         <!--Style sheet for loading screen-->
         <link rel="stylesheet" type="text/css" href="style/loading.css">
+        <!--Style for slide out menu-->
+        <link rel="stylesheet" type="text/css" href="style/menuslideout.css">
+
+        <!--Javascript for slide out menu-->
+        <script src="js/menuslideout.js" defer></script>
         <!--Javascript for loading screen-->
         <script src="js/loading.js" defer></script>
         <!--Javascript for high scores-->        
@@ -37,7 +42,30 @@
         <!--Top menu bar-->
 		<div id="topbar">
 	        <!--Menu button-->
-            <button id="menubutton" onclick="loadMenu()"></button> 
+            <button id="menubutton" class="slideout-menu-toggle"></button>
+                <div class="slideout-menu">
+	                <h3>Menu <a href="#" class="slideout-menu-toggle">×</a></h3>
+	                    <ul>
+		                <li>Novice
+                            <ul>
+                            <li><a href="http://noteable.comxa.com/sprint3/game.html?s=0&d=0">Level 1</a></li>
+                            <li><a href="http://noteable.comxa.com/sprint3/game.html?s=0&d=1">Level 2</a></li>
+                            </ul>
+                        </li>
+		                <li>Intermediate
+                            <ul>
+                            <li><a href="http://noteable.comxa.com/sprint3/game.html?s=1&d=0">Level 1</a></li>
+                            <li><a href="http://noteable.comxa.com/sprint3/game.html?s=1&d=1">Level 2</a></li>
+                            </ul>
+                        </li>
+		                <li>Advanced
+                            <ul>
+                            <li><a href="http://noteable.comxa.com/sprint3/game.html?s=2&d=0">Level 1</a></li>
+                            <li><a href="http://noteable.comxa.com/sprint3/game.html?s=2&d=1">Level 2</a></li>
+                            </ul>
+                        </li>
+	                    </ul>
+                </div> 
 	        <!-- Timer -->
 	        <div id = "timer"><time>0:00</time></div>
 	        <!--Div to display the user's win count (will later show score)-->

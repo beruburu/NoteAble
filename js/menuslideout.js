@@ -1,3 +1,4 @@
+//Found slide out menu code from JSFiddle
 $(document).ready(function () {
     $('.slideout-menu-toggle').on('click', function(event){
     	event.preventDefault();
