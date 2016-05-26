@@ -480,10 +480,6 @@ function displayUserNotes() {
 
     var newNote = document.createElement("IMG");
 	
-	var url = window.location.href;
-	if (url.includes("t=")) {
-        theme = parseInt(url.charAt(url.indexOf("t=") + 2));
-    }
 	
     switch (stage) {
         case 0: //shapes
@@ -543,10 +539,6 @@ function displayCompNotes() {
     var newNote = document.createElement("IMG");
 
     
-    var url = window.location.href;
-	if (url.includes("t=")) {
-        theme = parseInt(url.charAt(url.indexOf("t=") + 2));
-    }
 	
     switch (stage) {
         case 0: //shapes

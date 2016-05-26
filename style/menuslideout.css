@@ -3,6 +3,9 @@
 	src: url("../style/Quicksand-Bold.otf");
 }
 
+#slideout-menu-zindex {
+    z-index: 99999;
+}
 .slideout-menu {
 	position: fixed;
 	top: 0;
@@ -10,7 +13,6 @@
 	width: 20%;
 	height: 100%;
 	background: #ED008C;
-	z-index: 100;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }

@@ -11,7 +11,7 @@ html, body {
 }
 
 #topbar {
-	z-index: 4;
+	z-index: 6;
 	position: absolute;
 	width: 100%;
 	max-height: 10%;
@@ -162,3 +162,5 @@ html, body {
 	position: absolute;
 	z-index: 999;
 }
+
+
