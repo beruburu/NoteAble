@@ -230,8 +230,8 @@ function getUnlockables() {
                 if (values[0] > 0) { //first value equals 0 if there is no user logged on
                     userID = parseInt(values[0]);
                     userName = values[1];
-                    instrument = parseInt(values[2]);
-                    sound = parseInt(values[3]);
+                    theme = parseInt(values[2]);
+                    instrument = parseInt(values[3]);
                     unlock1 = parseInt(values[4]);
                     unlock2 = parseInt(values[5]);
                     unlock3 = parseInt(values[6]);
@@ -268,19 +268,25 @@ function setUnlockables() {
         document.getElementById("sound1").disabled = false;
         document.getElementById("sound2").disabled = false;
         document.getElementById("sound3").disabled = false;
-       // document.getElementById("sound" + )
+        document.getElementById("sound" + (instrument + 1)).checked = true; 
+        document.getElementById("sound1").style.color = "white";
+        document.getElementById("sound2").style.color = "white";
+        document.getElementById("sound3").style.color = "white";
     } else {
+        document.getElementById("sound1").checked = true;
         document.getElementById("sound1").disabled = true;
         document.getElementById("sound2").disabled = true;
         document.getElementById("sound3").disabled = true;
     }
     
-    //keyboard sound
+    //keyboard style
     if (unlock3 > 0) {
         document.getElementById("style1").disabled = false;
         document.getElementById("style2").disabled = false;
         document.getElementById("style3").disabled = false;
+        document.getElementById("style" + (theme + 1)).checked = true; 
     } else {
+        document.getElementById("style1").checked = true;
         document.getElementById("style1").disabled = true;
         document.getElementById("style2").disabled = true;
         document.getElementById("style3").disabled = true;
