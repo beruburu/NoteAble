@@ -200,6 +200,8 @@ var countdownImageNumber = 1;
 var bestscore = 0;
 
 //**PAGE LOADING SEQUENCE**
+
+getLogin(); 
 loadPage();
 //instructAppear();
 
@@ -465,7 +467,6 @@ function displayCompNotes() {
 
 //starts creation of computer's track
 function playTrack() {
-    //alert("PLAY TRACK");
     disabled = true; 
     resetTimer();
     
@@ -513,10 +514,9 @@ function createTrack() {
             var lastKey = keys[track[track.length - 1]];
             document.getElementById("key" + lastKey).style.display = "none";
         }
-
+        
 	    if (i < trackLength) {
 		    position = generateNote(scale);
-
 
         
 		    track.push(position);
@@ -525,17 +525,16 @@ function createTrack() {
             if (useEESounds) {
                 soundUrl = "sounds/sheep/" + keys[position] + ".mp3";
             } else {
-            switch (instrument) {
-                case 0: //piano
-                    soundUrl = "sounds/" + keys[position] + ".mp3";
-                    break;
-                case 1: //harpsichord
-                    soundUrl = "sounds/harpsichord/" + keys[position] + ".mp3";
-                    break;
-                case 2: //moog synth
-                    soundUrl = "sounds/moog/" + keys[position] + ".mp3";
-                    break;                
-            }
+                switch(instrument) {
+                    case 0: //piano
+                        soundUrl = "sounds/" + keys[position] + ".mp3";
+                        break;
+                    case 1: //harpsichord
+                        soundUrl = "sounds/harpsichord/" + keys[position] + ".mp3";
+                        break;
+                    case 2: //moog synth
+                        soundUrl = "sounds/moog/" + keys[position] + ".mp3";              
+                }
             }
             var sound = new Howl({
                 urls: [soundUrl],
@@ -615,7 +614,7 @@ function win() {
         }
         winsPerLengthCount = 0; 
     }
-    getSessionScore();
+    //getSessionScore();
 
     //document.getElementById("points").innerHTML = increaseScore();
     setTimeout(nextTrack, 1500);
@@ -694,9 +693,18 @@ function easterEgg() {
  function gameOver() {
         pause(); 
 		document.getElementById("score").innerHTML = runningScore;
+        
+        //get the user's best score for the game over menu
+        getSessionScore();
 
         //check if user has won
-		checkHighScore();  
+		checkHighScore();
+
+        //update the user's high score values if they are logged in
+        if (userID > 0 && runningScore > 0) {
+		    updateUserValues();            
+        }
+
  }
 
  //pauses and unpauses the game
@@ -883,6 +891,10 @@ function dismissHighScores() {
 
 //brings up the enter high scores popup
 function enterHighScores() {
+    //fill in name if user is logged in
+    if (userID > 0) {
+        document.getElementById("enterinitials").value = userName;
+    }
      document.getElementById("enterhighscoreresponse").innerHTML = "";
 	 $("#enterhighscore").animate({bottom: '120%'}, 1000);    
 }
@@ -930,7 +942,7 @@ function getHighScores() {
             var scores = result.split("{");
             for (x = 0; x < 5; x++) {
                 var scoreValues = scores[x].split("}");
-                document.getElementById("hsname" + (x + 1)).innerHTML = scoreValues[0];
+                document.getElementById("hsname" + (x + 1)).innerHTML = scoreValues[0].toUpperCase();
                 document.getElementById("hsscore" + (x + 1)).innerHTML = scoreValues[1];
             }
         }
@@ -952,9 +964,9 @@ function getSessionScore() {
     var http = new XMLHttpRequest();
     var modurl = myurl+"?score="+runningScore;
     http.open("GET", modurl, true);
-    http.onreadystatechange = function() {
+    http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
-            if(runningScore > 0) {
+            if (runningScore > 0) {
                 document.getElementById("bestscore").innerHTML = http.responseText;
             }
         }
@@ -963,27 +975,27 @@ function getSessionScore() {
 }
 
 //checks if a user is logged in and retrieves their login information
-//currently not called
-function getLogin() {    
+function getLogin() {   
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var result = xmlhttp.responseText;
             var values = result.split("{");
             if (values[0] > 0) { //first value equals 0 if there is no user logged on
-                userID = values[0];
+                userID = parseInt(values[0]);
                 userName = values[1];
-                instrument = values[2];
-                sound = values[3];
+                instrument = parseInt(values[2]);
+                sound = parseInt(values[3]);
             }
         }
     };
 
-    xmlhttp.open("GET", "../php/getlogin.php", true);
-    xmlhttp.send();
-
-
+    xmlhttp.open("GET", "./php/getlogin.php", true);
+    xmlhttp.send();    
 }
+
+
+
 
 function freeMode() {
     document.getElementById("lives").innerHTML = "";
@@ -992,18 +1004,39 @@ function freeMode() {
     document.getElementById("timer").innerHTML = "";
 }
 
-function getUnlockables() {
-        var button = document.getElementById("freemodebutton");
-        button.innerHTML = "Locked";
-        button.style.color = "silver";
-        //"bestscore" is a temp var, it should be the user's cumulative points
-        if (bestscore == 0) {
-            //var button = document.getElementById("freemodebutton");
-            button.innerHTML = "Free Mode";
-            button.style.color = "#00ffff";
-            button.addEventListener("click", function() {
-                loadGame(3, 0)
-                }, true);
+
+
+//updates the user's highest score and cumulative scores
+//checks if anything new has been unlocked 
+function updateUserValues() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+            var result = xmlhttp.responseText.split("{");
+            var unlocked = parseInt(result[0]);
+
+            if (unlocked > 0) {
+                var unlockedName = "";
+                switch (unlocked) {
+                    case 1:
+                        unlockedName = "Free Mode";
+                        break;
+                    case 2:
+                        unlockedName = "Sound Options";
+                        break;
+                    case 3:
+                        unlockedName = "Theme Options";
+                        break;
+                }
+
+                //test -- later switch to popup
+                alert("You've unlocked " + unlockedName + "!");
+
+            }
         }
-    
+    };
+
+    xmlhttp.open("GET", "./php/updateuservalues.php?Score=" + runningScore, true);
+    xmlhttp.send();
 }

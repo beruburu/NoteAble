@@ -8,6 +8,24 @@ var expanded = false;
 //true if a button has been clicked
 var haltAnimation = false; 
 
+//0 = not yet unlocked; 1 = unlocked;
+var unlock1 = 0;
+var unlock2 = 0;
+var unlock3 = 0;
+
+//Login.ID in the database
+var userID = 0;
+
+//the user's 3-letter name
+var userName = "";
+
+//0=piano, 1=harpsichord, 2=moog synth
+var instrument = 0;
+
+//0=standard theme, 1=unlockable theme
+var theme = 0; 
+
+
 /*resizeMap();
 
 function resizeMap() {
@@ -185,4 +203,42 @@ function getHighScores() {
 //goes back to the landing page
 function goBack() {
     location.href = "index.html";    
+}
+
+//checks if the free mode button should be available
+function getUnlockables() {
+        var button = document.getElementById("freemodebutton");
+        button.innerHTML = "Locked";
+        button.style.color = "silver";
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var result = xmlhttp.responseText;
+            var values = result.split("{");
+            if (values[0] > 0) { //first value equals 0 if there is no user logged on
+                userID = parseInt(values[0]);
+                userName = values[1];
+                instrument = parseInt(values[2]);
+                sound = parseInt(values[3]);
+                unlock1 = parseInt(values[4]);
+                unlock2 = parseInt(values[5]);
+                unlock3 = parseInt(values[6]);
+
+                
+                if (unlock1 > 0) {
+                button.innerHTML = "Free Mode";
+                button.style.color = "#00ffff";
+                button.addEventListener("click", function() {
+                    loadGame(3, 0)
+                    }, true);
+                }
+            }
+        }
+        };
+
+        xmlhttp.open("GET", "./php/getlogin.php", true);
+        xmlhttp.send();    
+
+    
 }

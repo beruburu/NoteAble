@@ -5,7 +5,7 @@ function register() {
     var name = document.getElementById("enterregisternickname").value;
 
 
-    if (email != "" && password != "" && !validateEmail(email)) {
+    if (email != "" && password != "" && validateEmail(email)) {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -30,7 +30,7 @@ function login() {
     var email = document.getElementById("enterloginemail").value;
     var password = document.getElementById("enterloginpassword").value;
 
-    if (email != "" && password != "" && !validateEmail(email)) {
+    if (email != "" && password != "" && validateEmail(email)) {
         
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
