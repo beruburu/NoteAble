@@ -139,6 +139,10 @@
 	height: 25%;
 }
 
+#loginresponse {
+	height: 15%;
+}
+
 #lbutton {
 	margin-left: 30%;
 	margin-top: 5%;
@@ -223,6 +227,10 @@
 	font-size: 2vw;
 	text-align: center;
     text-transform: uppercase;
+}
+
+#registerresponse {
+	height: 15%;
 }
 
 #registerbutton {
