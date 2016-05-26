@@ -20,18 +20,16 @@ html, body {
 
 #menubutton {
     height: 80px;
-    width: 80px;
-    background-color: #ED008C;
-    border-radius: 0 0 0 20px;
-    outline: none;
-	border: none;
-    background-image: url("../images/menubutton.png");
-    background-size: 55%;
+    width: 100px;
+    background: 0;
+    outline: 0;
+	border: 0;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
 	cursor: pointer;
 	float: left;
-	z-index :4;
+	z-index :-5;
 }
 
 #timer {
