@@ -13,11 +13,13 @@ html, body {
 
 img.roundpiano {
   	display: block;
-  	height: auto;
+  	height: 95%;
   	width:100%;
-  	clear:both;
     min-width:100px;
+    max-height:80%;
+    max-width:90%;
     margin:auto;
+    margin-top:-4%;
 }
 
 #buttoncontainer {
@@ -35,11 +37,12 @@ img.roundpiano {
   	font-family: Quicksand;
   	color:black;
   	border: 2px solid #000000;
-    margin-left: 32%;
-    margin-top:-34%;
-  	height: 5%;
-  	padding-left:5%;
-  	padding-right:5%;
+    margin-left: 35%;
+    margin-top:-30%;
+  	height: auto;
+  	padding-left:3%;
+  	padding-right:3%;
+    font-size:2vw;
 }
 
 .button:hover {
