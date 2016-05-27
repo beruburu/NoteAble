@@ -94,8 +94,8 @@
 }
 
 #retrybutton {
-    background-color: #FFFFFF;
-    color: #FF6138;
+    background-color: #FF6138;
+    color: #FFffff;
     position: absolute;
 	margin-left: 19%;
 	margin-top: 3.8%;
@@ -104,12 +104,13 @@
 }
 
 #retrybutton:active {
-	color: #ffffff;
-	background-color: #f0e9b9;
+	/*color: #ffffff;
+	background-color: #f0e9b9;*/
 }
 
 #mainmenu {
     /*background-color: #FFFFFF;*/
+    background-color: #FF6138;
     border-bottom-left-radius: 12px;
 	border: none;
     outline: none;
@@ -125,8 +126,8 @@
 }
 
 #mainmenu:active {
-	background-color: #f0e9b9;
-	background-image: url("../images/homeactive.png");
+	/*background-color: #f0e9b9;
+	background-image: url("../images/homeactive.png");*/
 }
 
 #highscores {
@@ -152,8 +153,8 @@
 }
 
 #hsconfirmbutton {
-    background-color: #FFFFFF;
-    color: #ff3b42;
+    background-color: #ff3b42;
+    color: #ffffff;
 	width: 33%;
 	height: 93%;
 	margin-top: 7.5%;
@@ -161,8 +162,8 @@
 }
 
 #hsconfirmbutton:active {
-	color: #ffffff;
-	background-color: #ffb6b9;
+	/*color: #ffffff;
+	background-color: #ffb6b9;*/
 }
 
 #enterhighscore {
@@ -216,8 +217,8 @@
 }
 
 #submithighscore {
-    background-color: #FFFFFF;
-    color: #77b129;
+    background-color: #77b129;
+    color: #ffffff;
 	width: 33%;
 	height: 68%;
 	margin-left: 33.5%;
@@ -226,8 +227,8 @@
 }
 
 #submithighscore:active {
-	color: #ffffff;
-	background-color: #bcf66e;
+	/*color: #ffffff;
+	background-color: #bcf66e;*/
 }
 
 #instructions {
@@ -275,13 +276,13 @@
 #ibutton {
 	margin-left: 33%;
 	margin-top: 5.2%;
-    background-color: #FFFFFF;
-    color: #3287d8;
+    background-color: #3287d8;
+    color: #ffffff;
 	width: 33%;
 	height: 70%;
 }
 
 #ibutton:active {
-	color: #ffffff;
-	background-color: #aad5ff;
+	/*color: #ffffff;
+	background-color: #aad5ff;*/
 }

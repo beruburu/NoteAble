@@ -70,8 +70,8 @@
 }
 
 #hsconfirmbutton {
-    background-color: #FFFFFF;
-    color: #ff3b42;
+    background-color: #ff3b42;
+    color: #ffffff;
 	width: 40%;
 	height: 93%;
 	margin-top: 8%;
@@ -80,9 +80,9 @@
 }
 
 #hsconfirmbutton:active {
-	color: #ffffff;
+/*	color: #ffffff;
 	background-color: #ffb6b9;
-    cursor: pointer;
+    cursor: pointer;*/
 }
 
 #hscontent {
@@ -154,17 +154,17 @@
 #lbutton {
 	margin-left: 30%;
 	margin-top: 5%;
-    background-color: #FFFFFF;
-    color: #ff18a0;
+    background-color: #ff18a0;
+    color: #ffffff;
 	width: 40%;
 	height: 75%;
     cursor: pointer;
 }
 
 #lbutton:active {
-	color: #ffffff;
+/*	color: #ffffff;
 	background-color: #ffa2d8;
-    cursor: pointer;
+    cursor: pointer;*/
 }
 
 #register {
@@ -251,8 +251,8 @@
 #rbutton {
 	margin-left: 30%;
 	margin-top: 3%;
-    background-color: #FFFFFF;
-    color: #ff18a0;
+    background-color: #ff18a0;
+    color: #ffffff;
 	width: 40%;
 	height: 75%;
     cursor: pointer;
@@ -260,9 +260,9 @@
 
 
 #rbutton:active {
-	color: #ffffff;
+/*	color: #ffffff;
 	background-color: #ffa2d8;
-    cursor: pointer;
+    cursor: pointer;*/
 }
 
 #lexit, #rexit {
