@@ -74,7 +74,7 @@
     color: #ff3b42;
 	width: 40%;
 	height: 93%;
-	margin-top: 7.8%;
+	margin-top: 8%;
 	margin-left: 30%;
     cursor: pointer;
 }
@@ -144,6 +144,7 @@
 
 #loginbutton {
 	height: 25%;
+	margin-top:8%;
 }
 
 #loginresponse {
@@ -244,6 +245,7 @@
 
 #registerbutton {
 	height: 25%;
+	margin-top:8%;
 }
 
 #rbutton {
