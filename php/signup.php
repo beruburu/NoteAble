@@ -52,9 +52,19 @@
                         $id = $row['ID'];
                     }
                 }
+                         
+                $_SESSION['ID'] = $id;      
+                $_SESSION['Name'] = $_GET['Name']; 
+                $_SESSION['Theme'] = 0;
+                $_SESSION['Sound'] = 0;
+                $_SESSION['BestScore'] = 0;
+                $_SESSION['TotalScore'] = 0;
+                $_SESSION['Unlock1'] = 0;
+                $_SESSION['Unlock2'] = 0;
+                $_SESSION['Unlock3'] = 0;
 
-                echo $id . "{";                
-                $_SESSION['ID'] = $id;
+                echo $id . "{";       
+
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }

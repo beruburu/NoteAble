@@ -60,5 +60,5 @@
         $_SESSION['Unlock3'] = $unlock3;
 
         //return unlock1 (free play mode) for main menu
-        echo $id . "{" . $unlock1 . "{";
+        echo $id . "{" . $unlock1 . "{" . $name . "{";
 ?>
