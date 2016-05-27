@@ -227,6 +227,7 @@
 #instructions {
 	background-color: #3287d8;
 	background-image: url("../images/instructionsBG.png");
+    z-index:  1000;
 }
 
 #instructioncontent {
