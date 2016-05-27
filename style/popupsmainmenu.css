@@ -73,13 +73,17 @@
     color: #ff3b42;
 	width: 40%;
 	height: 93%;
-	margin-top: 6%;
+	margin-top: 7.8%;
 	margin-left: 30%;
 }
 
 #hsconfirmbutton:active {
 	color: #ffffff;
 	background-color: #ffb6b9;
+}
+
+#hscontent {
+	margin-top:9%;
 }
 
 
