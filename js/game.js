@@ -712,13 +712,13 @@ function isCorrect() {
 
 //checks if the input was correct
 function confirmCorrect() {
-    //return to regular sounds after one sequence
-    useEESounds = false;
 	if (isCorrect() && track.length == keysPressed.length) {
-	    sequenceComplete = true; 
+	    sequenceComplete = true;
+	    useEESounds = false; 
 	    setTimeout(win, 1000);
 	} else if (!isCorrect()) {
-        sequenceComplete = true; 
+        sequenceComplete = true;
+        useEESounds = false;
 	    setTimeout(lose, 1000);
 	}
 }

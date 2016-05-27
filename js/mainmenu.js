@@ -137,7 +137,10 @@ function dismissHighScores() {
 
 //shows the login popup
 function showLogin() {
-    if (userID == 0) {
+    if (userID == 0) {        
+        document.getElementById("enterloginemail").value = "";
+        document.getElementById("enterloginpassword").value ="";
+
         document.getElementById("loginresponse").innerHTML = "";
         $("#login").animate({ bottom: '20%' }, 500);
     } else {
@@ -160,7 +163,10 @@ function dismissLogin() {
 }
 
 //shows the register popup
-function showRegister() {
+function showRegister() {    
+    document.getElementById("enterregisteremail").value = "";
+    document.getElementById("enterregisterpassword").value = "";
+    document.getElementById("enterregisternickname").value = "";
     document.getElementById("registerresponse").innerHTML = "";
 	 $("#register").animate({bottom: '20%'}, 500);  
 }
@@ -214,8 +220,6 @@ function applyUser() {
 
 //checks if the free mode button should be available
 function getUnlockables() {
-
-
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -236,7 +240,7 @@ function getUnlockables() {
                     instrument = 0;
                     unlock1 = 0;
                     unlock2 = 0;
-                    unlock3 = 0; 
+                    unlock3 = 0;
                 }
 
                 setUnlockables();
@@ -327,7 +331,7 @@ function register() {
                     document.getElementById("registerresponse").innerHTML = "Email already exists.";
                 } else {
                     dismissRegister();
-                    //document.getElementById("registerresponse").innerHTML = "Registration complete.";
+                    getUnlockables();
                 }
             }
         };
@@ -353,7 +357,6 @@ function login() {
                 if (parseInt(values[0]) == 0) {
                     document.getElementById("loginresponse").innerHTML = "Invalid login.";
                 } else {
-                    //document.getElementById("loginresponse").innerHTML = "Login successful.";
                     dismissLogin();
                     getUnlockables();
 

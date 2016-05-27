@@ -158,7 +158,7 @@
 		
 		<!--Login popup-->
 		<div id="login" class="popup">
-            <div id="lheading">Login</div>
+            <div id="lheading">Login<span id="lexit" onclick="dismissLogin()">X</span></div>
 			<div id="logincontent">
 				<div id="loginemail">Email:</div>
 				<input type="text" name="loginemail" id="enterloginemail" maxlength="30"></input>
@@ -173,7 +173,7 @@
 		
 		<!--Register popup-->
 		<div id="register" class="popup">
-            <div id="rheading">Register</div>
+            <div id="rheading">Register<span id="rexit" onclick="dismissRegister()">X</span></div>
 			<div id="registercontent">
 				<div id="registeremail">Email:</div>
 				<input type="text" name="registeremail" id="enterregisteremail" maxlength="30"></input>
