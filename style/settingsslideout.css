@@ -123,6 +123,7 @@ li {
 	width: 65%;
 	height: 12%;
 	margin-left: 15%;
+    cursor: pointer;
 }
 
 #sbutton:active {

@@ -205,6 +205,7 @@ body {
     min-width:10px;
     margin:auto;
     margin-left:1.5%;
+    cursor: pointer;
 }
 
 #highscorebutton {
@@ -244,6 +245,7 @@ body {
     min-width:10px;
     margin:auto;
     margin-left:1.5%;
+    cursor: pointer;
 }
 
 #regbutton {
@@ -263,11 +265,13 @@ body {
     min-width:10px;
     margin:auto;
     margin-left:1.5%;
+    cursor:  pointer;
 }
 
 #freemode:active, #highscorebutton:active, #logbutton:active, #regbutton:active {
 	color: #ED008C;
 	background-color: #ffffff;
+    cursor: pointer;
 }
 
 #novicecontent {
